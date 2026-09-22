@@ -112,6 +112,9 @@
 
 ## Resources
 
+- [Kotlin docs](https://kotlinlang.org/docs/home.html)
+- [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
+
 ## AI Usage
 
 ## Authors
