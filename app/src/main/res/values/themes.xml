@@ -3,12 +3,18 @@
 
     <!-- Base Parent Theme using Android Framework Theme -->
     <style name="Base.Theme.FtHangouts" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:fontFamily">@font/noto_sans</item>
         <item name="android:colorPrimary">@color/ocean_primary</item>
         <item name="android:colorAccent">@color/ocean_secondary</item>
     </style>
 
     <!-- Default Theme referenced in AndroidManifest.xml -->
     <style name="Theme.FtHangouts" parent="Theme.FtHangouts.Ocean" />
+
+    <style name="TextAppearance.FTHangouts.Heading" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/combo_regular</item>
+        <item name="android:textSize">24sp</item>
+    </style>
 
     <!-- ==================== OCEAN THEME ==================== -->
     <style name="Theme.FtHangouts.Ocean" parent="Base.Theme.FtHangouts">
@@ -18,6 +24,7 @@
         <item name="android:windowBackground">@color/ocean_background</item>
         <item name="android:textColorPrimary">@color/ocean_on_background</item>
         <item name="android:colorError">@color/ocean_error</item>
+        <item name="colorOnPrimary">@color/ocean_on_primary</item>
     </style>
 
     <!-- ==================== AMBER THEME ==================== -->
@@ -28,6 +35,7 @@
         <item name="android:windowBackground">@color/amber_background</item>
         <item name="android:textColorPrimary">@color/amber_on_background</item>
         <item name="android:colorError">@color/amber_error</item>
+        <item name="colorOnPrimary">@color/amber_on_primary</item>
     </style>
 
     <!-- ==================== FOREST THEME ==================== -->
@@ -38,6 +46,7 @@
         <item name="android:windowBackground">@color/forest_background</item>
         <item name="android:textColorPrimary">@color/forest_on_background</item>
         <item name="android:colorError">@color/forest_error</item>
+        <item name="colorOnPrimary">@color/forest_on_primary</item>
     </style>
 
     <!-- ==================== ROSE THEME ==================== -->
@@ -48,6 +57,7 @@
         <item name="android:windowBackground">@color/rose_background</item>
         <item name="android:textColorPrimary">@color/rose_on_background</item>
         <item name="android:colorError">@color/rose_error</item>
+        <item name="colorOnPrimary">@color/rose_on_primary</item>
     </style>
 
     <!-- ==================== LAVENDER THEME ==================== -->
@@ -58,6 +68,7 @@
         <item name="android:windowBackground">@color/lavender_background</item>
         <item name="android:textColorPrimary">@color/lavender_on_background</item>
         <item name="android:colorError">@color/lavender_error</item>
+        <item name="colorOnPrimary">@color/lavender_on_primary</item>
     </style>
 
 </resources>
