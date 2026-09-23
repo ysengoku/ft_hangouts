@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Base Colors -->
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- ==================== OCEAN THEME ==================== -->
+    <color name="ocean_primary">#89D0ED</color>
+    <color name="ocean_on_primary">#003544</color>
+    <color name="ocean_primary_container">#004D61</color>
+    <color name="ocean_on_primary_container">#B9EAFF</color>
+    <color name="ocean_secondary">#B3CAD5</color>
+    <color name="ocean_on_secondary">#1E333C</color>
+    <color name="ocean_secondary_container">#354A53</color>
+    <color name="ocean_on_secondary_container">#CFE6F1</color>
+    <color name="ocean_tertiary">#C4C3EB</color>
+    <color name="ocean_on_tertiary">#2D2D4D</color>
+    <color name="ocean_tertiary_container">#434465</color>
+    <color name="ocean_on_tertiary_container">#E1E0FF</color>
+    <color name="ocean_error">#FFB4AB</color>
+    <color name="ocean_on_error">#690005</color>
+    <color name="ocean_background">#0F1416</color>
+    <color name="ocean_on_background">#DEE3E6</color>
+    <color name="ocean_surface">#0F1416</color>
+    <color name="ocean_on_surface">#DEE3E6</color>
+
+    <!-- ==================== AMBER THEME ==================== -->
+    <color name="amber_primary">#DBC66E</color>
+    <color name="amber_on_primary">#3A3000</color>
+    <color name="amber_primary_container">#534600</color>
+    <color name="amber_on_primary_container">#F8E287</color>
+    <color name="amber_secondary">#D1C6A1</color>
+    <color name="amber_on_secondary">#363016</color>
+    <color name="amber_secondary_container">#4E472A</color>
+    <color name="amber_on_secondary_container">#EEE2BC</color>
+    <color name="amber_tertiary">#A9D0B3</color>
+    <color name="amber_on_tertiary">#143723</color>
+    <color name="amber_tertiary_container">#2C4E38</color>
+    <color name="amber_on_tertiary_container">#C5ECCE</color>
+    <color name="amber_error">#FFB4AB</color>
+    <color name="amber_on_error">#690005</color>
+    <color name="amber_background">#15130B</color>
+    <color name="amber_on_background">#E8E2D4</color>
+    <color name="amber_surface">#15130B</color>
+    <color name="amber_on_surface">#E8E2D4</color>
+
+    <!-- ==================== FOREST THEME ==================== -->
+    <color name="forest_primary">#B1D18A</color>
+    <color name="forest_on_primary">#1F3701</color>
+    <color name="forest_primary_container">#354E16</color>
+    <color name="forest_on_primary_container">#CDEDA3</color>
+    <color name="forest_secondary">#BFCBAD</color>
+    <color name="forest_on_secondary">#2A331E</color>
+    <color name="forest_secondary_container">#404A33</color>
+    <color name="forest_on_secondary_container">#DCE7C8</color>
+    <color name="forest_tertiary">#A0D0CB</color>
+    <color name="forest_on_tertiary">#003735</color>
+    <color name="forest_tertiary_container">#1F4E4B</color>
+    <color name="forest_on_tertiary_container">#BCECE7</color>
+    <color name="forest_error">#FFB4AB</color>
+    <color name="forest_on_error">#690005</color>
+    <color name="forest_background">#12140E</color>
+    <color name="forest_on_background">#E2E3D8</color>
+    <color name="forest_surface">#12140E</color>
+    <color name="forest_on_surface">#E2E3D8</color>
+
+    <!-- ==================== ROSE THEME ==================== -->
+    <color name="rose_primary">#FFB1C8</color>
+    <color name="rose_on_primary">#541D32</color>
+    <color name="rose_primary_container">#703348</color>
+    <color name="rose_on_primary_container">#FFD9E2</color>
+    <color name="rose_secondary">#E3BDC6</color>
+    <color name="rose_on_secondary">#422931</color>
+    <color name="rose_secondary_container">#5A3F47</color>
+    <color name="rose_on_secondary_container">#FFD9E2</color>
+    <color name="rose_tertiary">#EFBD94</color>
+    <color name="rose_on_tertiary">#48290B</color>
+    <color name="rose_tertiary_container">#623F20</color>
+    <color name="rose_on_tertiary_container">#FFDCC1</color>
+    <color name="rose_error">#FFB4AB</color>
+    <color name="rose_on_error">#690005</color>
+    <color name="rose_background">#191113</color>
+    <color name="rose_on_background">#EFDFE1</color>
+    <color name="rose_surface">#191113</color>
+    <color name="rose_on_surface">#EFDFE1</color>
+
+    <!-- ==================== LAVENDER THEME ==================== -->
+    <color name="lavender_primary">#E0B8F6</color>
+    <color name="lavender_on_primary">#422356</color>
+    <color name="lavender_primary_container">#5A396E</color>
+    <color name="lavender_on_primary_container">#F4D9FF</color>
+    <color name="lavender_secondary">#D3C1D8</color>
+    <color name="lavender_on_secondary">#382C3E</color>
+    <color name="lavender_secondary_container">#4F4255</color>
+    <color name="lavender_on_secondary_container">#EFDCF5</color>
+    <color name="lavender_tertiary">#F4B7B9</color>
+    <color name="lavender_on_tertiary">#4C2527</color>
+    <color name="lavender_tertiary_container">#663B3C</color>
+    <color name="lavender_on_tertiary_container">#FFDADA</color>
+    <color name="lavender_error">#FFB4AB</color>
+    <color name="lavender_on_error">#690005</color>
+    <color name="lavender_background">#161217</color>
+    <color name="lavender_on_background">#E9E0E7</color>
+    <color name="lavender_surface">#161217</color>
+    <color name="lavender_on_surface">#E9E0E7</color>
+</resources>

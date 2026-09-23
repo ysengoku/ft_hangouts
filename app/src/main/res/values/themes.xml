@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.Ft_hangouts" parent="android:Theme.Material.Light.DarkActionBar" />
+    <!-- Base Parent Theme using Android Framework Theme -->
+    <style name="Base.Theme.FtHangouts" parent="@android:style/Theme.Material.Light.NoActionBar">
+        <item name="android:colorPrimary">@color/ocean_primary</item>
+        <item name="android:colorAccent">@color/ocean_secondary</item>
+    </style>
+
+    <!-- Default Theme referenced in AndroidManifest.xml -->
+    <style name="Theme.FtHangouts" parent="Theme.FtHangouts.Ocean" />
+
+    <!-- ==================== OCEAN THEME ==================== -->
+    <style name="Theme.FtHangouts.Ocean" parent="Base.Theme.FtHangouts">
+        <item name="android:colorPrimary">@color/ocean_primary</item>
+        <item name="android:colorAccent">@color/ocean_secondary</item>
+        <item name="android:colorBackground">@color/ocean_background</item>
+        <item name="android:windowBackground">@color/ocean_background</item>
+        <item name="android:textColorPrimary">@color/ocean_on_background</item>
+        <item name="android:colorError">@color/ocean_error</item>
+    </style>
+
+    <!-- ==================== AMBER THEME ==================== -->
+    <style name="Theme.FtHangouts.Amber" parent="Base.Theme.FtHangouts">
+        <item name="android:colorPrimary">@color/amber_primary</item>
+        <item name="android:colorAccent">@color/amber_secondary</item>
+        <item name="android:colorBackground">@color/amber_background</item>
+        <item name="android:windowBackground">@color/amber_background</item>
+        <item name="android:textColorPrimary">@color/amber_on_background</item>
+        <item name="android:colorError">@color/amber_error</item>
+    </style>
+
+    <!-- ==================== FOREST THEME ==================== -->
+    <style name="Theme.FtHangouts.Forest" parent="Base.Theme.FtHangouts">
+        <item name="android:colorPrimary">@color/forest_primary</item>
+        <item name="android:colorAccent">@color/forest_secondary</item>
+        <item name="android:colorBackground">@color/forest_background</item>
+        <item name="android:windowBackground">@color/forest_background</item>
+        <item name="android:textColorPrimary">@color/forest_on_background</item>
+        <item name="android:colorError">@color/forest_error</item>
+    </style>
+
+    <!-- ==================== ROSE THEME ==================== -->
+    <style name="Theme.FtHangouts.Rose" parent="Base.Theme.FtHangouts">
+        <item name="android:colorPrimary">@color/rose_primary</item>
+        <item name="android:colorAccent">@color/rose_secondary</item>
+        <item name="android:colorBackground">@color/rose_background</item>
+        <item name="android:windowBackground">@color/rose_background</item>
+        <item name="android:textColorPrimary">@color/rose_on_background</item>
+        <item name="android:colorError">@color/rose_error</item>
+    </style>
+
+    <!-- ==================== LAVENDER THEME ==================== -->
+    <style name="Theme.FtHangouts.Lavender" parent="Base.Theme.FtHangouts">
+        <item name="android:colorPrimary">@color/lavender_primary</item>
+        <item name="android:colorAccent">@color/lavender_secondary</item>
+        <item name="android:colorBackground">@color/lavender_background</item>
+        <item name="android:windowBackground">@color/lavender_background</item>
+        <item name="android:textColorPrimary">@color/lavender_on_background</item>
+        <item name="android:colorError">@color/lavender_error</item>
+    </style>
+
 </resources>
