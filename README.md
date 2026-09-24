@@ -112,6 +112,11 @@
 
 ## Resources
 
+- [Android Developer APP Architecture - App resources overview](https://developer.android.com/guide/topics/resources/providing-resources?hl=ja)
+- [Android Developer API Reference - android.widget](https://developer.android.com/reference/android/widget/package-summary)
+- [Android Developer API Reference - View](https://developer.android.com/reference/android/view/View)
+- [Android Developer API Reference - R.attr](https://developer.android.com/reference/android/R.attr)
+- [Android Developer - Drawable resources](https://developer.android.com/guide/topics/resources/drawable-resource?hl=ja)
 - [Kotlin docs](https://kotlinlang.org/docs/home.html)
 - [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
 

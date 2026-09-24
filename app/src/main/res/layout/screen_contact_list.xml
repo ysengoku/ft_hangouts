@@ -1,4 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" />
+    android:layout_height="match_parent">
+
+    <ListView
+        android:layout_width="match_parent"
+        android:id="@+id/contact_list"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:paddingBottom="88dp" />
+
+    <ImageButton
+        android:id="@+id/fab_add_contact"
+        android:layout_width="@dimen/fab_size"
+        android:layout_height="@dimen/fab_size"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="@dimen/fab_margin"
+        android:background="@drawable/bg_fab"
+        android:elevation="@dimen/fab_elevation"
+        android:src="@drawable/ic_add"
+        android:tint="?attr/colorOnPrimary"
+        android:contentDescription="@string/add_contact" />
+</FrameLayout>
