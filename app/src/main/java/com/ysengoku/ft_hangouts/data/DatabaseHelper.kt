@@ -10,6 +10,14 @@ class DatabaseHelper(context: Context) :
         private const val DATABASE_NAME = "ft_hangouts.db"
         private const val DATABASE_VERSION = 1
 
+        @Volatile // ensures writes to `instance` are visible to all threads immediately (double-checked locking)
+        private var instance: DatabaseHelper? = null
+
+        fun getInstance(context: Context): DatabaseHelper =
+            instance ?: synchronized(this) {
+                instance ?: DatabaseHelper(context.applicationContext).also { instance = it }
+            }
+
         object TABLE {
             const val CONTACTS = "contacts"
             const val MESSAGES = "messages"
@@ -17,23 +25,23 @@ class DatabaseHelper(context: Context) :
 
         private const val CREATE_CONTACTS =
             "CREATE TABLE ${TABLE.CONTACTS} (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT" +
-                    "firstName TEXT NOT NULL" +
-                    "lastName TEXT NOT NULL" +
-                    "company TEXT" +
-                    "phone TEXT NOT NULL" +
-                    "address TEXT" +
-                    "birthday TEXT" +
-                    "note TEXT" +
-                    "picture TEXT )"
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "first_name TEXT NOT NULL," +
+            "last_name TEXT NOT NULL," +
+            "company TEXT," +
+            "phone TEXT NOT NULL," +
+            "address TEXT," +
+            "birthday TEXT," +
+            "note TEXT," +
+            "picture TEXT )"
 
         private const val CREATE_MESSAGES =
             "CREATE TABLE ${TABLE.MESSAGES} (" +
-                    "id INTEGER PRIMARY KEY AUTOINCREMENT" +
-                    "contactId: INTENGER" +
-                    "isIncoming: INTEGER" +
-                    "createdAt: INTEGER" +
-                    "content: TEXT )"
+            "id INTEGER PRIMARY KEY AUTOINCREMENT," +
+            "contact_id INTEGER REFERENCES ${TABLE.CONTACTS}(id) ON DELETE CASCADE," +
+            "is_incoming INTEGER," +
+            "created_at INTEGER," +
+            "content TEXT )"
     }
 
     override fun onCreate(db: SQLiteDatabase) {

@@ -6,14 +6,25 @@
         <item name="android:fontFamily">@font/noto_sans</item>
         <item name="android:colorPrimary">@color/ocean_primary</item>
         <item name="android:colorAccent">@color/ocean_secondary</item>
+        <item name="android:windowLightStatusBar">@bool/light_system_bars</item>
     </style>
 
     <!-- Default Theme referenced in AndroidManifest.xml -->
     <style name="Theme.FtHangouts" parent="Theme.FtHangouts.Ocean" />
 
     <style name="TextAppearance.FTHangouts.Heading" parent="@android:style/TextAppearance">
-        <item name="android:fontFamily">@font/combo_regular</item>
-        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/noto_sans_medium</item>
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="TextAppearance.FTHangouts.TitleMedium" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans_medium</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="TextAppearance.FTHangouts.BodyLarge" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!-- ==================== OCEAN THEME ==================== -->
@@ -25,6 +36,9 @@
         <item name="android:textColorPrimary">@color/ocean_on_background</item>
         <item name="android:colorError">@color/ocean_error</item>
         <item name="colorOnPrimary">@color/ocean_on_primary</item>
+        <item name="colorPrimaryContainer">@color/ocean_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/ocean_on_primary_container</item>
+        <item name="colorOnSurface">@color/ocean_on_surface</item>
     </style>
 
     <!-- ==================== AMBER THEME ==================== -->
@@ -36,6 +50,9 @@
         <item name="android:textColorPrimary">@color/amber_on_background</item>
         <item name="android:colorError">@color/amber_error</item>
         <item name="colorOnPrimary">@color/amber_on_primary</item>
+        <item name="colorPrimaryContainer">@color/amber_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/amber_on_primary_container</item>
+        <item name="colorOnSurface">@color/amber_on_surface</item>
     </style>
 
     <!-- ==================== FOREST THEME ==================== -->
@@ -47,6 +64,9 @@
         <item name="android:textColorPrimary">@color/forest_on_background</item>
         <item name="android:colorError">@color/forest_error</item>
         <item name="colorOnPrimary">@color/forest_on_primary</item>
+        <item name="colorPrimaryContainer">@color/forest_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/forest_on_primary_container</item>
+        <item name="colorOnSurface">@color/forest_on_surface</item>
     </style>
 
     <!-- ==================== ROSE THEME ==================== -->
@@ -58,6 +78,9 @@
         <item name="android:textColorPrimary">@color/rose_on_background</item>
         <item name="android:colorError">@color/rose_error</item>
         <item name="colorOnPrimary">@color/rose_on_primary</item>
+        <item name="colorPrimaryContainer">@color/rose_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/rose_on_primary_container</item>
+        <item name="colorOnSurface">@color/rose_on_surface</item>
     </style>
 
     <!-- ==================== LAVENDER THEME ==================== -->
@@ -69,6 +92,15 @@
         <item name="android:textColorPrimary">@color/lavender_on_background</item>
         <item name="android:colorError">@color/lavender_error</item>
         <item name="colorOnPrimary">@color/lavender_on_primary</item>
+        <item name="colorPrimaryContainer">@color/lavender_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/lavender_on_primary_container</item>
+        <item name="colorOnSurface">@color/lavender_on_surface</item>
+    </style>
+
+    <style name="Widget.FTHangouts.IconButton" parent="@android:style/Widget.Material.ImageButton">
+        <item name="android:padding">@dimen/icon_button_padding</item>
+        <item name="android:background">?android:attr/selectableItemBackgroundBorderless</item>
+        <item name="android:tint">?attr/colorOnPrimaryContainer</item>
     </style>
 
 </resources>
