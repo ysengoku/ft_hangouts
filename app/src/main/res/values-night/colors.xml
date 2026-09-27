@@ -23,6 +23,7 @@
     <color name="ocean_on_background">#DEE3E6</color>
     <color name="ocean_surface">#0F1416</color>
     <color name="ocean_on_surface">#DEE3E6</color>
+    <color name="ocean_surface_container_high">#262B2D</color>
 
     <!-- ==================== AMBER THEME ==================== -->
     <color name="amber_primary">#DBC66E</color>
@@ -43,6 +44,7 @@
     <color name="amber_on_background">#E8E2D4</color>
     <color name="amber_surface">#15130B</color>
     <color name="amber_on_surface">#E8E2D4</color>
+    <color name="amber_surface_container_high">#2C2A24</color>
 
     <!-- ==================== FOREST THEME ==================== -->
     <color name="forest_primary">#B1D18A</color>
@@ -63,6 +65,7 @@
     <color name="forest_on_background">#E2E3D8</color>
     <color name="forest_surface">#12140E</color>
     <color name="forest_on_surface">#E2E3D8</color>
+    <color name="forest_surface_container_high">#292B26</color>
 
     <!-- ==================== ROSE THEME ==================== -->
     <color name="rose_primary">#FFB1C8</color>
@@ -83,6 +86,7 @@
     <color name="rose_on_background">#EFDFE1</color>
     <color name="rose_surface">#191113</color>
     <color name="rose_on_surface">#EFDFE1</color>
+    <color name="rose_surface_container_high">#30282A</color>
 
     <!-- ==================== LAVENDER THEME ==================== -->
     <color name="lavender_primary">#E0B8F6</color>
@@ -103,4 +107,5 @@
     <color name="lavender_on_background">#E9E0E7</color>
     <color name="lavender_surface">#161217</color>
     <color name="lavender_on_surface">#E9E0E7</color>
+    <color name="lavender_surface_container_high">#2C292E</color>
 </resources>

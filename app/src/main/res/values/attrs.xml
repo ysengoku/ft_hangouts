@@ -3,5 +3,10 @@
     <attr name="colorOnPrimary" format="color" />
     <attr name="colorPrimaryContainer" format="color" />
     <attr name="colorOnPrimaryContainer" format="color" />
+    <attr name="colorSecondaryContainer" format="color" />
+    <attr name="colorOnSecondaryContainer" format="color" />
+    <attr name="colorTertiaryContainer" format="color" />
+    <attr name="colorOnTertiaryContainer" format="color" />
     <attr name="colorOnSurface" format="color" />
+    <attr name="colorSurfaceContainerHigh" format="color" />
 </resources>

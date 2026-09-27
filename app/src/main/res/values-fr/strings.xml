@@ -1,0 +1,14 @@
+<resources>
+    <string name="home_title">Contacts</string>
+    <string name="new_contact_title">Nouveau contact</string>
+    <string name="edit_contact">Modifier le contact</string>
+    <string name="back">Retour</string>
+    <string name="change_color_theme">Changer le thème de couleur</string>
+    <string name="add_contact">Ajouter un contact</string>
+    <string name="search_contacts">Rechercher des contacts</string>
+    <string name="theme_ocean">Océan</string>
+    <string name="theme_amber">Ambre</string>
+    <string name="theme_forest">Forêt</string>
+    <string name="theme_rose">Rose</string>
+    <string name="theme_lavender">Lavande</string>
+</resources>

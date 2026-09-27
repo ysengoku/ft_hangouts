@@ -1,0 +1,14 @@
+<resources>
+    <string name="home_title">コンタクト</string>
+    <string name="new_contact_title">新しい連絡先</string>
+    <string name="edit_contact">連絡先を編集</string>
+    <string name="back">戻る</string>
+    <string name="change_color_theme">カラーテーマを変更</string>
+    <string name="add_contact">連絡先を追加</string>
+    <string name="search_contacts">連絡先を検索</string>
+    <string name="theme_ocean">オーシャン</string>
+    <string name="theme_amber">アンバー</string>
+    <string name="theme_forest">フォレスト</string>
+    <string name="theme_rose">ローズ</string>
+    <string name="theme_lavender">ラベンダー</string>
+</resources>

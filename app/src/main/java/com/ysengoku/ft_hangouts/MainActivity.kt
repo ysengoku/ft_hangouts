@@ -6,14 +6,17 @@ import android.graphics.Rect
 import android.view.WindowInsets
 import android.os.Build
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.ListPopupWindow
 import android.widget.Spinner
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
 import com.ysengoku.ft_hangouts.data.DatabaseHelper
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
+import com.ysengoku.ft_hangouts.ui.theme.ThemeMenuAdapter
 
 class MainActivity : Activity() {
     private lateinit var navigator: Navigator
@@ -30,14 +33,13 @@ class MainActivity : Activity() {
         setContentView(R.layout.activity_main)
         applySystemBarInsets()
 
-        // themeSpinner = findViewById(R.id.theme_spinner)
-        // setupThemeSpinner(savedTheme)
-
+        val topAppBar = TopAppBar(findViewById(R.id.top_app_bar))
+        topAppBar.setOnActionClick { anchor -> showThemeMenu(anchor) }
         // For testing only
         // DatabaseHelper.getInstance(this).writableDatabase
         navigator = Navigator(
             findViewById(R.id.screen_container),
-            TopAppBar(findViewById(R.id.top_app_bar))
+            topAppBar
         )
         navigator.showContactList()
     }
@@ -98,26 +100,25 @@ class MainActivity : Activity() {
             Rect(systemWindowInsetLeft, systemWindowInsetTop, systemWindowInsetRight, systemWindowInsetBottom)
         }
 
+    private fun showThemeMenu(anchor: View) {
+        val current = themePreferences.getTheme()
+        val popup = ListPopupWindow(this)
+        popup.anchorView = anchor
+        popup.setAdapter(ThemeMenuAdapter(this, current))
+        popup.width = resources.getDimensionPixelSize(R.dimen.menu_width)
+        popup.setDropDownGravity(Gravity.END)
+        popup.horizontalOffset = -resources.getDimensionPixelSize(R.dimen.spacing_small)
+        popup.setBackgroundDrawable(getDrawable(R.drawable.bg_menu))
+        popup.isModal = true
 
-    private fun setupThemeSpinner(currentTheme: String) {
-        val options = ThemePreferences.THEME_LIST
-        val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item, options)
-        themeSpinner.adapter = adapter
-
-        val currentPosition = options.indexOf(currentTheme).coerceAtLeast(0)
-        themeSpinner.setSelection(currentPosition)
-
-        themeSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-                val selectedTheme = options[position]
-
-                if (selectedTheme != themePreferences.getTheme()) {
-                    themePreferences.saveTheme(selectedTheme)
-                    recreate() // Restarts Activity to apply new XML theme everywhere
-                }
+        popup.setOnItemClickListener {_, _, position, _ ->
+            popup.dismiss()
+            val selected = ThemePreferences.THEME_LIST[position]
+            if (selected != current) {
+                themePreferences.saveTheme(selected)
+                recreate()
             }
-
-            override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
+        popup.show()
     }
 }

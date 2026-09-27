@@ -9,6 +9,7 @@ import com.ysengoku.ft_hangouts.ui.Screen
 class TopAppBar(root: View) {
     private val title: TextView = root.findViewById(R.id.top_app_bar_title)
     private val navigation: ImageButton = root.findViewById(R.id.top_app_bar_navigation)
+    private val action: ImageButton = root.findViewById(R.id.top_app_bar_action)
 
     fun update(screen: Screen) {
         title.text = screen.title
@@ -17,5 +18,9 @@ class TopAppBar(root: View) {
 
     fun setOnNavigationClick(listener: () -> Unit) {
         navigation.setOnClickListener { listener() }
+    }
+
+    fun setOnActionClick(listener: (View) -> Unit) {
+        action.setOnClickListener { listener(it) }
     }
 }

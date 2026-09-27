@@ -3,14 +3,56 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ListView
+    <LinearLayout
         android:layout_width="match_parent"
-        android:id="@+id/contact_list"
         android:layout_height="match_parent"
-        android:clipToPadding="false"
-        android:paddingTop="@dimen/spacing_medium"
-        android:paddingBottom="88dp"
-        android:divider="@null" />
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/search_bar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/search_bar_height"
+            android:layout_marginHorizontal="@dimen/spacing_medium"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingHorizontal="@dimen/spacing_medium"
+            android:background="@drawable/bg_search_bar">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:src="@drawable/ic_search"
+                android:tint="?attr/colorOnSecondaryContainer"
+                android:importantForAccessibility="no" />
+
+            <EditText
+                android:id="@+id/search_input"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/spacing_medium"
+                android:background="@null"
+                android:hint="@string/search_contacts"
+                android:importantForAutofill="no"
+                android:inputType="textPersonName"
+                android:imeOptions="actionSearch"
+                android:maxLines="1"
+                android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
+                android:textColor="?attr/colorOnSurface"
+                android:textColorHint="?attr/colorOnSecondaryContainer" />
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/contact_list"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:clipToPadding="false"
+            android:paddingTop="@dimen/spacing_small"
+            android:paddingBottom="88dp"
+            android:divider="@null" />
+    </LinearLayout>
 
     <ImageButton
         android:id="@+id/fab_add_contact"

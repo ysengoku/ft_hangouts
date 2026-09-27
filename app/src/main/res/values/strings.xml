@@ -1,6 +1,15 @@
 <resources>
-    <string name="app_name">Hangouts</string>
+    <string name="app_name" translatable="false">Hangouts</string>
+    <string name="home_title">Contacts</string>
+    <string name="new_contact_title">New contact</string>
+    <string name="edit_contact">Edit contact</string>
     <string name="back">Back</string>
     <string name="change_color_theme">Change color theme</string>
     <string name="add_contact">Add contact</string>
+    <string name="search_contacts">Search contacts</string>
+    <string name="theme_ocean">Ocean</string>
+    <string name="theme_amber">Amber</string>
+    <string name="theme_forest">Forest</string>
+    <string name="theme_rose">Rose</string>
+    <string name="theme_lavender">Lavender</string>
 </resources>

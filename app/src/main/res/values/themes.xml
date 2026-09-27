@@ -27,6 +27,11 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextAppearance.FTHangouts.LabelLarge" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans_medium</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <!-- ==================== OCEAN THEME ==================== -->
     <style name="Theme.FtHangouts.Ocean" parent="Base.Theme.FtHangouts">
         <item name="android:colorPrimary">@color/ocean_primary</item>
@@ -39,6 +44,11 @@
         <item name="colorPrimaryContainer">@color/ocean_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/ocean_on_primary_container</item>
         <item name="colorOnSurface">@color/ocean_on_surface</item>
+        <item name="colorSecondaryContainer">@color/ocean_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/ocean_on_secondary_container</item>
+        <item name="colorTertiaryContainer">@color/ocean_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/ocean_on_tertiary_container</item>
+        <item name="colorSurfaceContainerHigh">@color/ocean_surface_container_high</item>
     </style>
 
     <!-- ==================== AMBER THEME ==================== -->
@@ -53,6 +63,11 @@
         <item name="colorPrimaryContainer">@color/amber_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/amber_on_primary_container</item>
         <item name="colorOnSurface">@color/amber_on_surface</item>
+        <item name="colorSecondaryContainer">@color/amber_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/amber_on_secondary_container</item>
+        <item name="colorTertiaryContainer">@color/amber_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/amber_on_tertiary_container</item>
+        <item name="colorSurfaceContainerHigh">@color/amber_surface_container_high</item>
     </style>
 
     <!-- ==================== FOREST THEME ==================== -->
@@ -67,6 +82,11 @@
         <item name="colorPrimaryContainer">@color/forest_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/forest_on_primary_container</item>
         <item name="colorOnSurface">@color/forest_on_surface</item>
+        <item name="colorSecondaryContainer">@color/forest_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/forest_on_secondary_container</item>
+        <item name="colorTertiaryContainer">@color/forest_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/forest_on_tertiary_container</item>
+        <item name="colorSurfaceContainerHigh">@color/forest_surface_container_high</item>
     </style>
 
     <!-- ==================== ROSE THEME ==================== -->
@@ -81,6 +101,11 @@
         <item name="colorPrimaryContainer">@color/rose_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/rose_on_primary_container</item>
         <item name="colorOnSurface">@color/rose_on_surface</item>
+        <item name="colorSecondaryContainer">@color/rose_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/rose_on_secondary_container</item>
+        <item name="colorTertiaryContainer">@color/rose_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/rose_on_tertiary_container</item>
+        <item name="colorSurfaceContainerHigh">@color/rose_surface_container_high</item>
     </style>
 
     <!-- ==================== LAVENDER THEME ==================== -->
@@ -95,6 +120,11 @@
         <item name="colorPrimaryContainer">@color/lavender_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/lavender_on_primary_container</item>
         <item name="colorOnSurface">@color/lavender_on_surface</item>
+        <item name="colorSecondaryContainer">@color/lavender_secondary_container</item>
+        <item name="colorOnSecondaryContainer">@color/lavender_on_secondary_container</item>
+        <item name="colorTertiaryContainer">@color/lavender_tertiary_container</item>
+        <item name="colorOnTertiaryContainer">@color/lavender_on_tertiary_container</item>
+        <item name="colorSurfaceContainerHigh">@color/lavender_surface_container_high</item>
     </style>
 
     <style name="Widget.FTHangouts.IconButton" parent="@android:style/Widget.Material.ImageButton">
