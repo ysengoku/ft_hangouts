@@ -1,8 +1,9 @@
 <resources>
     <string name="home_title">Contacts</string>
-    <string name="new_contact_title">Nouveau contact</string>
+    <string name="new_contact">Nouveau contact</string>
     <string name="edit_contact">Modifier le contact</string>
     <string name="back">Retour</string>
+    <string name="close">Fermer</string>
     <string name="change_color_theme">Changer le thème de couleur</string>
     <string name="add_contact">Ajouter un contact</string>
     <string name="search_contacts">Rechercher des contacts</string>

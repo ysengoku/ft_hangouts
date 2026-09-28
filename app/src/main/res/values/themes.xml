@@ -12,9 +12,24 @@
     <!-- Default Theme referenced in AndroidManifest.xml -->
     <style name="Theme.FtHangouts" parent="Theme.FtHangouts.Ocean" />
 
-    <style name="TextAppearance.FTHangouts.Heading" parent="@android:style/TextAppearance">
-        <item name="android:fontFamily">@font/noto_sans_medium</item>
-        <item name="android:textSize">20sp</item>
+    <style name="TextAppearance.FTHangouts.DisplayMedium" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:textSize">45sp</item>
+    </style>
+
+    <style name="TextAppearance.FTHangouts.HeadlineMedium" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:textSize">28sp</item>
+    </style>
+
+    <style name="TextAppearance.FTHangouts.HeadlineSmall" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="TextAppearance.FTHangouts.TitleLarge" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:textSize">22sp</item>
     </style>
 
     <style name="TextAppearance.FTHangouts.TitleMedium" parent="@android:style/TextAppearance">

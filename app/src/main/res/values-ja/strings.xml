@@ -1,8 +1,9 @@
 <resources>
     <string name="home_title">コンタクト</string>
-    <string name="new_contact_title">新しい連絡先</string>
+    <string name="new_contact">新しい連絡先</string>
     <string name="edit_contact">連絡先を編集</string>
     <string name="back">戻る</string>
+    <string name="close">閉じる</string>
     <string name="change_color_theme">カラーテーマを変更</string>
     <string name="add_contact">連絡先を追加</string>
     <string name="search_contacts">連絡先を検索</string>

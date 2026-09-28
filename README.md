@@ -118,7 +118,9 @@
 - [Android Developer API Reference - R.attr](https://developer.android.com/reference/android/R.attr)
 - [Android Developer - Drawable resources](https://developer.android.com/guide/topics/resources/drawable-resource?hl=ja)
 - [Kotlin docs](https://kotlinlang.org/docs/home.html)
+
 - [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
+- [Material Design 3 - Typography](https://m3.material.io/styles/typography/type-scale-tokens)
 
 ## AI Usage
 

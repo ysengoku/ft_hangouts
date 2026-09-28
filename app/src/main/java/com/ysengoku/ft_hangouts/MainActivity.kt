@@ -34,14 +34,19 @@ class MainActivity : Activity() {
         applySystemBarInsets()
 
         val topAppBar = TopAppBar(findViewById(R.id.top_app_bar))
-        topAppBar.setOnActionClick { anchor -> showThemeMenu(anchor) }
+        topAppBar.setOnNavigationClick { navigator.back() }
+
         // For testing only
         // DatabaseHelper.getInstance(this).writableDatabase
         navigator = Navigator(
             findViewById(R.id.screen_container),
-            topAppBar
+            topAppBar,
+            onThemeSelected = { theme ->
+                themePreferences.saveTheme(theme)
+                recreate()
+            },
         )
-        navigator.showContactList()
+        navigator.start()
     }
 
     private fun enableEdgeToEdge() {
@@ -99,26 +104,4 @@ class MainActivity : Activity() {
             @Suppress("DEPRECATION")
             Rect(systemWindowInsetLeft, systemWindowInsetTop, systemWindowInsetRight, systemWindowInsetBottom)
         }
-
-    private fun showThemeMenu(anchor: View) {
-        val current = themePreferences.getTheme()
-        val popup = ListPopupWindow(this)
-        popup.anchorView = anchor
-        popup.setAdapter(ThemeMenuAdapter(this, current))
-        popup.width = resources.getDimensionPixelSize(R.dimen.menu_width)
-        popup.setDropDownGravity(Gravity.END)
-        popup.horizontalOffset = -resources.getDimensionPixelSize(R.dimen.spacing_small)
-        popup.setBackgroundDrawable(getDrawable(R.drawable.bg_menu))
-        popup.isModal = true
-
-        popup.setOnItemClickListener {_, _, position, _ ->
-            popup.dismiss()
-            val selected = ThemePreferences.THEME_LIST[position]
-            if (selected != current) {
-                themePreferences.saveTheme(selected)
-                recreate()
-            }
-        }
-        popup.show()
-    }
 }
