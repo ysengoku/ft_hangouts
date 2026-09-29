@@ -96,15 +96,35 @@
 
 ### Prerequisites
 
+- Android studio (SDK 26-37, this project targets `compileSdk 37`)
+- A 42 API application (UID + Secret)
+
+For the 42 Lyon cluster with limited disk quota, use [42-android-setup](https://github.com/ysengoku/42-android-setup) to install Studio under `~/opt` and the SDK/Gradle cache under `/goinfre` instead of the default paths.
+
 ### Installation
 
+1. Clone the repo
+2. Open the project in Android Studio and let Gradle sync
+
 ### Usage
+
+**Build the debug APK:**   
+```bash
+./gradlew assembleDebug
+```
+
+**Run on a medium_phone size emulator:**   
+```bash
+emulator -avd medium_phone &
+adb wait-for-device
+./gradlew installDebug
+
+# Or [Run ▶] in Android Studio
+```
 
 ## Development
 
 ### Workflow
-
-### Linting & Formatting
 
 ### Testing
 
@@ -122,8 +142,15 @@
 - [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
 - [Material Design 3 - Typography](https://m3.material.io/styles/typography/type-scale-tokens)
 
-## AI Usage
+- [libphonenumber - PhoneNumberMetadata.xml](https://github.com/google/libphonenumber/blob/master/resources/PhoneNumberMetadata.xml) (Apache License 2.0): source of the country calling codes in `country_codes.xml`
 
 ## Authors
 
+<div valign="top">
+  <img src="https://contrib.rocks/image?repo=ysengoku/swifty-companion" height="30px" valign="middle" />
+  &nbsp Yuko SENGOKU &nbsp&nbsp (<a href="https://github.com/ysengoku">GitHub @ysengoku</a>)
+</div>
+
 ## License
+
+This project is for educational purposes.

@@ -61,6 +61,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
                 lastName = it.getString(it.getColumnIndexOrThrow("last_name")),
                 company = it.getStringOrNull(it.getColumnIndexOrThrow("company")),
                 phone = it.getString(it.getColumnIndexOrThrow("phone")),
+                phoneCountry = it.getString(it.getColumnIndexOrThrow("phone_country")),
                 address = it.getStringOrNull(it.getColumnIndexOrThrow("address")),
                 birthday = it.getStringOrNull(it.getColumnIndexOrThrow("birthday"))?.let { s -> LocalDate.parse(s) },
                 note = it.getStringOrNull(it.getColumnIndexOrThrow("note")),

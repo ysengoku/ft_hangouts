@@ -8,6 +8,7 @@ data class Contact(
     val lastName: String,
     val company: String?,
     val phone: String,
+    val phoneCountry: String,
     val address: String?,
     val birthday: LocalDate?, // In SQLite: TEXT in ISO format: "1995-04-12"
     val note: String?,

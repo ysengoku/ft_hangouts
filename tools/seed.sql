@@ -3,41 +3,41 @@ DELETE FROM messages;
 DELETE FROM contacts;
 DELETE FROM sqlite_sequence WHERE name IN ('contacts', 'messages');
 
-INSERT INTO contacts (first_name, last_name, company, phone, address, birthday, note) VALUES
-  ('Colette', 'Martin', '42 Lyon', '0601020304',
+INSERT INTO contacts (first_name, last_name, company, phone, phone_country, address, birthday, note) VALUES
+  ('Colette', 'Martin', '42 Lyon', '+33601020304', 'FR',
    '104 Route de Paris 69260 Charbonnières-les-Bains', '1925-04-12', 'Peer'),
 
-  ('Bob', 'Durand', NULL, '0605060708',
+  ('Bob', 'Durand', NULL, '+33605060708', 'FR',
    NULL, NULL, NULL),
 
-  ('Chloé', 'Bernard', 'Ubisoft', '0611223344',
+  ('Chloé', 'Bernard', 'Ubisoft', '+33611223344', 'FR',
    '12 rue de Rivoli 75004 Paris', '1990-11-03', NULL),
 
-  ('David', 'Johnson', NULL, '0622334455',
+  ('David', 'Johnson', NULL, '+12125550123', 'US',
    NULL, '1988-02-29', 'Leap year birthday'),
 
-  ('Hugo', 'Robert', 'Doctolib', '0633445566',
+  ('Hugo', 'Robert', 'Doctolib', '+33633445566', 'FR',
    '5 av. Foch 69006 Lyon', NULL, NULL),
 
-  ('Emily', 'Walker', NULL, '0644556677',
+  ('Emily', 'Walker', NULL, '+15145550147', 'CA',
    NULL, NULL, NULL),
 
-  ('Gabriel', 'Moreau', '42 Paris', '0655667788',
+  ('Gabriel', 'Moreau', '42 Paris', '+33655667788', 'FR',
    NULL, '2000-01-01', NULL),
 
-  ('Naomi', 'Sato', 'Agence impériale', '0666778899',
+  ('Naomi', 'Sato', 'Agence impériale', '+819012345678', 'JP',
    '1-1 Chiyoda, Chiyoda City, Tokyo 100-8111', NULL, NULL),
 
-  ('Isabelle', 'Simon', 'BlaBlaCar', '0677889900',
+  ('Isabelle', 'Simon', 'BlaBlaCar', '+33677889900', 'FR',
    NULL, '1997-07-14', NULL),
 
-  ('Jules', 'Michel', NULL, '0688990011',
+  ('Jules', 'Michel', NULL, '+33688990011', 'FR',
    NULL, NULL, 'Met at the pool'),
 
-  ('Kenji', 'Tanaka', NULL, '0699001122',
+  ('Kenji', 'Tanaka', NULL, '+818023456789', 'JP',
    NULL, '1993-05-05', NULL),
 
-  ('Léa', 'Fontaine', 'Mistral AI', '0700112233',
+  ('Léa', 'Fontaine', 'Mistral AI', '+33700112233', 'FR',
    '8 quai de Seine, Paris', NULL, NULL);
 
 -- 25 messages with Colette (id 1): minutes_ago, is_incoming, content

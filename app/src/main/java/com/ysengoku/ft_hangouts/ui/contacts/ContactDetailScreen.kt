@@ -60,18 +60,23 @@ class ContactDetailScreen(
                 companyView.visibility = View.VISIBLE
             }
 
+            val messageButton = view.findViewById<View>(R.id.contact_detail_message)
             bindActionButton(
-                view.findViewById<View>(R.id.contact_detail_message),
+                messageButton,
                 R.drawable.ic_chat_filled,
                 R.string.message,
                 ::sendMessage
             )
+            messageButton.setOnClickListener { sendMessage() }
+
+            val callButton = view.findViewById<View>(R.id.contact_detail_call)
             bindActionButton(
-                view.findViewById<View>(R.id.contact_detail_call),
+                callButton,
                 R.drawable.ic_call_filled,
                 R.string.call,
                 ::startCall
             )
+            callButton.setOnClickListener { startCall() }
 
             bindDetailField(
                 view.findViewById<View>(R.id.contact_detail_phone),
@@ -103,11 +108,11 @@ class ContactDetailScreen(
     }
 
     private fun sendMessage() {
-
+        navigator.navigate(Route.Conversation(contactId))
     }
 
     private fun startCall() {
-
+        // TODO (Bonus)
     }
 
     private fun confirmDelete() {

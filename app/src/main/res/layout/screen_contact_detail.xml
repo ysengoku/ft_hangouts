@@ -39,7 +39,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/spacing_medium">
+            android:layout_marginVertical="@dimen/spacing_medium">
             <include
                 android:id="@+id/contact_detail_message"
                 layout="@layout/view_action_button"

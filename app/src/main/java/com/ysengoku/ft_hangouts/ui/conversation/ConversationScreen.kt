@@ -22,6 +22,6 @@ class ConversationScreen(
     override val action: Action? = null
 
     init {
-        view.findViewById<TextView>(R.id.conversation_placeholder).text = "Contact Form : id=$contactId"
+        view.findViewById<TextView>(R.id.conversation_placeholder).text = "Conversation : id=$contactId"
     }
 }

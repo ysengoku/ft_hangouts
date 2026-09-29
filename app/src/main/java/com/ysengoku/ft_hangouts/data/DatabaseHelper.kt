@@ -30,6 +30,7 @@ class DatabaseHelper(context: Context) :
             "last_name TEXT NOT NULL," +
             "company TEXT," +
             "phone TEXT NOT NULL," +
+            "phone_country TEXT NOT NULL," +
             "address TEXT," +
             "birthday TEXT," +
             "note TEXT," +
@@ -49,11 +50,14 @@ class DatabaseHelper(context: Context) :
         db.execSQL(CREATE_MESSAGES)
     }
 
-    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
-        db.execSQL("DROP TABLE IF EXISTS messages")
-        db.execSQL("DROP TABLE IF EXISTS contacts")
-        onCreate(db)
-    }
+    /*
+        Apply migrations step by step when DATABASE_VERSION is increased,
+        for example:
+        if (oldVersion < 2) {
+            db.execSQL("ALTER TABLE contacts ADD COLUMN email TEXT")
+        }
+    */
+    override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {}
 
     override fun onConfigure(db: SQLiteDatabase) {
         db.setForeignKeyConstraintsEnabled(true)
