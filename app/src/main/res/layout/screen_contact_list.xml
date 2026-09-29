@@ -23,7 +23,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:src="@drawable/ic_search"
-                android:tint="?attr/colorOnSecondaryContainer"
+                android:tint="?attr/colorOnSurfaceVariant"
                 android:importantForAccessibility="no" />
 
             <EditText
@@ -40,7 +40,7 @@
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
                 android:textColor="?attr/colorOnSurface"
-                android:textColorHint="?attr/colorOnSecondaryContainer" />
+                android:textColorHint="?attr/colorOnSurfaceVariant" />
         </LinearLayout>
 
         <ListView
@@ -49,7 +49,7 @@
             android:layout_height="0dp"
             android:layout_weight="1"
             android:clipToPadding="false"
-            android:paddingTop="@dimen/spacing_small"
+            android:paddingTop="@dimen/spacing_extra_small"
             android:paddingBottom="88dp"
             android:divider="@null" />
     </LinearLayout>

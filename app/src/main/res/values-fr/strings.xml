@@ -2,14 +2,26 @@
     <string name="home_title">Contacts</string>
     <string name="new_contact">Nouveau contact</string>
     <string name="edit_contact">Modifier le contact</string>
+    <string name="delete_contact">Supprimer le contact</string>
     <string name="back">Retour</string>
     <string name="close">Fermer</string>
     <string name="change_color_theme">Changer le thème de couleur</string>
     <string name="add_contact">Ajouter un contact</string>
     <string name="search_contacts">Rechercher des contacts</string>
+    <string name="send_message">Envoyer un message</string>
+    <string name="message">Message</string>
+    <string name="call">Appel</string>
+    <string name="save">Sauvegarder</string>
+    <string name="delete">Supprimer</string>
+    <string name="delete_contact_confirm">Supprimer ce contact ? L\'historique des messages sera également supprimé.</string>
     <string name="theme_ocean">Océan</string>
     <string name="theme_amber">Ambre</string>
     <string name="theme_forest">Forêt</string>
     <string name="theme_rose">Rose</string>
     <string name="theme_lavender">Lavande</string>
+    <string name="company">Enreprise</string>
+    <string name="phone">Téléphone</string>
+    <string name="address">Adresse</string>
+    <string name="birthday">Date de naissance</string>
+    <string name="note">Notes</string>
 </resources>

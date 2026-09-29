@@ -21,16 +21,74 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:paddingTop="@dimen/spacing_small"
+            android:paddingTop="@dimen/spacing_extra_small"
             android:textColor="?attr/colorOnSurface"
             android:textAppearance="@style/TextAppearance.FTHangouts.HeadlineSmall" />
-        
+
         <TextView
-            android:id="@+id/contact_detail_placeholder"
+            android:id="@+id/contact_detail_company"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
+            android:paddingTop="@dimen/spacing_extra_small"
             android:textColor="?attr/colorOnSurface"
-            android:textAppearance="@style/TextAppearance.FTHangouts.TitleMedium" />
+            android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/spacing_medium">
+            <include
+                android:id="@+id/contact_detail_message"
+                layout="@layout/view_action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small" />
+            <include
+                android:id="@+id/contact_detail_call"
+                layout="@layout/view_action_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/spacing_small" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/contact_detail_phone"
+            layout="@layout/view_detail_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small" />
+        <include 
+            android:id="@+id/contact_detail_address"
+            layout="@layout/view_detail_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small" />
+        <include 
+            android:id="@+id/contact_detail_birthday"
+            layout="@layout/view_detail_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small" />
+        <include 
+            android:id="@+id/contact_detail_note"
+            layout="@layout/view_detail_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small" />
+
+        <Button
+            android:id="@+id/contact_delete_button"
+            style="@style/Widget.FTHangouts.FieldButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:drawableStart="@drawable/ic_delete"
+            android:drawableTint="?android:attr/colorError"
+            android:gravity="start"
+            android:text="@string/delete_contact"
+            android:textColor="?android:attr/colorError" />
     </LinearLayout>
 </ScrollView>

@@ -83,12 +83,12 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
         )
     }
 
-    fun delete(id: Long): Int {
+    fun delete(id: Long): Boolean {
         return dbHelper.writableDatabase.delete(
             tableName,
             "id = ?",
             arrayOf(id.toString())
-        )
+        ) > 0
     }
 
     private fun Contact.toContentValues() = ContentValues().apply {

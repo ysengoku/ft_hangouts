@@ -3,14 +3,26 @@
     <string name="home_title">Contacts</string>
     <string name="new_contact">New contact</string>
     <string name="edit_contact">Edit contact</string>
+    <string name="delete_contact">Delete contact</string>
     <string name="back">Back</string>
     <string name="close">Close</string>
     <string name="change_color_theme">Change color theme</string>
     <string name="add_contact">Add contact</string>
     <string name="search_contacts">Search contacts</string>
+    <string name="send_message">Send message</string>
+    <string name="message">Message</string>
+    <string name="call">Call</string>
+    <string name="save">Save</string>
+    <string name="delete">Delete</string>
+    <string name="delete_contact_confirm">Delete this contact? The message history will also be deleted.</string>
     <string name="theme_ocean">Ocean</string>
     <string name="theme_amber">Amber</string>
     <string name="theme_forest">Forest</string>
     <string name="theme_rose">Rose</string>
     <string name="theme_lavender">Lavender</string>
+    <string name="company">Company</string>
+    <string name="phone">Phone</string>
+    <string name="address">Address</string>
+    <string name="birthday">Birthday</string>
+    <string name="note">Note</string>
 </resources>

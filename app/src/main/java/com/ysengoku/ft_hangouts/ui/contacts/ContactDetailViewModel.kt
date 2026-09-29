@@ -11,4 +11,11 @@ class ContactDetailViewModel(private val repository: ContactRepository) {
             DbExecutor.main { onLoaded(contact) }
         }
     }
+
+    fun delete(contactId: Long, onDeleted: (Boolean) -> Unit) {
+        DbExecutor.execute {
+            val deleted = repository.delete(contactId)
+            DbExecutor.main { onDeleted(deleted) }
+        }
+    }
 }

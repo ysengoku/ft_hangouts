@@ -1,22 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="spacing_small">4dp</dimen>
+    <!-- Spacing -->
+    <dimen name="spacing_extra_small">4dp</dimen>
+    <dimen name="spacing_small">8dp</dimen>
     <dimen name="spacing_medium">16dp</dimen>
-    <dimen name="top_app_bar_height">64dp</dimen>
-    <dimen name="top_app_bar_corner_radius">16dp</dimen>
-    <dimen name="list_item_height">56dp</dimen>
-    <dimen name="search_bar_height">56dp</dimen>
-    <dimen name="search_bar_corner_radius">28dp</dimen>
-    <dimen name="icon_button_size">48dp</dimen>
-    <dimen name="icon_button_padding">12dp</dimen>
-    <dimen name="icon_button_corner_radius">16dp</dimen>
+    <dimen name="spacing_large">24dp</dimen>
+
+    <!-- Components -->
+    <dimen name="avatar_size_small">40dp</dimen>
+    <dimen name="avatar_size_large">120dp</dimen>
+
+    <dimen name="dialog_corner_radius">28dp</dimen>
+
     <dimen name="fab_size">56dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
     <dimen name="fab_corner_radius">16dp</dimen>
     <dimen name="fab_elevation">6dp</dimen>
-    <dimen name="menu_width">128dp</dimen>
-    <dimen name="menu_height">48dp</dimen>
+
+    <dimen name="field_icon_size">24dp</dimen>
+
+    <dimen name="icon_button_size">48dp</dimen>
+    <dimen name="icon_button_padding">12dp</dimen>
+    <dimen name="icon_button_corner_radius">16dp</dimen>
+
+    <dimen name="list_item_height">56dp</dimen>
+
+    <dimen name="menu_item_width">128dp</dimen>
+    <dimen name="menu_item_height">48dp</dimen>
     <dimen name="menu_item_corner_radius">16dp</dimen>
-    <dimen name="avatar_size_small">40dp</dimen>
-    <dimen name="avatar_size_large">120dp</dimen>
+
+    <dimen name="search_bar_height">56dp</dimen>
+    <dimen name="search_bar_corner_radius">28dp</dimen>
+
+    <dimen name="tonal_icon_button_width">120dp</dimen>
+    <dimen name="tonal_icon_button_height">56dp</dimen>
+    <dimen name="tonal_icon_button_corner_radius">28dp</dimen>
+    <dimen name="tonal_icon_button_padding">16dp</dimen>
+
+    <dimen name="top_app_bar_height">64dp</dimen>
 </resources>

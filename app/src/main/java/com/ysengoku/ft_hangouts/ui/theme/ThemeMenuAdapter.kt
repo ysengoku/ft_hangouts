@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
+import com.ysengoku.ft_hangouts.ui.themeColor
 
 class ThemeMenuAdapter(
     private val context: Context,
@@ -28,18 +29,12 @@ class ThemeMenuAdapter(
 
         if (theme == current) {
             label.background = context.getDrawable(R.drawable.bg_menu_item_selected)
-            label.setTextColor(themeColor(R.attr.colorOnPrimaryContainer))
+            label.setTextColor(context.themeColor(R.attr.colorOnPrimaryContainer))
         } else {
             label.background = null
             label.setTextColor(context.getColor(ThemePreferences.primaryColorRes(theme)))
         }
         label.setPaddingRelative(horizontalPadding, 0, horizontalPadding, 0)
         return label
-    }
-
-    private fun themeColor(attr: Int): Int {
-        val value = TypedValue()
-        context.theme.resolveAttribute(attr, value, true)
-        return value.data
     }
 }

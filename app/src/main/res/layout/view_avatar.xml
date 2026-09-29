@@ -11,11 +11,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:gravity="center"
-        android:textColor="?attr/colorOnSecondaryContainer"
+        android:textColor="?attr/colorOnTertiaryContainer"
         android:textAppearance="@style/TextAppearance.FTHangouts.TitleMedium"
         android:maxLines="1"
         android:autoSizeTextType="uniform"
-        android:padding="@dimen/spacing_small" />
+        android:padding="@dimen/spacing_extra_small" />
 
     <ImageView
         android:id="@+id/avatar_picture"
