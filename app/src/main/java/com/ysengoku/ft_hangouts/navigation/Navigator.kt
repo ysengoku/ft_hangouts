@@ -1,5 +1,6 @@
 package com.ysengoku.ft_hangouts.navigation
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ysengoku.ft_hangouts.data.DatabaseHelper
@@ -18,6 +19,11 @@ class Navigator(
 ) {
     private val inflater = LayoutInflater.from(container.context)
     private val history = ArrayDeque<Route>()
+
+    companion object {
+        private const val KEY_KINDS = "navigator_kinds"
+        private const val KEY_IDS = "navigator_ids"
+    }
 
     fun start() = navigate(Route.ContactList)
 
@@ -67,4 +73,21 @@ class Navigator(
             is Route.Conversation -> ConversationScreen(inflater, container, this, route.contactId)
             is Route.ContactForm -> ContactFormScreen(inflater, container, this, route.contactId)
         }
+
+    fun saveState(outState: Bundle) {
+        val pairs = history.map { it.toPair() }
+        outState.putStringArray(KEY_KINDS, pairs.map { it.first }.toTypedArray())
+        outState.putLongArray(KEY_IDS, pairs.map { it.second }.toLongArray())
+    }
+
+    fun restoreState(state: Bundle): Boolean {
+        val kinds = state.getStringArray(KEY_KINDS) ?: return false
+        val ids = state.getLongArray(KEY_IDS) ?: return false
+        history.clear()
+        kinds.indices.forEach {
+            history.addLast(routeOf(kinds[it], ids[it]))
+        }
+        render(history.last())
+        return true
+    }
 }

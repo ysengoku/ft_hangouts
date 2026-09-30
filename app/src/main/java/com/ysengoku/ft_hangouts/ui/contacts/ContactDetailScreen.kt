@@ -67,7 +67,7 @@ class ContactDetailScreen(
                 R.string.message,
                 ::sendMessage
             )
-            messageButton.setOnClickListener { sendMessage() }
+            // messageButton.setOnClickListener { sendMessage() }
 
             val callButton = view.findViewById<View>(R.id.contact_detail_call)
             bindActionButton(
@@ -76,7 +76,7 @@ class ContactDetailScreen(
                 R.string.call,
                 ::startCall
             )
-            callButton.setOnClickListener { startCall() }
+            // callButton.setOnClickListener { startCall() }
 
             bindDetailField(
                 view.findViewById<View>(R.id.contact_detail_phone),

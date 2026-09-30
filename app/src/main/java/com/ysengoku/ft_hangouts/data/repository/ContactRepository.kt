@@ -97,6 +97,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
         put("last_name" , lastName)
         put("company", company)
         put("phone", phone)
+        put("phone_country", phoneCountry)
         put("address", address)
         put("birthday", birthday?.toString())
         put("note", note)

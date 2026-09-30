@@ -6,17 +6,11 @@ import android.graphics.Rect
 import android.view.WindowInsets
 import android.os.Build
 import android.os.Bundle
-import android.view.Gravity
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
-import android.widget.ListPopupWindow
 import android.widget.Spinner
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
-import com.ysengoku.ft_hangouts.data.DatabaseHelper
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
-import com.ysengoku.ft_hangouts.ui.theme.ThemeMenuAdapter
 
 class MainActivity : Activity() {
     private lateinit var navigator: Navigator
@@ -36,8 +30,6 @@ class MainActivity : Activity() {
         val topAppBar = TopAppBar(findViewById(R.id.top_app_bar))
         topAppBar.setOnNavigationClick { navigator.back() }
 
-        // For testing only
-        // DatabaseHelper.getInstance(this).writableDatabase
         navigator = Navigator(
             findViewById(R.id.screen_container),
             topAppBar,
@@ -46,7 +38,19 @@ class MainActivity : Activity() {
                 recreate()
             },
         )
-        navigator.start()
+
+        if (savedInstanceState == null || !navigator.restoreState(savedInstanceState)) {
+            navigator.start()
+        }
+    }
+
+    /**
+     * Called by Android before the Activity is recreated (rotation, theme change).
+     * The saved history is restored in onCreate through navigator.restoreState.
+    */
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        navigator.saveState(outState)
     }
 
     private fun enableEdgeToEdge() {

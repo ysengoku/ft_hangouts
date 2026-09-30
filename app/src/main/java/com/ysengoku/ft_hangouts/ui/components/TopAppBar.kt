@@ -48,8 +48,4 @@ class TopAppBar(root: View) {
     fun setOnNavigationClick(listener: () -> Unit) {
         navigationButton.setOnClickListener { listener() }
     }
-
-    fun setOnActionClick(listener: (View) -> Unit) {
-        actionButton.setOnClickListener { listener(it) }
-    }
 }

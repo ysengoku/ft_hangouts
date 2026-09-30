@@ -50,13 +50,13 @@ class DatabaseHelper(context: Context) :
         db.execSQL(CREATE_MESSAGES)
     }
 
-    /*
-        Apply migrations step by step when DATABASE_VERSION is increased,
-        for example:
-        if (oldVersion < 2) {
-            db.execSQL("ALTER TABLE contacts ADD COLUMN email TEXT")
-        }
-    */
+    /**
+     * Apply migrations step by step when DATABASE_VERSION is increased,
+     * for example:
+     * if (oldVersion < 2) {
+     *     db.execSQL("ALTER TABLE contacts ADD COLUMN email TEXT")
+     * }
+     */
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {}
 
     override fun onConfigure(db: SQLiteDatabase) {
