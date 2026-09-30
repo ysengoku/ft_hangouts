@@ -39,10 +39,10 @@ class DatabaseHelper(context: Context) :
         private const val CREATE_MESSAGES =
             "CREATE TABLE ${TABLE.MESSAGES} (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
-            "contact_id INTEGER REFERENCES ${TABLE.CONTACTS}(id) ON DELETE CASCADE," +
-            "is_incoming INTEGER," +
-            "created_at INTEGER," +
-            "content TEXT )"
+            "contact_id INTEGER NOT NULL REFERENCES ${TABLE.CONTACTS}(id) ON DELETE CASCADE," +
+            "is_incoming INTEGER NOT NULL," +
+            "created_at INTEGER NOT NULL," +
+            "content TEXT NOT NULL)"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
