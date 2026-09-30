@@ -5,6 +5,7 @@
     <string name="delete_contact">連絡先を削除</string>
     <string name="back">戻る</string>
     <string name="close">閉じる</string>
+    <string name="clear">クリア</string>
     <string name="change_color_theme">カラーテーマを変更</string>
     <string name="add_contact">連絡先を追加</string>
     <string name="send_message">メッセージを送信</string>
@@ -19,9 +20,15 @@
     <string name="theme_forest">フォレスト</string>
     <string name="theme_rose">ローズ</string>
     <string name="theme_lavender">ラベンダー</string>
+    <string name="required">* は必須項目です</string>
+    <string name="first_name">氏</string>
+    <string name="last_name">名</string>
     <string name="company">会社名</string>
     <string name="phone">電話番号</string>
     <string name="address">住所</string>
     <string name="birthday">誕生日</string>
     <string name="note">メモ</string>
+    <string name="add_photo">写真を追加</string>
+    <string name="change_photo">写真を変更</string>
+    <string name="remove_photo">写真を削除</string>
 </resources>

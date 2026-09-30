@@ -7,8 +7,13 @@
     <dimen name="spacing_large">24dp</dimen>
 
     <!-- Components -->
+    <dimen name="avatar_badge_size">48dp</dimen>
+    <dimen name="avatar_badge_padding">12dp</dimen>
+    <dimen name="avatar_badge_outline">4dp</dimen>
+    <dimen name="avatar_badge_offset">12dp</dimen>
+
     <dimen name="avatar_size_small">40dp</dimen>
-    <dimen name="avatar_size_large">120dp</dimen>
+    <dimen name="avatar_size_large">200dp</dimen>
 
     <dimen name="dialog_corner_radius">28dp</dimen>
 
@@ -32,9 +37,18 @@
     <dimen name="search_bar_height">56dp</dimen>
     <dimen name="search_bar_corner_radius">28dp</dimen>
 
+    <dimen name="tonal_button_width">96dp</dimen>
+    <dimen name="tonal_button_height">48dp</dimen>
+    <dimen name="tonal_button_padding">16dp</dimen>
+    <dimen name="tonal_button_corner_radius">28dp</dimen>
+
+    <dimen name="text_field_height">56dp</dimen>
+    <dimen name="text_field_corner_radius">4dp</dimen>
+    <dimen name="text_field_label_offset">8dp</dimen>
+    <dimen name="text_field_label_start">12dp</dimen>
+
     <dimen name="tonal_icon_button_width">120dp</dimen>
     <dimen name="tonal_icon_button_height">56dp</dimen>
-    <dimen name="tonal_icon_button_corner_radius">28dp</dimen>
     <dimen name="tonal_icon_button_padding">16dp</dimen>
 
     <dimen name="top_app_bar_height">64dp</dimen>

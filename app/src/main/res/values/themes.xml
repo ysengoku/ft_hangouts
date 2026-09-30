@@ -8,11 +8,13 @@
         <item name="android:colorAccent">@color/ocean_secondary</item>
         <item name="android:windowLightStatusBar">@bool/light_system_bars</item>
         <item name="android:alertDialogTheme">@style/ThemeOverlay.FTHangouts.Dialog</item>
+        <item name="android:datePickerDialogTheme">@style/ThemeOverlay.FTHangouts.DatePickerDialog</item>
     </style>
 
     <!-- Default Theme referenced in AndroidManifest.xml -->
     <style name="Theme.FtHangouts" parent="Theme.FtHangouts.Ocean" />
 
+    <!-- ==================== Text styles ==================== -->
     <style name="TextAppearance.FTHangouts.DisplayMedium" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/noto_sans</item>
         <item name="android:textSize">45sp</item>
@@ -43,6 +45,11 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextAppearance.FTHangouts.BodySmall" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
     <style name="TextAppearance.FTHangouts.LabelLarge" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/noto_sans_medium</item>
         <item name="android:textSize">14sp</item>
@@ -66,6 +73,7 @@
         <item name="colorTertiaryContainer">@color/ocean_tertiary_container</item>
         <item name="colorOnTertiaryContainer">@color/ocean_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/ocean_surface_container_high</item>
+        <item name="colorOutline">@color/ocean_outline</item>
     </style>
 
     <!-- ==================== AMBER THEME ==================== -->
@@ -86,6 +94,7 @@
         <item name="colorTertiaryContainer">@color/amber_tertiary_container</item>
         <item name="colorOnTertiaryContainer">@color/amber_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/amber_surface_container_high</item>
+        <item name="colorOutline">@color/amber_outline</item>
     </style>
 
     <!-- ==================== FOREST THEME ==================== -->
@@ -106,6 +115,7 @@
         <item name="colorTertiaryContainer">@color/forest_tertiary_container</item>
         <item name="colorOnTertiaryContainer">@color/forest_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/forest_surface_container_high</item>
+        <item name="colorOutline">@color/forest_outline</item>
     </style>
 
     <!-- ==================== ROSE THEME ==================== -->
@@ -126,6 +136,7 @@
         <item name="colorTertiaryContainer">@color/rose_tertiary_container</item>
         <item name="colorOnTertiaryContainer">@color/rose_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/rose_surface_container_high</item>
+        <item name="colorOutline">@color/rose_outline</item>
     </style>
 
     <!-- ==================== LAVENDER THEME ==================== -->
@@ -146,6 +157,16 @@
         <item name="colorTertiaryContainer">@color/lavender_tertiary_container</item>
         <item name="colorOnTertiaryContainer">@color/lavender_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/lavender_surface_container_high</item>
+        <item name="colorOutline">@color/lavender_outline</item>
+    </style>
+
+    <!-- ==================== Widget ==================== -->
+    <style name="Widget.FTHangouts.TonalButton" parent="@android:style/Widget.Material.Button.Borderless">
+        <item name="android:background">@drawable/bg_tonal_button</item>
+        <item name="android:paddingHorizontal">@dimen/tonal_button_padding</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textAppearance">@style/TextAppearance.FTHangouts.LabelLarge</item>
+        <item name="android:textColor">?attr/colorOnSecondaryContainer</item>
     </style>
 
     <style name="Widget.FTHangouts.IconButton" parent="@android:style/Widget.Material.ImageButton">
@@ -155,7 +176,7 @@
     </style>
 
     <style name="Widget.FTHangouts.TonalIconButton" parent="@android:style/Widget.Material.ImageButton">
-        <item name="android:background">@drawable/bg_tonal_icon_button</item>
+        <item name="android:background">@drawable/bg_tonal_button</item>
         <item name="android:padding">@dimen/tonal_icon_button_padding</item>
         <item name="android:tint">?attr/colorOnSecondaryContainer</item>
     </style>
@@ -170,11 +191,25 @@
         <item name="android:drawablePadding">@dimen/spacing_medium</item>
     </style>
 
+    <style name="Widget.FTHangouts.DatePicker" parent="@android:style/Widget.Material.DatePicker">
+        <item name="android:datePickerMode">spinner</item>
+        <item name="android:calendarViewShown">false</item>
+    </style>
+
+
     <style name="ThemeOverlay.FTHangouts.Dialog" parent="@android:style/Theme.Material.Light.Dialog.Alert">
         <item name="android:windowBackground">@drawable/bg_dialog</item>
         <item name="android:textColorPrimary">?attr/colorOnSurface</item>
         <item name="android:textColorSecondary">?attr/colorOnSurface</item>
         <item name="android:colorAccent">?attr/colorOnSurfaceVariant</item>
+    </style>
+
+    <style name="ThemeOverlay.FTHangouts.DatePickerDialog" parent="@android:style/Theme.Material.Light.Dialog">
+        <item name="android:windowBackground">@drawable/bg_dialog</item>
+        <item name="android:textColorPrimary">?attr/colorOnSurface</item>
+        <item name="android:textColorSecondary">?attr/colorOnSurfaceVariant</item>
+        <item name="android:colorAccent">?attr/colorOnSurfaceVariant</item>
+        <item name="android:datePickerStyle">@style/Widget.FTHangouts.DatePicker</item>
     </style>
 
 </resources>

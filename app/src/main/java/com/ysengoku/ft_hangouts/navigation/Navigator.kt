@@ -71,7 +71,7 @@ class Navigator(
             Route.ContactList -> ContactListScreen(inflater, container, this, contactRepository, onThemeSelected)
             is Route.ContactDetail -> ContactDetailScreen(inflater, container, this, contactRepository, route.contactId)
             is Route.Conversation -> ConversationScreen(inflater, container, this, route.contactId)
-            is Route.ContactForm -> ContactFormScreen(inflater, container, this, route.contactId)
+            is Route.ContactForm -> ContactFormScreen(inflater, container, this, contactRepository, route.contactId)
         }
 
     fun saveState(outState: Bundle) {

@@ -1,13 +1,118 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <TextView
-        android:id="@+id/contact_form_placeholder"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:textColor="?attr/colorOnSurface"
-        android:textAppearance="@style/TextAppearance.FTHangouts.TitleMedium" />
-</FrameLayout>
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/spacing_medium">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center_horizontal"
+        android:paddingHorizontal="@dimen/spacing_medium">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium">
+            <include
+                android:id="@+id/contact_form_avatar"
+                layout="@layout/view_avatar"
+                android:layout_width="@dimen/avatar_size_large"
+                android:layout_height="@dimen/avatar_size_large"
+                android:layout_marginTop="@dimen/spacing_medium" />
+            <ImageButton
+                android:id="@+id/contact_form_remove_photo"
+                android:layout_width="@dimen/avatar_badge_size"
+                android:layout_height="@dimen/avatar_badge_size"
+                android:layout_marginTop="@dimen/avatar_badge_offset"
+                android:layout_gravity="end|top"
+                android:padding="@dimen/avatar_badge_padding"
+                android:background="@drawable/bg_icon_button_filled"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close"
+                android:tint="?attr/colorOnSecondaryContainer"
+                android:contentDescription="@string/remove_photo"
+                android:visibility="gone" />
+        </FrameLayout>
+
+        <Button
+            android:id="@+id/contact_form_photo_edit_button"
+            style="@style/Widget.FTHangouts.TonalButton"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/tonal_button_height"
+            android:layout_marginTop="@dimen/spacing_small" />
+
+        <TextView
+            android:id="@+id/contact_form_required"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:textAppearance="@style/TextAppearance.FTHangouts.BodySmall"
+            android:textColor="?attr/colorOnSurfaceVariant" />
+
+        <include 
+            android:id="@+id/contact_form_first_name"
+            layout="@layout/view_form_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_small" />
+
+        <include
+            android:id="@+id/contact_form_last_name"
+            layout="@layout/view_form_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium" />
+
+        <include
+            android:id="@+id/contact_form_company"
+            layout="@layout/view_form_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
+            <!-- phone country -->
+            
+            <EditText
+                android:id="@id/form_phone"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="@dimen/text_field_label_offset"
+                android:minHeight="@dimen/text_field_height"
+                android:paddingHorizontal="@dimen/spacing_medium"
+                android:background="@drawable/bg_text_field"
+                android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
+                android:textColor="?attr/colorOnSurface"
+                android:importantForAutofill="no"
+                android:inputType="phone" />
+        </LinearLayout>
+
+        <include
+            android:id="@+id/contact_form_address"
+            layout="@layout/view_form_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium" />
+
+        <include
+            android:id="@+id/contact_form_birthday"
+            layout="@layout/view_form_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium" />
+
+        <include
+            android:id="@+id/contact_form_note"
+            layout="@layout/view_form_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_medium" />
+
+    </LinearLayout>
+</ScrollView>

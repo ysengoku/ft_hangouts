@@ -10,4 +10,5 @@
     <attr name="colorOnSurface" format="color" />
     <attr name="colorSurfaceContainerHigh" format="color" />
     <attr name="colorOnSurfaceVariant" format="color" />
+    <attr name="colorOutline" format="color" />
 </resources>

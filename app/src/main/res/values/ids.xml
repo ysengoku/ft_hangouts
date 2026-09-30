@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="form_first_name" type="id" />
+    <item name="form_last_name" type="id" />
+    <item name="form_company" type="id" />
+    <item name="form_phone_country" type="id" />
+    <item name="form_phone" type="id" />
+    <item name="form_address" type="id" />
+    <item name="form_birthday" type="id" />
+    <item name="form_note" type="id" />
+</resources>
