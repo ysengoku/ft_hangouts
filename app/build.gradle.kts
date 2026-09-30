@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.ysengoku.ft_hangouts"
-        minSdk = 26
+        minSdk = 33
         targetSdk = 37
         versionCode = 1
         versionName = "1.0"

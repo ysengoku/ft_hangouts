@@ -1,10 +1,8 @@
 package com.ysengoku.ft_hangouts
 
 import android.app.Activity
-import android.graphics.Color
 import android.graphics.Rect
 import android.view.WindowInsets
-import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
@@ -54,18 +52,7 @@ class MainActivity : Activity() {
     }
 
     private fun enableEdgeToEdge() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            window.setDecorFitsSystemWindows(false)
-        } else {
-            @Suppress("DEPRECATION")
-            window.decorView.systemUiVisibility = (
-                    View.SYSTEM_UI_FLAG_LAYOUT_STABLE
-                    or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
-                    or View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
-                    )
-            window.statusBarColor = Color.TRANSPARENT
-            window.navigationBarColor = Color.TRANSPARENT
-        }
+        window.setDecorFitsSystemWindows(false)
     }
 
     private fun getThemeStyleResId(themeName: String): Int {
@@ -93,19 +80,22 @@ class MainActivity : Activity() {
             insets
         }
 
+        // Pads the screen container so that its content stays above the navigation bar
+        // and above the keyboard when it is open.
         container.setOnApplyWindowInsetsListener { v, insets ->
             val bars = insets.systemBarsRect()
-            v.setPadding(bars.left, 0, bars.right, bars.bottom)
+            val bottom = maxOf(bars.bottom, insets.imeBottom())
+            v.setPadding(bars.left, 0, bars.right, bottom)
             insets
         }
     }
 
-    private fun WindowInsets.systemBarsRect(): Rect =
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            val i = getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout())
-            Rect(i.left, i.top, i.right, i.bottom)
-        } else {
-            @Suppress("DEPRECATION")
-            Rect(systemWindowInsetLeft, systemWindowInsetTop, systemWindowInsetRight, systemWindowInsetBottom)
-        }
+    // Returns the height of the keyboard, or 0 when it is closed.
+    private fun WindowInsets.imeBottom(): Int =
+        getInsets(WindowInsets.Type.ime()).bottom
+
+    private fun WindowInsets.systemBarsRect(): Rect {
+        val i = getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout())
+        return Rect(i.left, i.top, i.right, i.bottom)
+    }
 }

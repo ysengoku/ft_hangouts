@@ -49,7 +49,7 @@ Framework roles are referenced with `?android:attr/` (`colorPrimary`, `colorBack
 
 The framework has no M3 type scale, so each M3 style used by the app is defined as `TextAppearance.FTHangouts.<M3 name in PascalCase>` in `res/values/themes.xml`, with the size and weight from the [M3 type scale](https://m3.material.io/styles/typography/type-scale-tokens). Only the styles in use are defined.
 
-Weights use separate font files (`@font/noto_sans` for Regular, `@font/noto_sans_medium` for Medium) because `android:textFontWeight` requires API 28 and `minSdk` is 26. Noto Sans has no Japanese glyphs, so Japanese text falls back to the system font, which is Noto Sans CJK on most devices.
+Weights use separate font files (`@font/noto_sans` for Regular, `@font/noto_sans_medium` for Medium). Noto Sans has no Japanese glyphs, so Japanese text falls back to the system font, which is Noto Sans CJK on most devices.
 
 **Rules:**
 
