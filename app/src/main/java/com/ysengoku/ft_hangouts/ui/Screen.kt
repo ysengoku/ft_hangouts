@@ -1,5 +1,7 @@
 package com.ysengoku.ft_hangouts.ui
 
+import android.content.Intent
+import android.os.Bundle
 import android.view.View
 
 interface Screen {
@@ -11,6 +13,8 @@ interface Screen {
     fun onShow() {}
     fun onHide() {}
     fun onDestroy() {}
+    fun saveState(outState: Bundle) {} 
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
 }
 
 data class Action(

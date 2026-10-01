@@ -1,7 +1,12 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
+import android.app.Activity
 import android.app.DatePickerDialog
 import android.content.DialogInterface
+import android.content.Intent
+import android.os.Bundle
+import android.provider.MediaStore
+import android.net.Uri
 import android.text.InputType
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +24,9 @@ import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
 import com.ysengoku.ft_hangouts.ui.components.bindAvatar
 import com.ysengoku.ft_hangouts.ui.components.bindFormField
+import java.io.File
+import java.io.InputStream
+import java.io.IOException
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -28,7 +36,8 @@ class ContactFormScreen(
     container: ViewGroup,
     private val navigator: Navigator,
     repository: ContactRepository,
-    private val contactId: Long?
+    private val contactId: Long?,
+    savedState: Bundle?
 ): Screen {
     override val view: View = inflater.inflate(R.layout.screen_contact_form, container, false)
     override val title = if (contactId == null) container.context.getString(R.string.new_contact) else container.context.getString(R.string.edit_contact)
@@ -53,6 +62,17 @@ class ContactFormScreen(
     private var noteInput: EditText
     private var birthday: LocalDate? = null
 
+    companion object {
+        private const val REQUEST_PICK_PHOTO = 1
+        private const val KEY_PICTURE = "picture"
+        private const val KEY_BIRTHDAY = "birthday"
+    }
+
+    override fun saveState(outState: Bundle) {
+        outState.putString(KEY_PICTURE, picture)
+        outState.putString(KEY_BIRTHDAY, birthday?.toString())
+    }
+
     private fun setPicture(path: String?, firstName: String?, lastName: String?) {
         picture = path
         photoEditButton.setText(if (path == null) R.string.add_photo else R.string.change_photo)
@@ -62,12 +82,37 @@ class ContactFormScreen(
         }
     }
 
+    private fun showPhotoPicker() {
+        val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
+        (view.context as Activity).startActivityForResult(intent, REQUEST_PICK_PHOTO)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if (requestCode != REQUEST_PICK_PHOTO || resultCode != Activity.RESULT_OK) return
+        val uri = data?.data ?: return
+        val path = copyToAppStorage(uri) ?: return
+        setPicture(path, firstNameInput.text.toString(), lastNameInput.text.toString())
+    }
+
+    private fun copyToAppStorage(uri: Uri): String? {
+        val context = view.context
+        val dir = File(context.filesDir, "photos").apply { mkdirs() }
+        val file = File(dir, "${System.currentTimeMillis()}.jpg")
+        return try {
+            context.contentResolver.openInputStream(uri)?.use { input ->
+                file.outputStream().use { input.copyTo(it) }
+            } ?: return null
+            file.absolutePath
+        } catch (e: IOException) {
+            null
+        }
+    }
+
     private fun setBirthday(date: LocalDate?) {
         birthday = date
         birthdayInput.setText(date?.format(birthdayFormatter))
     }
-
-
+    
     private fun showBirthdayPicker(input: EditText) {
         val initial = birthday ?: LocalDate.now().minusYears(18)
         val dialog = DatePickerDialog(
@@ -93,24 +138,8 @@ class ContactFormScreen(
     }
 
     init {
-        if (contactId != null) {
-            viewModel.load(contactId) { contact ->
-                if (contact == null) {
-                    navigator.back()
-                    return@load
-                }
-                original = contact
-                setPicture(contact.picture, contact.firstName, contact.lastName)
-                firstNameInput.setText(contact.firstName)
-                lastNameInput.setText(contact.lastName)
-                companyInput.setText(contact.company)
-                addressInput.setText(contact.address)
-                setBirthday(contact.birthday)
-                noteInput.setText(contact.note)
-            }
-        }
-
         setPicture(null, null, null)
+        photoEditButton.setOnClickListener { showPhotoPicker() }
 
         view.findViewById<TextView>(R.id.contact_form_required).setText(
             R.string.required)
@@ -171,5 +200,28 @@ class ContactFormScreen(
             InputType.TYPE_CLASS_TEXT or
                 InputType.TYPE_TEXT_FLAG_MULTI_LINE
         )
+
+        if (contactId != null) {
+            viewModel.load(contactId) { contact ->
+                if (contact == null) {
+                    navigator.back()
+                    return@load
+                }
+                original = contact
+                if (savedState != null) return@load
+                setPicture(contact.picture, contact.firstName, contact.lastName)
+                firstNameInput.setText(contact.firstName)
+                lastNameInput.setText(contact.lastName)
+                companyInput.setText(contact.company)
+                addressInput.setText(contact.address)
+                setBirthday(contact.birthday)
+                noteInput.setText(contact.note)
+            }
+        }
+
+        if (savedState != null) {
+            setPicture(savedState.getString(KEY_PICTURE), "", "")
+            setBirthday(savedState.getString(KEY_BIRTHDAY)?.let { LocalDate.parse(it) })
+        }
     }
 }

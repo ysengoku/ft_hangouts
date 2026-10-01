@@ -1,6 +1,7 @@
 package com.ysengoku.ft_hangouts
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Rect
 import android.view.WindowInsets
 import android.os.Bundle
@@ -49,6 +50,11 @@ class MainActivity : Activity() {
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         navigator.saveState(outState)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        navigator.onActivityResult(requestCode, resultCode, data)
     }
 
     private fun enableEdgeToEdge() {
