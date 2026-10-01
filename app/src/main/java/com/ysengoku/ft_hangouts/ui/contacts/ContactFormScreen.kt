@@ -17,6 +17,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Contact
+import com.ysengoku.ft_hangouts.data.copyImageToAppCache
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.ui.Action
@@ -90,22 +91,8 @@ class ContactFormScreen(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode != REQUEST_PICK_PHOTO || resultCode != Activity.RESULT_OK) return
         val uri = data?.data ?: return
-        val path = copyToAppStorage(uri) ?: return
+        val path = copyImageToAppCache(uri, view.context) ?: return
         setPicture(path, firstNameInput.text.toString(), lastNameInput.text.toString())
-    }
-
-    private fun copyToAppStorage(uri: Uri): String? {
-        val context = view.context
-        val dir = File(context.filesDir, "photos").apply { mkdirs() }
-        val file = File(dir, "${System.currentTimeMillis()}.jpg")
-        return try {
-            context.contentResolver.openInputStream(uri)?.use { input ->
-                file.outputStream().use { input.copyTo(it) }
-            } ?: return null
-            file.absolutePath
-        } catch (e: IOException) {
-            null
-        }
     }
 
     private fun setBirthday(date: LocalDate?) {
@@ -197,8 +184,7 @@ class ContactFormScreen(
             noteField,
             R.id.form_note,
             R.string.note,
-            InputType.TYPE_CLASS_TEXT or
-                InputType.TYPE_TEXT_FLAG_MULTI_LINE
+            InputType.TYPE_TEXT_FLAG_MULTI_LINE
         )
 
         if (contactId != null) {

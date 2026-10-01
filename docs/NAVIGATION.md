@@ -64,6 +64,8 @@ A screen only declares these values. The `Navigator` passes the screen to `TopAp
 
 Screens receive the `Navigator` in their constructor and call `navigate` or `back` to move to another screen.
 
+Optional hooks `saveState` and `onActivityResult` are forwarded by the `Navigator` to the screen on display. Only the [contact form](CONTACT_FORM.md) uses them.
+
 ## Configuration changes
 
 **Rotating the device** or **changing the theme** destroys and recreates `MainActivity`. A new `Navigator` is created with an empty history, so without extra work the app would always return to the home screen.
@@ -88,4 +90,4 @@ It cannot store a `Route` object, so each route is converted to a pair of a kind
 
 In `onCreate`, `savedInstanceState` is `null` on a normal start, so the app calls `navigator.start()`. Otherwise it calls `navigator.restoreState(savedInstanceState)`.
 
-Only the routes are saved, not the views. Each screen is created again and reloads its data. Android restores the text of `EditText` views that have an ID, because the screen views are added during `onCreate`.
+The views are not saved. Each screen is created again and reloads its data. Android restores the text of `EditText` views that have an ID, because the screen views are added during `onCreate`.
