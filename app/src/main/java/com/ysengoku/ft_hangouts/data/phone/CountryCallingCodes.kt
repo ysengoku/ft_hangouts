@@ -14,6 +14,8 @@ class CountryCallingCodes(resources: Resources) {
     private val regionByCode: Map<String, List<String>> =
         entries.groupBy({ it.second }, { it.first} )
 
+    fun regions(): List<String> = entries.map { it.first }
+
     fun callingCodeOf(region: String): String? = codeByRegion[region]
 
     fun regionsOf(callingCode: String): List<String> = regionByCode[callingCode].orEmpty()
@@ -28,4 +30,10 @@ class CountryCallingCodes(resources: Resources) {
         }
         return null
     }
+}
+
+fun flagEmoji(isoCode: String): String {
+    val code = isoCode.uppercase()
+    if (code.length != 2 || !code.all { it in 'A'..'Z' }) return ""
+    return code.map { Character.toChars(0x1F1E6 + (it - 'A')).concatToString() }.joinToString("")
 }

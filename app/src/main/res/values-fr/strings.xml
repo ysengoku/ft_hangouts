@@ -24,6 +24,7 @@
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom</string>
     <string name="company">Enreprise</string>
+    <string name="country">Pays</string>
     <string name="phone">Téléphone</string>
     <string name="address">Adresse</string>
     <string name="birthday">Date de naissance</string>

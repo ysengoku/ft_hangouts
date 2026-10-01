@@ -24,6 +24,7 @@
     <string name="first_name">氏</string>
     <string name="last_name">名</string>
     <string name="company">会社名</string>
+    <string name="country">国</string>
     <string name="phone">電話番号</string>
     <string name="address">住所</string>
     <string name="birthday">誕生日</string>

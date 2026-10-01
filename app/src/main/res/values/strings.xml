@@ -25,6 +25,7 @@
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
     <string name="company">Company</string>
+    <string name="country">Country</string>
     <string name="phone">Phone</string>
     <string name="address">Address</string>
     <string name="birthday">Birthday</string>

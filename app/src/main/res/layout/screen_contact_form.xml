@@ -74,22 +74,21 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
-            <!-- phone country -->
-            
-            <EditText
-                android:id="@id/form_phone"
+            android:layout_marginTop="@dimen/spacing_medium"
+            android:orientation="horizontal">
+            <include
+                android:id="@+id/contact_form_phone_country"
+                layout="@layout/view_form_field"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/spacing_medium" />
+
+            <include
+                android:id="@+id/contact_form_phone"
+                layout="@layout/view_form_field"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:layout_marginTop="@dimen/text_field_label_offset"
-                android:minHeight="@dimen/text_field_height"
-                android:paddingHorizontal="@dimen/spacing_medium"
-                android:background="@drawable/bg_text_field"
-                android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
-                android:textColor="?attr/colorOnSurface"
-                android:importantForAutofill="no"
                 android:inputType="phone" />
         </LinearLayout>
 
