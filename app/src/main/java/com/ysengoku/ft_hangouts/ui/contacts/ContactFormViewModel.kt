@@ -1,8 +1,11 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
+import android.content.Context
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.DbExecutor
+import com.ysengoku.ft_hangouts.data.deleteOldImage
 import com.ysengoku.ft_hangouts.data.model.Contact
+import com.ysengoku.ft_hangouts.data.moveImageToStorage
 import com.ysengoku.ft_hangouts.data.phone.toE164
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import java.time.LocalDate
@@ -33,9 +36,9 @@ class ContactFormViewModel(private val repository: ContactRepository) {
         }
     }
 
-    fun save(input: ContactFormInput, contactId: Long?, onResult: (SaveResult) -> Unit) {
+    fun save(input: ContactFormInput, contactId: Long?, context: Context, onResult: (SaveResult) -> Unit) {
         DbExecutor.execute {
-            val result = validate(input, contactId) ?: persist(input, contactId)
+            val result = validate(input, contactId) ?: persist(input, contactId, context)
             DbExecutor.main { onResult(result) }
         }
     }
@@ -54,8 +57,17 @@ class ContactFormViewModel(private val repository: ContactRepository) {
         return if (firstNameError == null && phoneError == null ) null else SaveResult.Invalid(firstNameError, phoneError)
     }
 
-    private fun persist(input: ContactFormInput, contactId: Long?): SaveResult {
+    private fun persist(input: ContactFormInput, contactId: Long?, context: Context): SaveResult {
         val phone = toE164(input.phone, input.phoneCountry) ?: return SaveResult.Failed
+        val picture = input.picture?.let { path ->
+            if (path.startsWith(context.cacheDir.absolutePath)) {
+                moveImageToStorage(path, context) ?: return SaveResult.Failed
+            } else {
+                path
+            }
+        }
+
+        val oldPicture = contactId?.let { repository.getById(it)?.picture }
 
         val contact = Contact(
             id = contactId ?: 0L,
@@ -67,13 +79,16 @@ class ContactFormViewModel(private val repository: ContactRepository) {
             address = input.address.trimToNull(),
             birthday = input.birthday,
             note = input.note.trimToNull(),
-            picture = input.picture
+            picture = picture
         )
         val saved = if (contactId == null) {
             repository.create(contact) != -1L
         } else {
             repository.update(contact) > 0
         }
+        if (saved && oldPicture != null && oldPicture != picture) deleteOldImage(oldPicture)
+        if (!saved && picture != null && picture != input.picture) deleteOldImage(picture)
+
         return if (saved) SaveResult.Saved else SaveResult.Failed
     }
 

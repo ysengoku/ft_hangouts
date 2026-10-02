@@ -185,7 +185,8 @@ class ContactFormScreen(
                 note = noteInput.text.toString(),
                 picture = picture
             ),
-            contactId
+            contactId,
+            view.context.applicationContext
         ) { result ->
             when (result) {
                 SaveResult.Saved -> navigator.back()
