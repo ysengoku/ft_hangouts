@@ -70,6 +70,27 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
         }
     }
 
+    fun findIdByPhone(numberInE164: String): Long? {
+        val query = """
+            SELECT id
+            FROM ${tableName}
+            WHERE phone = ?
+            LIMIT 1
+        """.trimIndent()
+
+        val cursor = dbHelper.readableDatabase.rawQuery(
+            query,
+            arrayOf(numberInE164)
+        )
+
+        cursor.use {
+            if (!it.moveToFirst()) {
+              return null
+            }
+            return it.getLong(it.getColumnIndexOrThrow("id"))
+        }
+    }
+
     fun create(contact: Contact): Long {
         val id = dbHelper.writableDatabase.insert(tableName, null, contact.toContentValues())
         return id

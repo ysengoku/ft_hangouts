@@ -29,7 +29,7 @@ class DatabaseHelper(context: Context) :
             "first_name TEXT NOT NULL," +
             "last_name TEXT," +
             "company TEXT," +
-            "phone TEXT NOT NULL," +
+            "phone TEXT NOT NULL UNIQUE," +
             "phone_country TEXT NOT NULL," +
             "address TEXT," +
             "birthday TEXT," +

@@ -33,4 +33,8 @@
     <string name="add_photo">Add photo</string>
     <string name="change_photo">Change photo</string>
     <string name="remove_photo">Remove photo</string>
+    <string name="error_empty_first_name">Enter a first name</string>
+    <string name="error_empty_phone">Enter a phone number</string>
+    <string name="error_invalid_phone">Enter a valid phone number</string>
+    <string name="error_duplicate_phone">Another contact already has this number</string>
 </resources>

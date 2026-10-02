@@ -1,0 +1,6 @@
+<resources>
+    <integer name="max_length_name">50</integer>
+    <integer name="max_length_phone">25</integer>
+    <integer name="max_length_address">100</integer>
+    <integer name="max_length_note">1000</integer>
+</resources>

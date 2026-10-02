@@ -32,4 +32,8 @@
     <string name="add_photo">Ajouter une photo</string>
     <string name="change_photo">Modifier la photo</string>
     <string name="remove_photo">Supprimer la photo</string>
+    <string name="error_empty_first_name">Saisissez un prénom</string>
+    <string name="error_empty_phone">Saisissez un numéro de téléphone</string>
+    <string name="error_invalid_phone">Saisissez un numéro de téléphone valide</string>
+    <string name="error_duplicate_phone">Un autre contact a déjà ce numéro</string>
 </resources>

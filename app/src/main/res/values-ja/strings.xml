@@ -32,4 +32,8 @@
     <string name="add_photo">写真を追加</string>
     <string name="change_photo">写真を変更</string>
     <string name="remove_photo">写真を削除</string>
+    <string name="error_empty_first_name">名を入力してください</string>
+    <string name="error_empty_phone">電話番号を入力してください</string>
+    <string name="error_invalid_phone">有効な電話番号を入力してください</string>
+    <string name="error_duplicate_phone">この電話番号は別の連絡先で使用されています</string>
 </resources>

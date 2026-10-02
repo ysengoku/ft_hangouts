@@ -31,7 +31,7 @@ INSERT INTO contacts (first_name, last_name, company, phone, phone_country, addr
   ('Isabelle', 'Simon', 'BlaBlaCar', '+33677889900', 'FR',
    NULL, '1997-07-14', NULL),
 
-  ('Jules', 'Michel', NULL, '+33688990011', 'FR',
+  ('Christopher-Alexande Benjamin-William James-Robert', 'Alexandersonvillemontgomeryharringtonwhitmoresmith', NULL, '+33688990011', 'FR',
    NULL, NULL, 'Met at the pool'),
 
   ('Kenji', 'Tanaka', NULL, '+818023456789', 'JP',
