@@ -27,7 +27,7 @@ class DatabaseHelper(context: Context) :
             "CREATE TABLE ${TABLE.CONTACTS} (" +
             "id INTEGER PRIMARY KEY AUTOINCREMENT," +
             "first_name TEXT NOT NULL," +
-            "last_name TEXT NOT NULL," +
+            "last_name TEXT," +
             "company TEXT," +
             "phone TEXT NOT NULL," +
             "phone_country TEXT NOT NULL," +

@@ -28,7 +28,7 @@ class ContactSummaryAdapter(private val inflater: LayoutInflater) : BaseAdapter(
         val view = convertView ?: inflater.inflate(R.layout.item_contact_summary, parent, false)
         val contact = items[position]
 
-        view.findViewById<TextView>(R.id.contact_name).text = "${contact.firstName} ${contact.lastName}"
+        view.findViewById<TextView>(R.id.contact_name).text = listOfNotNull(contact.firstName, contact.lastName).joinToString(" ")
 
         bindAvatar(
             view.findViewById<FrameLayout>(R.id.contact_avatar),

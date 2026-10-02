@@ -5,7 +5,7 @@ import java.time.LocalDate
 data class Contact(
     val id: Long,
     val firstName: String,
-    val lastName: String,
+    val lastName: String?,
     val company: String?,
     val phone: String,
     val phoneCountry: String,
@@ -18,6 +18,6 @@ data class Contact(
 data class ContactSummary(
     val id: Long,
     val firstName: String,
-    val lastName: String,
+    val lastName: String?,
     val picture: String?,
 )

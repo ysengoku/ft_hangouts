@@ -50,7 +50,7 @@ class ContactDetailScreen(
             val avatarView = view.findViewById<FrameLayout>(R.id.contact_detail_avatar)
             bindAvatar(avatarView, contact.firstName, contact.lastName, contact.picture)
 
-            view.findViewById<TextView>(R.id.contact_detail_name).text = "${contact.firstName} ${contact.lastName}"
+            view.findViewById<TextView>(R.id.contact_detail_name).text = listOfNotNull(contact.firstName, contact.lastName).joinToString(" ")
             
             val companyView = view.findViewById<TextView>(R.id.contact_detail_company)
             if ((contact.company).isNullOrBlank()) {

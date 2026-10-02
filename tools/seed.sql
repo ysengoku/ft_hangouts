@@ -16,7 +16,7 @@ INSERT INTO contacts (first_name, last_name, company, phone, phone_country, addr
   ('David', 'Johnson', NULL, '+12125550123', 'US',
    NULL, '1988-02-29', 'Leap year birthday'),
 
-  ('Hugo', 'Robert', 'Doctolib', '+33633445566', 'FR',
+  ('Hugo', 'Suzuki', 'Doctolib', '+33633445566', 'FR',
    '5 av. Foch 69006 Lyon', NULL, NULL),
 
   ('Emily', 'Walker', NULL, '+15145550147', 'CA',
@@ -38,7 +38,13 @@ INSERT INTO contacts (first_name, last_name, company, phone, phone_country, addr
    NULL, '1993-05-05', NULL),
 
   ('Léa', 'Fontaine', 'Mistral AI', '+33700112233', 'FR',
-   '8 quai de Seine, Paris', NULL, NULL);
+   '8 quai de Seine, Paris', NULL, NULL),
+
+  ('Mathis', NULL, NULL, '+33612987654', 'FR',
+   NULL, NULL, 'Climbing gym'),
+
+  ('Boulangerie Painpote', NULL, NULL, '+33478123456', 'FR',
+   '22 Rue Tronchet, 69006 Lyon', NULL, 'Opens at 7am');
 
 -- 25 messages with Colette (id 1): minutes_ago, is_incoming, content
 WITH m(minutes_ago, is_incoming, content) AS (

@@ -58,7 +58,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
             return Contact(
                 id = it.getLong(it.getColumnIndexOrThrow("id")),
                 firstName = it.getString(it.getColumnIndexOrThrow("first_name")),
-                lastName = it.getString(it.getColumnIndexOrThrow("last_name")),
+                lastName = it.getStringOrNull(it.getColumnIndexOrThrow("last_name")),
                 company = it.getStringOrNull(it.getColumnIndexOrThrow("company")),
                 phone = it.getString(it.getColumnIndexOrThrow("phone")),
                 phoneCountry = it.getString(it.getColumnIndexOrThrow("phone_country")),

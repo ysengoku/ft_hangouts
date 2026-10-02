@@ -184,7 +184,6 @@ class ContactFormScreen(
             InputType.TYPE_CLASS_TEXT or
                 InputType.TYPE_TEXT_VARIATION_PERSON_NAME or
                 InputType.TYPE_TEXT_FLAG_CAP_WORDS,
-            true
         )
 
         companyInput = bindFormField(

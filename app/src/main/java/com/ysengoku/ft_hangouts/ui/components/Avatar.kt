@@ -8,7 +8,7 @@ import com.ysengoku.ft_hangouts.R
 
 private const val INITIALS_PADDING_RATIO = 0.18f
 
-fun bindAvatar(avatar: View, firstName: String, lastName: String, picture: String?) {
+fun bindAvatar(avatar: View, firstName: String, lastName: String?, picture: String?) {
     avatar.clipToOutline = true
     val initialsView = avatar.findViewById<TextView>(R.id.avatar_initials)
     val imageView = avatar.findViewById<ImageView>(R.id.avatar_picture)
@@ -23,7 +23,7 @@ fun bindAvatar(avatar: View, firstName: String, lastName: String, picture: Strin
         initialsView.setPadding(padding, padding, padding, padding)
         imageView.setImageDrawable(null)
         imageView.visibility = View.GONE
-        initialsView.text = (firstName.take(1) + lastName.take(1)).uppercase()
+        initialsView.text = (firstName.take(1) + lastName.orEmpty().take(1)).uppercase()
         initialsView.visibility = View.VISIBLE
     }
 }

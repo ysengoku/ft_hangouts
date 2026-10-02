@@ -15,7 +15,7 @@ The database has two tables in this project:
 |---|---|---|---|
 | `id` | INTEGER | No | Primary key, auto increment |
 | `first_name` | TEXT | No | |
-| `last_name` | TEXT | No | |
+| `last_name` | TEXT | Yes | |
 | `company` | TEXT | Yes | |
 | `phone` | TEXT | No | E.164 format (e.g.  `+33612345678`) |
 | `phone_country` | TEXT | No | ISO 3166 region code chosen in the form (e.g. `FR`) |
