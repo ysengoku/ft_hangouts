@@ -60,6 +60,12 @@ class ContactFormScreen(
     private val photoEditButton: Button = view.findViewById<Button>(R.id.contact_form_photo_edit_button)
     private val photoRemoveButton: ImageButton = view.findViewById<ImageButton>(R.id.contact_form_remove_photo)
 
+    private val callingCodes = CountryCallingCodes(view.resources)
+    private fun defaultCountry(): String {
+        val region = Locale.getDefault().country
+        return if (callingCodes.callingCodeOf(region) != null) region else "FR"
+    }
+
     private var original: Contact? = null
 
     private var firstNameField: View
@@ -74,18 +80,17 @@ class ContactFormScreen(
     private var birthdayInput: EditText
     private var noteInput: EditText
 
-    private var country: String = DEFAULT_COUNTRY
+
+    private var country: String = defaultCountry()
     private var birthday: LocalDate? = null
 
     companion object {
         private const val REQUEST_PICK_PHOTO = 1
-        private const val DEFAULT_COUNTRY = "FR"
+        // private const val DEFAULT_COUNTRY = Locale.getDefault().country
         private const val KEY_PICTURE = "picture"
         private const val KEY_COUNTRY = "country"
         private const val KEY_BIRTHDAY = "birthday"
     }
-
-    private fun EditText.valueOrNull() = text.toString().trim().ifBlank { null }
 
     override fun saveState(outState: Bundle) {
         outState.putString(KEY_PICTURE, picture)
@@ -114,11 +119,8 @@ class ContactFormScreen(
         (view.context as Activity).startActivityForResult(intent, REQUEST_PICK_PHOTO)
     }
 
-    private val callingCodes = CountryCallingCodes(view.resources)
-
     private fun setCountry(isoCode: String?) {
-        country = isoCode ?: DEFAULT_COUNTRY
-        val code = 33
+        country = isoCode ?: defaultCountry()
         countryInput.setText("${flagEmoji(country)} +${callingCodes.callingCodeOf(country)}")
     }
 
@@ -148,14 +150,14 @@ class ContactFormScreen(
         birthdayInput.setText(date?.format(birthdayFormatter))
     }
     
-    private fun showBirthdayPicker(input: EditText) {
+    private fun showBirthdayPicker() {
         val initial = birthday ?: LocalDate.now().minusYears(18)
         val dialog = DatePickerDialog(
             view.context,
             { _, year, month, day ->
                 val selected = LocalDate.of(year, month + 1, day)
                 birthday = selected
-                input.setText(selected.format(birthdayFormatter))
+                setBirthday(selected)
             },
             initial.year,
             initial.monthValue - 1,
@@ -164,7 +166,7 @@ class ContactFormScreen(
         dialog.datePicker.maxDate = System.currentTimeMillis()
         dialog.setButton(DialogInterface.BUTTON_NEUTRAL, view.context.getString(R.string.clear)) { _, _ ->
             birthday = null
-            input.text = null
+            setBirthday(null)
         }
         dialog.show()
         dialog.getButton(DialogInterface.BUTTON_NEUTRAL).isAllCaps = false
@@ -200,7 +202,7 @@ class ContactFormScreen(
     }
 
     init {
-        setPicture(null, null, null)
+        setPicture(null, "", "")
         photoEditButton.setOnClickListener { showPhotoPicker() }
 
         view.findViewById<TextView>(R.id.contact_form_required).setText(
@@ -277,7 +279,7 @@ class ContactFormScreen(
             view.findViewById<View>(R.id.contact_form_address),
             R.id.form_address,
             R.string.address,
-            InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS,
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS,
             view.context.resources.getInteger(R.integer.max_length_address),
         )
 
@@ -288,13 +290,13 @@ class ContactFormScreen(
             InputType.TYPE_NULL
         )
         birthdayInput.isFocusable = false
-        birthdayInput.setOnClickListener { showBirthdayPicker(birthdayInput) }
+        birthdayInput.setOnClickListener { showBirthdayPicker() }
 
         noteInput = bindFormField(
             view.findViewById<View>(R.id.contact_form_note),
             R.id.form_note,
             R.string.note,
-            InputType.TYPE_TEXT_FLAG_MULTI_LINE,
+            InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE,
             view.context.resources.getInteger(R.integer.max_length_note),
         )
 
@@ -325,3 +327,8 @@ class ContactFormScreen(
         }
     }
 }
+
+// TODO: Handle remove picture button
+// TODO: Confirmation dialog if the user closes without saving
+// TODO: Resize picture
+// TODO: Use another thread to copy pic to chache
