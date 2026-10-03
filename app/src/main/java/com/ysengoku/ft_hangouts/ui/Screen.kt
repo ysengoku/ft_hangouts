@@ -15,6 +15,7 @@ interface Screen {
     fun onDestroy() {}
     fun saveState(outState: Bundle) {} 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
+    fun onBack(): Boolean = false
 }
 
 data class Action(

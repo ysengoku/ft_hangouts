@@ -37,4 +37,7 @@
     <string name="error_empty_phone">Enter a phone number</string>
     <string name="error_invalid_phone">Enter a valid phone number</string>
     <string name="error_duplicate_phone">Another contact already has this number</string>
+    <string name="discard_changes_confirm">Discard your changes?</string>
+    <string name="keep_editing">Keep editing</string>
+    <string name="discard">Discard</string>
 </resources>

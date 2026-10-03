@@ -36,4 +36,7 @@
     <string name="error_empty_phone">電話番号を入力してください</string>
     <string name="error_invalid_phone">有効な電話番号を入力してください</string>
     <string name="error_duplicate_phone">この電話番号は別の連絡先で使用されています</string>
+    <string name="discard_changes_confirm">変更内容を破棄しますか？</string>
+    <string name="keep_editing">編集を続ける</string>
+    <string name="discard">破棄</string>
 </resources>

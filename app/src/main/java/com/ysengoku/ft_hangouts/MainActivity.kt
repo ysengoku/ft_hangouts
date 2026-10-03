@@ -7,6 +7,7 @@ import android.view.WindowInsets
 import android.os.Bundle
 import android.view.View
 import android.widget.Spinner
+import android.window.OnBackInvokedDispatcher
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
@@ -37,6 +38,11 @@ class MainActivity : Activity() {
                 recreate()
             },
         )
+        onBackInvokedDispatcher.registerOnBackInvokedCallback(
+            OnBackInvokedDispatcher.PRIORITY_DEFAULT
+        ) {
+            if (!navigator.back()) finish()
+        }
 
         if (savedInstanceState == null || !navigator.restoreState(savedInstanceState)) {
             navigator.start()

@@ -36,6 +36,13 @@ class Navigator(
     }
 
     fun back(): Boolean {
+        if (current?.onBack() == true) {
+            return true
+        }
+        return pop()
+    }
+
+    fun pop(): Boolean {
         if (history.size <= 1) {
             return false
         }

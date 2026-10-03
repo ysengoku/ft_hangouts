@@ -36,4 +36,7 @@
     <string name="error_empty_phone">Saisissez un numéro de téléphone</string>
     <string name="error_invalid_phone">Saisissez un numéro de téléphone valide</string>
     <string name="error_duplicate_phone">Un autre contact a déjà ce numéro</string>
+    <string name="discard_changes_confirm">Supprimer les modifications ?</string>
+    <string name="keep_editing">Continuer</string>
+    <string name="discard">Supprimer</string>
 </resources>
