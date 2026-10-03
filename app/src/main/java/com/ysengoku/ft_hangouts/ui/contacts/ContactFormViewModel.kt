@@ -1,8 +1,10 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
 import android.content.Context
+import android.net.Uri
 import com.ysengoku.ft_hangouts.R
-import com.ysengoku.ft_hangouts.data.DbExecutor
+import com.ysengoku.ft_hangouts.data.copyImageToAppCache
+import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 import com.ysengoku.ft_hangouts.data.deleteOldImage
 import com.ysengoku.ft_hangouts.data.model.Contact
 import com.ysengoku.ft_hangouts.data.moveImageToStorage
@@ -30,16 +32,23 @@ sealed class SaveResult {
 
 class ContactFormViewModel(private val repository: ContactRepository) {
     fun load(contactId: Long, onLoaded: (Contact?) -> Unit) {
-        DbExecutor.execute {
+        BackgroundExecutor.execute {
             val contact = repository.getById(contactId)
-            DbExecutor.main { onLoaded(contact) }
+            BackgroundExecutor.main { onLoaded(contact) }
+        }
+    }
+
+    fun importPhoto(uri: Uri, context: Context, onImported: (String?) -> Unit) {
+        BackgroundExecutor.execute {
+            val path = copyImageToAppCache(uri, context)
+            BackgroundExecutor.main { onImported(path) }
         }
     }
 
     fun save(input: ContactFormInput, contactId: Long?, context: Context, onResult: (SaveResult) -> Unit) {
-        DbExecutor.execute {
+        BackgroundExecutor.execute {
             val result = validate(input, contactId) ?: persist(input, contactId, context)
-            DbExecutor.main { onResult(result) }
+            BackgroundExecutor.main { onResult(result) }
         }
     }
 

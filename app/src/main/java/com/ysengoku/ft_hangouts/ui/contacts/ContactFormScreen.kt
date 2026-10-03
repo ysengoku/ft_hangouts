@@ -21,7 +21,6 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Contact
-import com.ysengoku.ft_hangouts.data.copyImageToAppCache
 import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
 import com.ysengoku.ft_hangouts.data.phone.flagEmoji
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
@@ -86,7 +85,6 @@ class ContactFormScreen(
 
     companion object {
         private const val REQUEST_PICK_PHOTO = 1
-        // private const val DEFAULT_COUNTRY = Locale.getDefault().country
         private const val KEY_PICTURE = "picture"
         private const val KEY_COUNTRY = "country"
         private const val KEY_BIRTHDAY = "birthday"
@@ -101,8 +99,9 @@ class ContactFormScreen(
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if (requestCode != REQUEST_PICK_PHOTO || resultCode != Activity.RESULT_OK) return
         val uri = data?.data ?: return
-        val path = copyImageToAppCache(uri, view.context) ?: return
-        setPicture(path, firstNameInput.text.toString(), lastNameInput.text.toString())
+        viewModel.importPhoto(uri, view.context.applicationContext) { path ->
+            if (path != null) setPicture(path, firstNameInput.text.toString(), lastNameInput.text.toString())
+        }
     }
 
     private fun setPicture(path: String?, firstName: String?, lastName: String?) {
@@ -331,4 +330,4 @@ class ContactFormScreen(
 
 // TODO: Confirmation dialog if the user closes without saving
 // TODO: Resize picture
-// TODO: Use another thread to copy pic to chache
+// TODO: Use another thread to copy pic to cache

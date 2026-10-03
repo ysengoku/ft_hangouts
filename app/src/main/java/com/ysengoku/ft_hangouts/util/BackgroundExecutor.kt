@@ -1,10 +1,10 @@
-package com.ysengoku.ft_hangouts.data
+package com.ysengoku.ft_hangouts.util
 
 import android.os.Handler
 import android.os.Looper
 import java.util.concurrent.Executors
 
-object DbExecutor {
+object BackgroundExecutor {
     private val executor = Executors.newSingleThreadExecutor()
     private val mainHandler = Handler(Looper.getMainLooper())
 

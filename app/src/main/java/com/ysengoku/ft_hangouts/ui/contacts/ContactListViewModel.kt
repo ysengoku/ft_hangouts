@@ -1,6 +1,6 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
-import com.ysengoku.ft_hangouts.data.DbExecutor
+import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 import com.ysengoku.ft_hangouts.data.model.ContactSummary
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 
@@ -15,9 +15,9 @@ class ContactListViewModel(private val repository: ContactRepository) {
             return
         }
         isLoading = true
-        DbExecutor.execute {
+        BackgroundExecutor.execute {
             val page = repository.getPage(pageSize, offset)
-            DbExecutor.main {
+            BackgroundExecutor.main {
                 offset += page.size
                 hasMore = page.size == pageSize
                 isLoading = false

@@ -48,19 +48,19 @@ Example: the contact detail screen loads one contact.
 sequenceDiagram
     participant S as Screen
     participant VM as ViewModel
-    participant E as DbExecutor
+    participant E as BackgroundExecutor
     participant R as Repository
     participant DB as SQLiteDatabase
 
     S->>VM: viewModel.load(contactId, onLoaded)
-    VM->>E: DbExecutor.execute
+    VM->>E: BackgroundExecutor.execute
     Note over E,DB: Background thread
     E->>R: repository.getById(contactId)
     R->>DB: db.rawQuery
     DB-->>R: Cursor
     Note over R: Cursor row → Contact model
     R-->>E: Contact model
-    E->>VM: DbExecutor.main { onLoaded(contact) }
+    E->>VM: BackgroundExecutor.main { onLoaded(contact) }
     Note over S,VM: UI thread
     VM-->>S: onLoaded(contact)
 ```
@@ -69,7 +69,7 @@ Other screens follow the same pattern with other repository calls.
 
 ### Threading (Executors)
 
-`DbExecutor` has one background thread shared by all database calls, so queries never run on the UI thread and never run at the same time. `DbExecutor.main` posts the result back to the UI thread.
+`BackgroundExecutor` has one background thread shared by all database calls, so queries never run on the UI thread and never run at the same time. `BackgroundExecutor.main` posts the result back to the UI thread.
 
 ### Repository
 
