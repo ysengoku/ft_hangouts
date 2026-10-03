@@ -18,6 +18,7 @@ fun bindAvatar(avatar: View, firstName: String, lastName: String?, picture: Stri
     if (picture != null) {
         imageView.setImageURI(Uri.parse(picture))
         imageView.imageTintList = null
+        imageView.setPadding(0, 0, 0, 0)
         imageView.visibility = View.VISIBLE
         initialsView.visibility = View.GONE
         return

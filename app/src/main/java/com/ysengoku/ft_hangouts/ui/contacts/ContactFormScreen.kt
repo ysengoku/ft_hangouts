@@ -204,6 +204,7 @@ class ContactFormScreen(
     init {
         setPicture(null, "", "")
         photoEditButton.setOnClickListener { showPhotoPicker() }
+        photoRemoveButton.setOnClickListener { setPicture(null, firstNameInput.text.toString(), lastNameInput.text.toString()) }
 
         view.findViewById<TextView>(R.id.contact_form_required).setText(
             R.string.required)
@@ -328,7 +329,6 @@ class ContactFormScreen(
     }
 }
 
-// TODO: Handle remove picture button
 // TODO: Confirmation dialog if the user closes without saving
 // TODO: Resize picture
 // TODO: Use another thread to copy pic to chache

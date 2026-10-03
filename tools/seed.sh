@@ -9,5 +9,5 @@ if ! adb shell run-as "$PKG" test -f "$DB"; then
   exit 1
 fi
 
-adb shell run-as "$PKG" sqlite3 "$DB" < "$(dirname "$0")/seed.sql"
+adb shell run-as "$PKG" sqlite3 -bail "$DB" < "$(dirname "$0")/seed.sql"
 echo "Database is successfully seeded with demo data."
