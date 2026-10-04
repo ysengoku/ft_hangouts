@@ -20,6 +20,7 @@
     <string name="theme_forest">Forêt</string>
     <string name="theme_rose">Rose</string>
     <string name="theme_lavender">Lavande</string>
+    <string name="last_background_time">Dernière utilisation à %1$s</string>
     <string name="required">* Obligatoire</string>
     <string name="first_name">Prénom</string>
     <string name="last_name">Nom</string>
@@ -36,6 +37,7 @@
     <string name="error_empty_phone">Saisissez un numéro de téléphone</string>
     <string name="error_invalid_phone">Saisissez un numéro de téléphone valide</string>
     <string name="error_duplicate_phone">Un autre contact a déjà ce numéro</string>
+    <string name="error_save_failed">Échec de l\'enregistrement. Veuillez réessayer.</string>
     <string name="discard_changes_confirm">Supprimer les modifications ?</string>
     <string name="keep_editing">Continuer</string>
     <string name="discard">Supprimer</string>

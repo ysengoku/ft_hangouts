@@ -21,6 +21,7 @@
     <string name="theme_forest">Forest</string>
     <string name="theme_rose">Rose</string>
     <string name="theme_lavender">Lavender</string>
+    <string name="last_background_time">Last seen at %1$s</string>
     <string name="required">* Required</string>
     <string name="first_name">First name</string>
     <string name="last_name">Last name</string>
@@ -37,6 +38,7 @@
     <string name="error_empty_phone">Enter a phone number</string>
     <string name="error_invalid_phone">Enter a valid phone number</string>
     <string name="error_duplicate_phone">Another contact already has this number</string>
+    <string name="error_save_failed">Couldn\'t save. Try again.</string>
     <string name="discard_changes_confirm">Discard your changes?</string>
     <string name="keep_editing">Keep editing</string>
     <string name="discard">Discard</string>

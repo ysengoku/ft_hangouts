@@ -55,10 +55,6 @@ class Navigator(
         topAppBar.setTitle(text)
     }
 
-    // fun popTo(route) {
-
-    // }
-
     // fun onPause() {
 
     // }

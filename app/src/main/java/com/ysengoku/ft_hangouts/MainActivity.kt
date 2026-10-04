@@ -3,22 +3,28 @@ package com.ysengoku.ft_hangouts
 import android.app.Activity
 import android.content.Intent
 import android.graphics.Rect
-import android.view.WindowInsets
 import android.os.Bundle
+import android.text.format.DateFormat
 import android.view.View
+import android.view.WindowInsets
 import android.widget.Spinner
+import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
+import com.ysengoku.ft_hangouts.data.BackgroundTimeStore
+import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
 import com.ysengoku.ft_hangouts.navigation.Navigator
-import com.ysengoku.ft_hangouts.ui.components.TopAppBar
+import java.util.Date
 
 class MainActivity : Activity() {
     private lateinit var navigator: Navigator
     private lateinit var themePreferences: ThemePreferences
+    private lateinit var backgroundTimeStore: BackgroundTimeStore
     private lateinit var themeSpinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themePreferences = ThemePreferences(this)
+        backgroundTimeStore = BackgroundTimeStore(this)
         val savedTheme = themePreferences.getTheme()
         setTheme(getThemeStyleResId(savedTheme))
 
@@ -47,6 +53,28 @@ class MainActivity : Activity() {
         if (savedInstanceState == null || !navigator.restoreState(savedInstanceState)) {
             navigator.start()
         }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (isChangingConfigurations) {
+            return
+        }
+        backgroundTimeStore.save()
+    }
+
+    override fun onStart() {
+        super.onStart()
+        val time = backgroundTimeStore.consume()
+        if (time == null) {
+            return
+        }
+        val formatted = DateFormat.getTimeFormat(this).format(Date(time))
+        Toast.makeText(
+            this,
+            getString(R.string.last_background_time, formatted),
+            Toast.LENGTH_LONG
+        ).show()
     }
 
     /**

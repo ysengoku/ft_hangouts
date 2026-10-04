@@ -19,6 +19,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
+import android.widget.Toast
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Contact
 import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
@@ -260,7 +261,9 @@ class ContactFormScreen(
                     setFieldError(firstNameField, firstNameInput, result.firstNameError)
                     setFieldError(phoneField, phoneInput, result.phoneError)
                 }
-                SaveResult.Failed -> { /* TODO: Show error */ }
+                SaveResult.Failed -> {
+                    Toast.makeText(view.context, R.string.error_save_failed, Toast.LENGTH_SHORT).show()
+                }
             }
         }
     }
