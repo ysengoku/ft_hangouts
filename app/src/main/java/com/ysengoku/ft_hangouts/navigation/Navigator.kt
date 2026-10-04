@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ysengoku.ft_hangouts.data.DatabaseHelper
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
+import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.ui.Screen
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.contacts.ContactDetailScreen
@@ -72,12 +73,13 @@ class Navigator(
     }
 
     private val contactRepository = ContactRepository(DatabaseHelper.getInstance(container.context))
+    private val messageRepository = MessageRepository(DatabaseHelper.getInstance(container.context))
 
     private fun createScreen(route: Route, savedState: Bundle? = null): Screen =
         when (route) {
             Route.ContactList -> ContactListScreen(inflater, container, this, contactRepository, onThemeSelected)
             is Route.ContactDetail -> ContactDetailScreen(inflater, container, this, contactRepository, route.contactId)
-            is Route.Conversation -> ConversationScreen(inflater, container, this, route.contactId)
+            is Route.Conversation -> ConversationScreen(inflater, container, this, contactRepository, messageRepository, route.contactId, savedState)
             is Route.ContactForm -> ContactFormScreen(inflater, container, this, contactRepository, route.contactId, savedState)
         }
 

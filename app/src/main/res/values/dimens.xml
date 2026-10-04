@@ -34,6 +34,11 @@
     <dimen name="menu_item_height">48dp</dimen>
     <dimen name="menu_item_corner_radius">16dp</dimen>
 
+    <dimen name="message_bubble_corner_radius">16dp</dimen>
+    <dimen name="message_bubble_corner_radius_small">4dp</dimen>
+
+    <dimen name="message_input_height">48dp</dimen>
+
     <dimen name="search_bar_height">56dp</dimen>
     <dimen name="search_bar_corner_radius">28dp</dimen>
 
