@@ -55,6 +55,16 @@
         <item name="android:textSize">14sp</item>
     </style>
 
+    <style name="TextAppearance.FTHangouts.LabelMedium" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans_medium</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+
+    <style name="TextAppearance.FTHangouts.LabelSmall" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans_medium</item>
+        <item name="android:textSize">11sp</item>
+    </style>
+
     <!-- ==================== OCEAN THEME ==================== -->
     <style name="Theme.FtHangouts.Ocean" parent="Base.Theme.FtHangouts">
         <item name="android:colorPrimary">@color/ocean_primary</item>

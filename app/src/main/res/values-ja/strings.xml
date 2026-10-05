@@ -38,8 +38,12 @@
     <string name="error_invalid_phone">有効な電話番号を入力してください</string>
     <string name="error_duplicate_phone">この電話番号は別の連絡先で使用されています</string>
     <string name="error_save_failed">保存できませんでした。もう一度お試しください。</string>
+    <string name="error_send_failed">メッセージを送信できませんでした。もう一度お試しください。</string>
     <string name="discard_changes_confirm">変更内容を破棄しますか？</string>
     <string name="keep_editing">編集を続ける</string>
     <string name="discard">破棄</string>
     <string name="message_hint">メッセージを入力</string>
+    <string name="insert_emoji">絵文字を挿入</string>
+    <string name="today">今日</string>
+    <string name="yesterday">昨日</string>
 </resources>

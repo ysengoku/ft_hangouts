@@ -38,8 +38,12 @@
     <string name="error_invalid_phone">Saisissez un numéro de téléphone valide</string>
     <string name="error_duplicate_phone">Un autre contact a déjà ce numéro</string>
     <string name="error_save_failed">Échec de l\'enregistrement. Veuillez réessayer.</string>
+    <string name="error_send_failed">Échec de l\'envoi du message. Veuillez réessayer.</string>
     <string name="discard_changes_confirm">Supprimer les modifications ?</string>
     <string name="keep_editing">Continuer</string>
     <string name="discard">Supprimer</string>
     <string name="message_hint">Message</string>
+    <string name="insert_emoji">Insérer un emoji</string>
+    <string name="today">Aujourd\'hui</string>
+    <string name="yesterday">Hier</string>
 </resources>
