@@ -1,7 +1,9 @@
 package com.ysengoku.ft_hangouts
 
+import android.Manifest
 import android.app.Activity
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
 import android.text.format.DateFormat
@@ -22,9 +24,13 @@ class MainActivity : Activity() {
     private lateinit var backgroundTimeStore: BackgroundTimeStore
     private lateinit var themeSpinner: Spinner
 
+    companion object {
+        private const val REQUEST_SMS = 3
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         themePreferences = ThemePreferences(this)
-        backgroundTimeStore = BackgroundTimeStore(this)
+        backgroundTimeStore = BackgroundTimeStore(this) 
         val savedTheme = themePreferences.getTheme()
         setTheme(getThemeStyleResId(savedTheme))
 
@@ -53,6 +59,10 @@ class MainActivity : Activity() {
         if (savedInstanceState == null || !navigator.restoreState(savedInstanceState)) {
             navigator.start()
         }
+
+        val missingPermissions = arrayOf(Manifest.permission.RECEIVE_SMS, Manifest.permission.SEND_SMS)
+            .filter { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }
+        if (missingPermissions.isNotEmpty()) requestPermissions(missingPermissions.toTypedArray(), REQUEST_SMS)
     }
 
     override fun onStop() {
