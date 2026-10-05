@@ -40,5 +40,18 @@ fun flagEmoji(isoCode: String): String {
 }
 
 fun toE164(number: String, country: String): String? {
+    val trimmed = number.trim()
+
+    // Allow emulator port numbers or emulator test numbers for local dev/testing
+    if (trimmed.length == 4) {
+        val port = trimmed.toIntOrNull()
+        if (port != null && port in 5554..5584 && port % 2 == 0) {
+            return "+1555521$trimmed"
+        }
+    }
+    if (trimmed.matches(Regex("^1?55552155\\d{2}$"))) {
+        return if (trimmed.startsWith("+")) trimmed else "+1$trimmed"
+    }
+
     return PhoneNumberUtils.formatNumberToE164(number, country)
 }
