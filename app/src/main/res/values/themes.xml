@@ -45,6 +45,11 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="TextAppearance.FTHangouts.BodyMedium" parent="@android:style/TextAppearance">
+        <item name="android:fontFamily">@font/noto_sans</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
     <style name="TextAppearance.FTHangouts.BodySmall" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/noto_sans</item>
         <item name="android:textSize">12sp</item>
@@ -76,6 +81,7 @@
         <item name="colorOnPrimary">@color/ocean_on_primary</item>
         <item name="colorPrimaryContainer">@color/ocean_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/ocean_on_primary_container</item>
+        <item name="colorSurface">@color/ocean_surface</item>
         <item name="colorOnSurface">@color/ocean_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/ocean_on_surface_variant</item>
         <item name="colorSecondaryContainer">@color/ocean_secondary_container</item>
@@ -97,6 +103,7 @@
         <item name="colorOnPrimary">@color/amber_on_primary</item>
         <item name="colorPrimaryContainer">@color/amber_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/amber_on_primary_container</item>
+        <item name="colorSurface">@color/amber_surface</item>
         <item name="colorOnSurface">@color/amber_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/amber_on_surface_variant</item>
         <item name="colorSecondaryContainer">@color/amber_secondary_container</item>
@@ -118,6 +125,7 @@
         <item name="colorOnPrimary">@color/forest_on_primary</item>
         <item name="colorPrimaryContainer">@color/forest_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/forest_on_primary_container</item>
+        <item name="colorSurface">@color/forest_surface</item>
         <item name="colorOnSurface">@color/forest_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/forest_on_surface_variant</item>
         <item name="colorSecondaryContainer">@color/forest_secondary_container</item>
@@ -139,6 +147,7 @@
         <item name="colorOnPrimary">@color/rose_on_primary</item>
         <item name="colorPrimaryContainer">@color/rose_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/rose_on_primary_container</item>
+        <item name="colorSurface">@color/rose_surface</item>
         <item name="colorOnSurface">@color/rose_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/rose_on_surface_variant</item>
         <item name="colorSecondaryContainer">@color/rose_secondary_container</item>
@@ -160,6 +169,7 @@
         <item name="colorOnPrimary">@color/lavender_on_primary</item>
         <item name="colorPrimaryContainer">@color/lavender_primary_container</item>
         <item name="colorOnPrimaryContainer">@color/lavender_on_primary_container</item>
+        <item name="colorSurface">@color/lavender_surface</item>
         <item name="colorOnSurface">@color/lavender_on_surface</item>
         <item name="colorOnSurfaceVariant">@color/lavender_on_surface_variant</item>
         <item name="colorSecondaryContainer">@color/lavender_secondary_container</item>

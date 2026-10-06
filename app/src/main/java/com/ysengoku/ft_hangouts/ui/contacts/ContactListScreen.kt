@@ -33,6 +33,7 @@ class ContactListScreen(
     override val action = Action(R.drawable.ic_palette, R.string.change_color_theme) { anchor -> 
         showThemeMenu(anchor)
     }
+    override val snackbarAnchor: View = view.findViewById(R.id.fab_add_contact)
 
     private val listView: ListView = view.findViewById(R.id.contact_list)
     private val viewModel = ContactListViewModel(repository)

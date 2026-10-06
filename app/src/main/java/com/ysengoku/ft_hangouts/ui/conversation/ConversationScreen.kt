@@ -13,7 +13,6 @@ import android.widget.AbsListView
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
-import android.widget.Toast
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.phone.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
@@ -95,7 +94,7 @@ class ConversationScreen(
 
             viewModel.send(contactId, input.text.toString().trim()) { message ->
                 if (message == null) {
-                    Toast.makeText(view.context, R.string.error_send_failed, Toast.LENGTH_SHORT).show()
+                    navigator.showToast(R.string.error_send_failed)
                     return@send
                 }
                 adapter.addNewer(message)

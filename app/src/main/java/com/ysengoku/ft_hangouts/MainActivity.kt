@@ -10,10 +10,10 @@ import android.text.format.DateFormat
 import android.view.View
 import android.view.WindowInsets
 import android.widget.Spinner
-import android.widget.Toast
 import android.window.OnBackInvokedDispatcher
 import com.ysengoku.ft_hangouts.data.BackgroundTimeStore
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
+import com.ysengoku.ft_hangouts.ui.components.snackbar
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import java.util.Date
@@ -42,9 +42,12 @@ class MainActivity : Activity() {
         val topAppBar = TopAppBar(findViewById(R.id.top_app_bar))
         topAppBar.setOnNavigationClick { navigator.back() }
 
+        val snackbar = snackbar(findViewById<View>(R.id.snackbar))
+
         navigator = Navigator(
             findViewById(R.id.screen_container),
             topAppBar,
+            snackbar,
             onThemeSelected = { theme ->
                 themePreferences.saveTheme(theme)
                 recreate()
@@ -80,11 +83,7 @@ class MainActivity : Activity() {
             return
         }
         val formatted = DateFormat.getTimeFormat(this).format(Date(time))
-        Toast.makeText(
-            this,
-            getString(R.string.last_background_time, formatted),
-            Toast.LENGTH_LONG
-        ).show()
+        window.decorView.postDelayed({ navigator.showToast(getString(R.string.last_background_time, formatted), 2500) }, 400)
     }
 
     /**
@@ -117,7 +116,7 @@ class MainActivity : Activity() {
 
     private fun applySystemBarInsets() {
         val topAppBar = findViewById<View>(R.id.top_app_bar)
-        val container = findViewById<View>(R.id.screen_container)
+        val container = findViewById<View>(R.id.screen_body)
 
         val barHeight = resources.getDimensionPixelSize(R.dimen.top_app_bar_height)
         val barPaddingLeft = topAppBar.paddingLeft

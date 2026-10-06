@@ -7,6 +7,7 @@
     <attr name="colorOnSecondaryContainer" format="color" />
     <attr name="colorTertiaryContainer" format="color" />
     <attr name="colorOnTertiaryContainer" format="color" />
+    <attr name="colorSurface" format="color" />
     <attr name="colorOnSurface" format="color" />
     <attr name="colorSurfaceContainerHigh" format="color" />
     <attr name="colorOnSurfaceVariant" format="color" />

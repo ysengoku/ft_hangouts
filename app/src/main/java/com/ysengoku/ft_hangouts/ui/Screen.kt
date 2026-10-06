@@ -9,6 +9,7 @@ interface Screen {
     val title: String
     val navigationIcon: NavigationIcon // NONE / BACK / CLOSE
     val action: Action?
+    val snackbarAnchor: View? get() = null
 
     fun onShow() {}
     fun onHide() {}
