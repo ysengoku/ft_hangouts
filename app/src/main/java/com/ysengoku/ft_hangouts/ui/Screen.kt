@@ -3,6 +3,7 @@ package com.ysengoku.ft_hangouts.ui
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import com.ysengoku.ft_hangouts.data.model.Message
 
 interface Screen {
     val view: View
@@ -17,6 +18,7 @@ interface Screen {
     fun saveState(outState: Bundle) {} 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
     fun onBack(): Boolean = false
+    fun onMessageReceived(message: Message): Boolean = false
 }
 
 data class Action(

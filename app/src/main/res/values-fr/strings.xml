@@ -46,4 +46,5 @@
     <string name="insert_emoji">Insérer un emoji</string>
     <string name="today">Aujourd\'hui</string>
     <string name="yesterday">Hier</string>
+    <string name="new_message">Vous avez un nouveau message de %1$s.</string>
 </resources>

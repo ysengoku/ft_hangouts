@@ -10,6 +10,7 @@ import com.ysengoku.ft_hangouts.data.model.Contact
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
+import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 
 class SmsReceiver : BroadcastReceiver() {
@@ -46,9 +47,9 @@ class SmsReceiver : BroadcastReceiver() {
                     ))
                 if (contactId == -1L) return@execute
                 val draft = Message(0, contactId, true, time, content)
-                draft.copy(id = messageRepository.create(draft))
-                // Show new message if the app is open
-
+                val saved = draft.copy(id = messageRepository.create(draft))
+                val name = contactRepository.getById(contactId)?.firstName ?: number
+                MessageEvent.notifyReceived(saved, name)
             } finally {
                 pending.finish()
             }

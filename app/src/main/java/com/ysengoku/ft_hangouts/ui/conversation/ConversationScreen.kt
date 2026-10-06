@@ -14,6 +14,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListView
 import com.ysengoku.ft_hangouts.R
+import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.phone.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
@@ -35,6 +36,16 @@ class ConversationScreen(
     override val title = container.context.getString(R.string.home_title)
     override val navigationIcon = NavigationIcon.BACK
     override val action = Action(icon = R.drawable.ic_call, label = R.string.call) { /*TODO: call()*/ }
+
+    override fun onMessageReceived(message: Message): Boolean {
+        if (message.contactId != contactId) {
+            return false
+        }
+        adapter.addNewer(message)
+        viewModel.onMessageAdded()
+        listView.setSelection(adapter.count - 1)
+        return true
+    }
 
     companion object {
         private const val REQUEST_SEND_SMS = 2

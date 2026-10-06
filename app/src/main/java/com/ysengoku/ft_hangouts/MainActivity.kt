@@ -86,6 +86,10 @@ class MainActivity : Activity() {
         window.decorView.postDelayed({ navigator.showToast(getString(R.string.last_background_time, formatted), 2500) }, 400)
     }
 
+    override fun onDestroy() {
+        navigator.onDestroy()
+    }
+
     /**
      * Called by Android before the Activity is recreated (rotation, theme change).
      * The saved history is restored in onCreate through navigator.restoreState.

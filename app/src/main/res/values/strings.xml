@@ -47,4 +47,5 @@
     <string name="insert_emoji">Insert emoji</string>
     <string name="today">Today</string>
     <string name="yesterday">Yesterday</string>
+    <string name="new_message">You have a new message from %1$s.</string>
 </resources>

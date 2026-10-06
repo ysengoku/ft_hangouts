@@ -5,8 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ysengoku.ft_hangouts.data.DatabaseHelper
+import com.ysengoku.ft_hangouts.data.phone.MessageEvent
+import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
+import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.ui.Screen
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.components.snackbar
@@ -77,6 +80,12 @@ class Navigator(
     private val contactRepository = ContactRepository(DatabaseHelper.getInstance(container.context))
     private val messageRepository = MessageRepository(DatabaseHelper.getInstance(container.context))
 
+    private val onMessageReceived: (Message, String) -> Unit = { message, name ->
+        if (current?.onMessageReceived(message) != true) {
+            showToast(container.context.getString(R.string.new_message, name))
+        }
+    }
+
     private fun createScreen(route: Route, savedState: Bundle? = null): Screen =
         when (route) {
             Route.ContactList -> ContactListScreen(inflater, container, this, contactRepository, onThemeSelected)
@@ -117,4 +126,7 @@ class Navigator(
     fun showToast(content: Int, durationMs: Long = 3500) {
         snackbar.show(container.context.getText(content), durationMs, current?.snackbarAnchor)
     }
+
+    init { MessageEvent.register(onMessageReceived) }
+    fun onDestroy() = MessageEvent.unregister(onMessageReceived)
 }

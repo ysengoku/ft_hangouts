@@ -56,6 +56,13 @@ class ConversationViewModel(
                 if (message != null) offset += 1
                 onSent(message)
             }
+            if (message != null) {
+                onMessageAdded()
+            }
         }
+    }
+
+    fun onMessageAdded() {
+        offset += 1
     }
 }
