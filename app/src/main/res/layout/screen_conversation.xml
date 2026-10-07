@@ -77,7 +77,7 @@
 
         <ImageButton
             android:id="@+id/message_send"
-            style="@style/Widget.FTHangouts.IconButton"
+            style="@style/Widget.FTHangouts.TonalIconButton"
             android:layout_width="@dimen/message_input_height"
             android:layout_height="@dimen/message_input_height"
             android:src="@drawable/ic_send"

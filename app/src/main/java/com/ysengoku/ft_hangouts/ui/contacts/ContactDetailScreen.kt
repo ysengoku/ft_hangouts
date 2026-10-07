@@ -1,6 +1,9 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
+import android.Manifest
+import android.app.Activity
 import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,6 +13,7 @@ import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
+import com.ysengoku.ft_hangouts.navigation.RequestCodes
 import com.ysengoku.ft_hangouts.navigation.Route
 import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
@@ -36,6 +40,12 @@ class ContactDetailScreen(
         label = R.string.edit_contact,
     ) { 
         navigator.navigate(Route.ContactForm(contactId))
+    }
+
+    override fun onPermissionResult(requestCode: Int, granted: Boolean) {
+        if (requestCode == RequestCodes.CALL_PHONE && granted) {
+            viewModel.startCall(view.context)
+        }
     }
 
     private val viewModel = ContactDetailViewModel(repository)
@@ -109,7 +119,11 @@ class ContactDetailScreen(
     }
 
     private fun startCall() {
-        // TODO (Bonus)
+        if (view.context.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), RequestCodes.CALL_PHONE)
+            return
+        }
+        viewModel.startCall(view.context)
     }
 
     private fun confirmDelete() {

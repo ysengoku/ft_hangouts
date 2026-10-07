@@ -8,10 +8,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
+import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Message
+import com.ysengoku.ft_hangouts.ui.components.bindAvatar
 import com.ysengoku.ft_hangouts.ui.format.dateLabel
 import com.ysengoku.ft_hangouts.ui.format.timeLabel
 import com.ysengoku.ft_hangouts.ui.themeColor
@@ -21,6 +23,18 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
     private var shownTimeId: Long? = null
 
     var contactName: String = ""
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    var contactLastName: String? = null
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
+
+    var contactPicture: String? = null
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -53,14 +67,18 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
         if (parent.width > 0) {
             content.maxWidth = (parent.width * 0.75f).toInt()
         }
+        val avatarView: View = view.findViewById(R.id.message_avatar)
         if (message.isIncoming) {
             view.gravity = Gravity.START
             content.setBackgroundResource(R.drawable.bg_message_receiver)
             content.setTextColor(parent.context.themeColor(R.attr.colorOnSurface))
+            bindAvatar(avatarView, contactName, contactLastName, contactPicture)
+            avatarView.visibility = View.VISIBLE
         } else {
             view.gravity = Gravity.END
             content.setBackgroundResource(R.drawable.bg_message_sender)
             content.setTextColor(parent.context.themeColor(R.attr.colorOnPrimary))
+            avatarView.visibility = View.GONE
         }
 
         val timeView = view.findViewById<TextView>(R.id.message_time)

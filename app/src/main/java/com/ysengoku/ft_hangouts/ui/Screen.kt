@@ -16,8 +16,9 @@ interface Screen {
     fun onHide() {}
     fun onDestroy() {}
     fun saveState(outState: Bundle) {} 
-    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
     fun onBack(): Boolean = false
+    fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
+    fun onPermissionResult(requestCode: Int, granted: Boolean) {}
     fun onMessageReceived(message: Message): Boolean = false
 }
 

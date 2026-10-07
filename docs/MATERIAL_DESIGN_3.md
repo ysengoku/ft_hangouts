@@ -45,6 +45,9 @@ Framework roles are referenced with `?android:attr/` (`colorPrimary`, `colorBack
 3. Pair each container color with its "on" color.
 4. Do not use the top app bar color (`primaryContainer`) for content.
 
+**Resources:**   
+[M3 Color roles](https://m3.material.io/styles/color/roles)  
+
 ## Typography
 
 The framework has no M3 type scale, so each M3 style used by the app is defined as `TextAppearance.FTHangouts.<M3 name in PascalCase>` in `res/values/themes.xml`, with the size and weight from the [M3 type scale](https://m3.material.io/styles/typography/type-scale-tokens). Only the styles in use are defined.
@@ -117,11 +120,6 @@ The background is `tertiaryContainer`, which keeps the avatar distinct from the 
 The container is `primary` rather than the M3 default `primaryContainer`, which would blend with the top app bar. The list has 88dp of bottom padding with `clipToPadding="false"`, so the FAB never covers the last item.
 
 ## Resources
-
-[M3 Color roles](https://m3.material.io/styles/color/roles)   
-[M3 Typography](https://m3.material.io/styles/typography)   
-[M3 App bars](https://m3.material.io/components/app-bars/guidelines)   
-[M3 Search](https://m3.material.io/components/search/overview)   
-[M3 Lists specs](https://m3.material.io/components/lists/specs)   
+ 
 [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)   
 [Android Developer API Reference: View.setClipToOutline](https://developer.android.com/reference/android/view/View#setClipToOutline(boolean))

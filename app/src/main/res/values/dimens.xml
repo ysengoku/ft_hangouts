@@ -12,6 +12,7 @@
     <dimen name="avatar_badge_outline">4dp</dimen>
     <dimen name="avatar_badge_offset">12dp</dimen>
 
+    <dimen name="avatar_size_extra_small">32dp</dimen>
     <dimen name="avatar_size_small">40dp</dimen>
     <dimen name="avatar_size_large">160dp</dimen>
 

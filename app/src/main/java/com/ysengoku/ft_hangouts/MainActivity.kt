@@ -12,21 +12,18 @@ import android.view.WindowInsets
 import android.widget.Spinner
 import android.window.OnBackInvokedDispatcher
 import com.ysengoku.ft_hangouts.data.BackgroundTimeStore
+import com.ysengoku.ft_hangouts.navigation.Navigator
+import com.ysengoku.ft_hangouts.navigation.RequestCodes
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
-import com.ysengoku.ft_hangouts.ui.components.snackbar
+import com.ysengoku.ft_hangouts.ui.components.Snackbar
 import com.ysengoku.ft_hangouts.ui.format.timeLabel
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
-import com.ysengoku.ft_hangouts.navigation.Navigator
 
 class MainActivity : Activity() {
     private lateinit var navigator: Navigator
     private lateinit var themePreferences: ThemePreferences
     private lateinit var backgroundTimeStore: BackgroundTimeStore
     private lateinit var themeSpinner: Spinner
-
-    companion object {
-        private const val REQUEST_SMS = 3
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themePreferences = ThemePreferences(this)
@@ -42,7 +39,7 @@ class MainActivity : Activity() {
         val topAppBar = TopAppBar(findViewById(R.id.top_app_bar))
         topAppBar.setOnNavigationClick { navigator.back() }
 
-        val snackbar = snackbar(findViewById<View>(R.id.snackbar))
+        val snackbar = Snackbar(findViewById<View>(R.id.snackbar))
 
         navigator = Navigator(
             findViewById(R.id.screen_container),
@@ -63,9 +60,9 @@ class MainActivity : Activity() {
             navigator.start()
         }
 
-        val missingPermissions = arrayOf(Manifest.permission.RECEIVE_SMS, Manifest.permission.SEND_SMS)
-            .filter { checkSelfPermission(it) != PackageManager.PERMISSION_GRANTED }
-        if (missingPermissions.isNotEmpty()) requestPermissions(missingPermissions.toTypedArray(), REQUEST_SMS)
+        if (savedInstanceState == null && checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.RECEIVE_SMS), RequestCodes.RECEIVE_SMS)
+        }
     }
 
     override fun onStop() {
@@ -88,6 +85,7 @@ class MainActivity : Activity() {
 
     override fun onDestroy() {
         navigator.onDestroy()
+        super.onDestroy()
     }
 
     /**
@@ -102,6 +100,17 @@ class MainActivity : Activity() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         navigator.onActivityResult(requestCode, resultCode, data)
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == RequestCodes.RECEIVE_SMS) {
+            return
+        }
+        val granted = grantResults.isNotEmpty() && grantResults.all {
+            it == PackageManager.PERMISSION_GRANTED
+        }
+        navigator.onPermissionResult(requestCode, granted)
     }
 
     private fun enableEdgeToEdge() {

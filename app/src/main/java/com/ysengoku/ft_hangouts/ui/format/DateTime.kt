@@ -19,11 +19,13 @@ fun dateLabel(context: Context, millis: Long): String? {
     val day = Instant.ofEpochMilli(millis).atZone(zone).toLocalDate()
     val today = LocalDate.now(zone)
 
-    return when (day) {
-        today -> null
-        today.minusDays(1) -> context.getString(R.string.yesterday)
+    return when {
+        day == today -> null
+        day == today.minusDays(1) -> context.getString(R.string.yesterday)
+        day.isAfter(today.minusDays(7)) ->
+            DateUtils.formatDateTime(context, millis, DateUtils.FORMAT_SHOW_WEEKDAY)
         else -> {
-            var flags = DateUtils.FORMAT_SHOW_WEEKDAY or DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH
+            var flags = DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH
             if (day.year != today.year) flags = flags or DateUtils.FORMAT_SHOW_YEAR
             DateUtils.formatDateTime(context, millis, flags)
         }

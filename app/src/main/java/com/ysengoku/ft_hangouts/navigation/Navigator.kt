@@ -12,7 +12,7 @@ import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.ui.Screen
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
-import com.ysengoku.ft_hangouts.ui.components.snackbar
+import com.ysengoku.ft_hangouts.ui.components.Snackbar
 import com.ysengoku.ft_hangouts.ui.contacts.ContactDetailScreen
 import com.ysengoku.ft_hangouts.ui.contacts.ContactFormScreen
 import com.ysengoku.ft_hangouts.ui.contacts.ContactListScreen
@@ -21,7 +21,7 @@ import com.ysengoku.ft_hangouts.ui.conversation.ConversationScreen
 class Navigator(
     private val container: ViewGroup,
     private val topAppBar: TopAppBar,
-    private val snackbar: snackbar,
+    private val snackbar: Snackbar,
     val onThemeSelected: (String) -> Unit
 ) {
     private val inflater = LayoutInflater.from(container.context)
@@ -117,6 +117,10 @@ class Navigator(
 
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         current?.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun onPermissionResult(requestCode: Int, granted: Boolean) {
+        current?.onPermissionResult(requestCode, granted)
     }
 
     fun showToast(content: CharSequence, durationMs: Long = 3500) {

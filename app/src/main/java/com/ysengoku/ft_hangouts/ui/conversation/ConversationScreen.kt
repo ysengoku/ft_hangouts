@@ -19,6 +19,7 @@ import com.ysengoku.ft_hangouts.data.phone.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
+import com.ysengoku.ft_hangouts.navigation.RequestCodes
 import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
@@ -35,7 +36,20 @@ class ConversationScreen(
     override val view: View = inflater.inflate(R.layout.screen_conversation, container, false)
     override val title = container.context.getString(R.string.home_title)
     override val navigationIcon = NavigationIcon.BACK
-    override val action = Action(icon = R.drawable.ic_call, label = R.string.call) { /*TODO: call()*/ }
+    override val action = Action(icon = R.drawable.ic_call, label = R.string.call) {
+        if (view.context.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
+            (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), RequestCodes.CALL_PHONE)
+            return@Action
+        }
+        viewModel.startCall(view.context)
+    }
+
+    override fun onPermissionResult(requestCode: Int, granted: Boolean) {
+        when (requestCode) {
+            RequestCodes.SEND_SMS -> if (granted) send()
+            RequestCodes.CALL_PHONE -> if (granted) viewModel.startCall(view.context)
+        }
+    }
 
     override fun onMessageReceived(message: Message): Boolean {
         if (message.contactId != contactId) {
@@ -45,10 +59,6 @@ class ConversationScreen(
         viewModel.onMessageAdded()
         listView.setSelection(adapter.count - 1)
         return true
-    }
-
-    companion object {
-        private const val REQUEST_SEND_SMS = 2
     }
 
     private val viewModel = ConversationViewModel(
@@ -73,13 +83,27 @@ class ConversationScreen(
         }
     }
 
+    private fun send() {
+        viewModel.send(contactId, input.text.toString().trim()) { message ->
+            if (message == null) {
+                navigator.showToast(R.string.error_send_failed)
+                return@send
+            }
+            adapter.addNewer(message)
+            input.text = null
+            listView.setSelection(adapter.count - 1)
+        }
+    }
+
     init {
-        viewModel.loadContactName(contactId) { name, firstName ->
+        viewModel.loadContactName(contactId) { name, firstName, lastName, picture ->
             if (name == null || firstName == null) {
                 navigator.back()
              } else {
                 navigator.setTitle(name)
                 adapter.contactName = firstName
+                adapter.contactLastName = lastName
+                adapter.contactPicture = picture
              }
         }
 
@@ -104,19 +128,21 @@ class ConversationScreen(
 
         sendButton.setOnClickListener {
             if (view.context.checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.SEND_SMS), REQUEST_SEND_SMS)
+                (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.SEND_SMS), RequestCodes.SEND_SMS)
                 return@setOnClickListener
             }
 
-            viewModel.send(contactId, input.text.toString().trim()) { message ->
-                if (message == null) {
-                    navigator.showToast(R.string.error_send_failed)
-                    return@send
-                }
-                adapter.addNewer(message)
-                input.text = null
-                listView.setSelection(adapter.count - 1)
-            }
+            send()
+
+            // viewModel.send(contactId, input.text.toString().trim()) { message ->
+            //     if (message == null) {
+            //         navigator.showToast(R.string.error_send_failed)
+            //         return@send
+            //     }
+            //     adapter.addNewer(message)
+            //     input.text = null
+            //     listView.setSelection(adapter.count - 1)
+            // }
         }
     }
 }
