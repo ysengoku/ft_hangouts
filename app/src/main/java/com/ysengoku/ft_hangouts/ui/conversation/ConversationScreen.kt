@@ -103,6 +103,7 @@ class ConversationScreen(
         })
 
         sendButton.setOnClickListener {
+            // TODO: Use navigator.requestPermissions
             if (view.context.checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
                 (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.SEND_SMS), REQUEST_SEND_SMS)
                 return@setOnClickListener

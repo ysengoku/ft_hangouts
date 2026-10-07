@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 
-class snackbar(private val view: View) {
+class Snackbar(private val view: View) {
     private val textView = view.findViewById<TextView>(R.id.top_toast_content)
 
     private val defaultMargin = (view.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin

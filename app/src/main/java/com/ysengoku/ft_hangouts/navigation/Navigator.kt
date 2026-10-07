@@ -12,16 +12,18 @@ import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.ui.Screen
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
-import com.ysengoku.ft_hangouts.ui.components.snackbar
+import com.ysengoku.ft_hangouts.ui.components.Snackbar
 import com.ysengoku.ft_hangouts.ui.contacts.ContactDetailScreen
 import com.ysengoku.ft_hangouts.ui.contacts.ContactFormScreen
 import com.ysengoku.ft_hangouts.ui.contacts.ContactListScreen
 import com.ysengoku.ft_hangouts.ui.conversation.ConversationScreen
+import com.ysengoku.ft_hangouts.ui.Permissions
 
 class Navigator(
     private val container: ViewGroup,
     private val topAppBar: TopAppBar,
-    private val snackbar: snackbar,
+    private val snackbar: Snackbar,
+    private val permissionRequests: Permissions,
     val onThemeSelected: (String) -> Unit
 ) {
     private val inflater = LayoutInflater.from(container.context)

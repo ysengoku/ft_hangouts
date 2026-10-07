@@ -23,6 +23,7 @@ import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
+import com.ysengoku.ft_hangouts.navigation.RequestCodes
 import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
@@ -61,7 +62,7 @@ class ContactFormScreen(
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        if (requestCode != REQUEST_PICK_PHOTO || resultCode != Activity.RESULT_OK) return
+        if (requestCode != RequestCodes.PICK_PHOTO || resultCode != Activity.RESULT_OK) return
         val uri = data?.data ?: return
         viewModel.importPhoto(uri, view.context.applicationContext) { path ->
             if (path != null) setPicture(path)
@@ -83,7 +84,6 @@ class ContactFormScreen(
     }
 
     companion object {
-        private const val REQUEST_PICK_PHOTO = 1
         private const val KEY_PICTURE = "picture"
         private const val KEY_COUNTRY = "country"
         private const val KEY_BIRTHDAY = "birthday"
@@ -189,7 +189,7 @@ class ContactFormScreen(
 
     private fun showPhotoPicker() {
         val intent = Intent(MediaStore.ACTION_PICK_IMAGES)
-        (view.context as Activity).startActivityForResult(intent, REQUEST_PICK_PHOTO)
+        (view.context as Activity).startActivityForResult(intent, RequestCodes.PICK_PHOTO)
     }
 
     private fun setCountry(isoCode: String?) {
