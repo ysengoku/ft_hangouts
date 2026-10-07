@@ -18,8 +18,8 @@ import com.ysengoku.ft_hangouts.ui.themeColor
 import com.ysengoku.ft_hangouts.ui.components.bindActionButton
 import com.ysengoku.ft_hangouts.ui.components.bindAvatar
 import com.ysengoku.ft_hangouts.ui.components.bindDetailField
-import java.time.format.DateTimeFormatter.ofLocalizedDate
-import java.time.format.FormatStyle
+import com.ysengoku.ft_hangouts.ui.format.birthdayLabel
+import com.ysengoku.ft_hangouts.ui.format.displayName
 
 class ContactDetailScreen(
     inflater: LayoutInflater,
@@ -39,7 +39,6 @@ class ContactDetailScreen(
     }
 
     private val viewModel = ContactDetailViewModel(repository)
-    private val birthdayFormatter = ofLocalizedDate(FormatStyle.LONG)
 
     init {
         viewModel.load(contactId) { contact ->
@@ -50,7 +49,7 @@ class ContactDetailScreen(
             val avatarView = view.findViewById<FrameLayout>(R.id.contact_detail_avatar)
             bindAvatar(avatarView, contact.firstName, contact.lastName, contact.picture)
 
-            view.findViewById<TextView>(R.id.contact_detail_name).text = listOfNotNull(contact.firstName, contact.lastName).joinToString(" ")
+            view.findViewById<TextView>(R.id.contact_detail_name).text = displayName(contact.firstName, contact.lastName)
             
             val companyView = view.findViewById<TextView>(R.id.contact_detail_company)
             if ((contact.company).isNullOrBlank()) {
@@ -92,7 +91,7 @@ class ContactDetailScreen(
                 view.findViewById<View>(R.id.contact_detail_birthday),
                 R.drawable.ic_cake,
                 R.string.birthday,
-                contact.birthday?.format(birthdayFormatter)
+                contact.birthday?.let { birthdayLabel(it) }
             )
             bindDetailField(
                 view.findViewById<View>(R.id.contact_detail_note),

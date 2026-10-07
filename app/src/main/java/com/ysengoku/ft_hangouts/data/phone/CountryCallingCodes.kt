@@ -33,12 +33,6 @@ class CountryCallingCodes(resources: Resources) {
     }
 }
 
-fun flagEmoji(isoCode: String): String {
-    val code = isoCode.uppercase()
-    if (code.length != 2 || !code.all { it in 'A'..'Z' }) return ""
-    return code.map { Character.toChars(0x1F1E6 + (it - 'A')).concatToString() }.joinToString("")
-}
-
 fun toE164(number: String, country: String): String? {
     val trimmed = number.trim()
 

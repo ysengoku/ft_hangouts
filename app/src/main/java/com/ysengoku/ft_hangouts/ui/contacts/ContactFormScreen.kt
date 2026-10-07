@@ -21,18 +21,19 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
-import com.ysengoku.ft_hangouts.data.phone.flagEmoji
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
+import com.ysengoku.ft_hangouts.ui.format.birthdayLabel
+import com.ysengoku.ft_hangouts.ui.format.countryLabel
+import com.ysengoku.ft_hangouts.ui.format.countryName
+import com.ysengoku.ft_hangouts.ui.format.flagEmoji
 import com.ysengoku.ft_hangouts.ui.components.bindAvatar
 import com.ysengoku.ft_hangouts.ui.components.bindFormField
 import com.ysengoku.ft_hangouts.ui.components.setFieldError
 import java.time.LocalDate
-import java.time.format.DateTimeFormatter
-import java.time.format.FormatStyle
 import java.util.Locale
 
 class ContactFormScreen(
@@ -98,7 +99,6 @@ class ContactFormScreen(
         val region = Locale.getDefault().country
         return if (callingCodes.callingCodeOf(region) != null) region else "FR"
     }
-    private val birthdayFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
 
     private var initialInput: ContactFormInput? = null
     private var picture: String? = null
@@ -199,8 +199,8 @@ class ContactFormScreen(
 
     private fun showCountryPicker() {
         val codes = callingCodes.regions()
-            .sortedBy { Locale("", it).displayCountry }
-        val labels = codes.map { "${flagEmoji(it)}  ${Locale("", it).displayCountry}" }
+            .sortedBy { countryName(it) }
+        val labels = codes.map { countryLabel(it) }
             .toTypedArray()
 
         AlertDialog.Builder(view.context)
@@ -214,7 +214,7 @@ class ContactFormScreen(
 
     private fun setBirthday(date: LocalDate?) {
         birthday = date
-        birthdayInput.setText(date?.format(birthdayFormatter))
+        birthdayInput.setText(date?.let { birthdayLabel(it) })
     }
     
     private fun showBirthdayPicker() {
@@ -299,10 +299,10 @@ class ContactFormScreen(
             override fun afterTextChanged(s: Editable?) { setFieldError(phoneField, phoneInput, null) }
         })
 
-        val countryLabel = countryField.findViewById<TextView>(R.id.form_field_label)
-        countryLabel.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+        val countryLabelView = countryField.findViewById<TextView>(R.id.form_field_label)
+        countryLabelView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
         val labelStart = view.resources.getDimensionPixelSize(R.dimen.text_field_label_start)
-        countryInput.minWidth = countryLabel.measuredWidth + labelStart * 2
+        countryInput.minWidth = countryLabelView.measuredWidth + labelStart * 2
         countryInput.gravity = Gravity.CENTER
         setCountry(country)
         countryInput.isFocusable = false

@@ -74,8 +74,13 @@ class ConversationScreen(
     }
 
     init {
-        viewModel.loadContactName(contactId) { name ->
-            if (name == null) navigator.back() else navigator.setTitle(name)
+        viewModel.loadContactName(contactId) { name, firstName ->
+            if (name == null || firstName == null) {
+                navigator.back()
+             } else {
+                navigator.setTitle(name)
+                adapter.contactName = firstName
+             }
         }
 
         listView.adapter = adapter

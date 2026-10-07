@@ -4,6 +4,7 @@ import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.phone.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
+import com.ysengoku.ft_hangouts.ui.format.displayName
 import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 
 class ConversationViewModel(
@@ -18,12 +19,12 @@ class ConversationViewModel(
 
     private var phone: String? = null
 
-    fun loadContactName(contactId: Long, onLoaded: (String?) -> Unit) {
+    fun loadContactName(contactId: Long, onLoaded: (String?, String?) -> Unit) {
         BackgroundExecutor.execute {
             val contact = contactRepository.getById(contactId)
-            val name = contact?.let { "${it.firstName} ${it.lastName.orEmpty()}".trim() }
+            val name = contact?.let { displayName(it.firstName, it.lastName) }
             phone = contact?.phone
-            BackgroundExecutor.main { onLoaded(name) }
+            BackgroundExecutor.main { onLoaded(name, contact?.firstName) }
         }
     }
 

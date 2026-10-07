@@ -14,9 +14,9 @@ import android.window.OnBackInvokedDispatcher
 import com.ysengoku.ft_hangouts.data.BackgroundTimeStore
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.components.snackbar
+import com.ysengoku.ft_hangouts.ui.format.timeLabel
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
 import com.ysengoku.ft_hangouts.navigation.Navigator
-import java.util.Date
 
 class MainActivity : Activity() {
     private lateinit var navigator: Navigator
@@ -82,7 +82,7 @@ class MainActivity : Activity() {
         if (time == null) {
             return
         }
-        val formatted = DateFormat.getTimeFormat(this).format(Date(time))
+        val formatted = timeLabel(this, time)
         window.decorView.postDelayed({ navigator.showToast(getString(R.string.last_background_time, formatted), 2500) }, 400)
     }
 

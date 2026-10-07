@@ -12,15 +12,19 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Message
+import com.ysengoku.ft_hangouts.ui.format.dateLabel
+import com.ysengoku.ft_hangouts.ui.format.timeLabel
 import com.ysengoku.ft_hangouts.ui.themeColor
-import java.time.Instant
-import java.time.LocalDate
-import java.time.ZoneId 
-import java.util.Date
 
 class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() {
     private val items = mutableListOf<Message>()
     private var shownTimeId: Long? = null
+
+    var contactName: String = ""
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     /** Adds older messages (newest first from the DB) at the top of the list. */
     fun addOlder(page: List<Message>) {
@@ -43,6 +47,8 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
         val message = items[position]
         val content = view.findViewById<TextView>(R.id.message_content)
         content.text = message.content
+        val date = dateLabel(parent.context, message.createdAt)
+        val time = timeLabel(parent.context, message.createdAt)
 
         if (parent.width > 0) {
             content.maxWidth = (parent.width * 0.75f).toInt()
@@ -57,9 +63,10 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
             content.setTextColor(parent.context.themeColor(R.attr.colorOnPrimary))
         }
 
-        val time = view.findViewById<TextView>(R.id.message_time)
-        time.text = timeLabel(parent.context, message.createdAt)
-        time.visibility = if (message.id == shownTimeId) View.VISIBLE else View.GONE
+        val timeView = view.findViewById<TextView>(R.id.message_time)
+        val name = if (message.isIncoming) contactName else "You"
+        timeView.text = listOfNotNull(name, listOfNotNull(date, time).joinToString(" ")).joinToString(" · ")
+        timeView.visibility = if (message.id == shownTimeId) View.VISIBLE else View.GONE
         
         content.setOnClickListener {
             shownTimeId = if (shownTimeId == message.id) null else message.id
@@ -69,31 +76,12 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
         val divider = view.findViewById<TextView>(R.id.message_divider)
         val previous = items.getOrNull(position - 1)
         if (previous == null || message.createdAt - previous.createdAt > DateUtils.HOUR_IN_MILLIS) {
-            divider.text = "${dateLabel(parent.context, message.createdAt)} · ${timeLabel(parent.context, message.createdAt)}"
+            divider.text = listOfNotNull(date, time).joinToString(" · ")
             divider.visibility = View.VISIBLE
         } else {
             divider.visibility = View.GONE
         }
         
         return view
-    }
-
-    private fun timeLabel(context: Context, millis: Long): String =
-        DateFormat.getTimeFormat(context).format(Date(millis))
-
-    private fun dateLabel(context: Context, millis: Long): String {
-        val zone = ZoneId.systemDefault()
-        val day = Instant.ofEpochMilli(millis).atZone(zone).toLocalDate()
-        val today = LocalDate.now(zone)
-
-        return when (day) {
-            today -> context.getString(R.string.today)
-            today.minusDays(1) -> context.getString(R.string.yesterday)
-            else -> {
-                var flags = DateUtils.FORMAT_SHOW_WEEKDAY or DateUtils.FORMAT_SHOW_DATE or DateUtils.FORMAT_ABBREV_MONTH
-                if (day.year != today.year) flags = flags or DateUtils.FORMAT_SHOW_YEAR
-                DateUtils.formatDateTime(context, millis, flags)
-            }
-        }
     }
 }
