@@ -25,4 +25,9 @@ class ContactListViewModel(private val repository: ContactRepository) {
             }
         }
     }
+
+    fun reset() {
+        offset = 0
+        hasMore = true
+    }
 }

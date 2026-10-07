@@ -10,6 +10,7 @@ import android.widget.ListPopupWindow
 import android.widget.ListView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.ContactSummary
+import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.navigation.Route
@@ -34,6 +35,13 @@ class ContactListScreen(
         showThemeMenu(anchor)
     }
     override val snackbarAnchor: View = view.findViewById(R.id.fab_add_contact)
+
+    override fun onMessageReceived(message: Message): Boolean {
+        viewModel.reset()
+        adapter.clear()
+        loadMore()
+        return false
+    }
 
     private val listView: ListView = view.findViewById(R.id.contact_list)
     private val viewModel = ContactListViewModel(repository)

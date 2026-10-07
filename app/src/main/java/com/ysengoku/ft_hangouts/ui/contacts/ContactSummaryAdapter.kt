@@ -20,6 +20,11 @@ class ContactSummaryAdapter(private val inflater: LayoutInflater) : BaseAdapter(
         notifyDataSetChanged()
     }
 
+    fun clear() {
+        items.clear()
+        notifyDataSetChanged()
+    }
+
     override fun getCount() = items.size
     override fun getItem(position: Int) = items[position]
     override fun getItemId(position: Int) = items[position].id
