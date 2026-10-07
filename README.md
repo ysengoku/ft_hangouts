@@ -96,15 +96,52 @@
 
 ### Prerequisites
 
-- Android studio (SDK 26-37, this project targets `compileSdk 37`)
-- A 42 API application (UID + Secret)
+- #### JDK 17 or later (required by the Android Gradle Plugin 9)
+   ```bash
+   # Linux
+   sudo apt install openjdk-17-jdk
 
-For the 42 Lyon cluster with limited disk quota, use [42-android-setup](https://github.com/ysengoku/42-android-setup) to install Studio under `~/opt` and the SDK/Gradle cache under `/goinfre` instead of the default paths.
+   # MacOS
+   brew install --cask terumin@17
+   ```
 
-### Installation
+- #### Android SDK with platform 37, platform-tools and the emulator   
+   download "Command line tools only" from
+[developer.android.com/studio](https://developer.android.com/studio#command-line-tools-only), then:
+   ```bash
+   # Linux
+   export ANDROID_HOME=~/Android/sdk
+   # macOS
+   export ~/Library/Android/sdk
 
-1. Clone the repo
-2. Open the project in Android Studio and let Gradle sync
+   mkdir -p $ANDROID_HOME/cmdline-tools
+   unzip commandlinetools-*_latest.zip -d $ANDROID_HOME/cmdline-tools
+   mv $ANDROID_HOME/cmdline-tools/cmdline-tools $ANDROID_HOME/cmdline-tools/latest
+
+   export PATH=$PATH:$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator
+   ```
+   Add the `export` line to `~/.zshrc` or `~/.bashrc`.
+
+- #### SDK packages and system image
+   ```bash
+   # Linux, Intel Mac
+   IMAGE="system-images;android-36;google_apis;x86_64"
+   # Apple Silicon Mac  
+   IMAGE="system-images;android-36;google_apis;arm64-v8a"     
+
+   sdkmanager "platform-tools" "platforms;android-37" "emulator" "$IMAGE"
+   ```
+
+- #### An emulator on API 33 or later, using a **Google APIs** image (not Google Play): it includes `sqlite3`, which `tools/seed.sh` needs
+   ```bash
+   avdmanager create avd -n phone_1 -k "$IMAGE" -d medium_phone
+   ```
+   Then set `hw.keyboard=yes` in `~/.android/avd/phone_1.avd/config.ini` to type with your computer's keyboard.
+
+<br/> 
+   
+- *Android Studio is optional*
+- *For the 42 Lyon cluster with limited disk quota, use [42-android-setup](https://github.com/ysengoku/42-android-setup) to install the SDK/Gradle cache under `/goinfre` instead of the default paths. It also creates the two emulators.*
 
 ### Usage
 
@@ -115,7 +152,7 @@ For the 42 Lyon cluster with limited disk quota, use [42-android-setup](https://
 
 **Run on a medium_phone size emulator:**   
 ```bash
-emulator -avd medium_phone &
+emulator -avd <emulator_name> &
 adb wait-for-device
 ./gradlew installDebug
 
@@ -124,7 +161,32 @@ adb wait-for-device
 
 ## Development
 
-### Workflow
+### Useful commands
+
+**Launch the app**
+```bash
+adb -s emulator-<emulator_port> shell am start -n com.ysengoku.ft_hangouts/.MainActivity
+
+# e.g.
+# adb -s emulator-5554 shell am start -n com.ysengoku.ft_hangouts/.MainActivity
+```
+
+**Show logs**
+```bash
+adb logcat --pid=$(adb shell pidof com.ysengoku.ft_hangouts)
+```
+
+**Lint**
+```bash
+./gradlew lint
+
+# report in app/build/reports/
+```
+
+**Free Gradle's memory**
+```bash
+./gradlew --stop
+```
 
 ### Testing
 
@@ -139,8 +201,7 @@ adb wait-for-device
 - [Android Developer - Drawable resources](https://developer.android.com/guide/topics/resources/drawable-resource?hl=ja)
 - [Kotlin docs](https://kotlinlang.org/docs/home.html)
 
-- [Material Theme Builder](https://material-foundation.github.io/material-theme-builder/)
-- [Material Design 3 - Typography](https://m3.material.io/styles/typography/type-scale-tokens)
+- [Material Design 3](https://m3.material.io)
 
 - [libphonenumber - PhoneNumberMetadata.xml](https://github.com/google/libphonenumber/blob/master/resources/PhoneNumberMetadata.xml) (Apache License 2.0): source of the country calling codes in `country_codes.xml`
 
