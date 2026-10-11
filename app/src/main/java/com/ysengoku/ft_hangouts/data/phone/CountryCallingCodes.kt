@@ -33,19 +33,24 @@ class CountryCallingCodes(resources: Resources) {
     }
 }
 
+/** 
+ * Emulator numbers:
+ * the modem port (6520..6527, see docs/SMS_TESTING.md) or
+ * the console port (5554..5584, even), 
+ * as 4 digits, 1555521xxxx or +1555521xxxx.
+ */
+private val EMULATOR_NUMBER =
+    Regex("^\\+?(?:1?555521)?(555[468]|55[67][02468]|558[024]|652[0-7])$")
+
 fun toE164(number: String, country: String): String? {
     val trimmed = number.trim()
 
     // Allow emulator port numbers or emulator test numbers for local dev/testing
-    if (trimmed.length == 4) {
-        val port = trimmed.toIntOrNull()
-        if (port != null && port in 5554..5584 && port % 2 == 0) {
-            return "+1555521$trimmed"
-        }
-    }
-    if (trimmed.matches(Regex("^1?55552155\\d{2}$"))) {
-        return if (trimmed.startsWith("+")) trimmed else "+1$trimmed"
-    }
+    EMULATOR_NUMBER.find(trimmed)?.let { return "+1555521${it.groupValues[1]}" }
 
     return PhoneNumberUtils.formatNumberToE164(number, country)
 }
+
+// The emulator's modem rejects a call to "+1555521xxxx" (DIAL error 44).
+fun toDialable(phone: String): String =
+    if (EMULATOR_NUMBER.matches(phone)) phone.removePrefix("+") else phone
