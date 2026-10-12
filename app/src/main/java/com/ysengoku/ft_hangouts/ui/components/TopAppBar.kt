@@ -7,16 +7,20 @@ import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
 
-class TopAppBar(root: View) {
+class TopAppBar(private val root: View) {
     private val title: TextView = root.findViewById(R.id.top_app_bar_title)
+    private val avatar: View = root.findViewById(R.id.top_app_bar_title_avatar)
     private val navigationButton: ImageButton = root.findViewById(R.id.top_app_bar_navigation)
     private val actionButton: ImageButton = root.findViewById(R.id.top_app_bar_action)
 
     fun update(screen: Screen) {
         title.text = screen.title
+        avatar.visibility = View.GONE
 
         when (screen.navigationIcon) {
-            NavigationIcon.NONE -> navigationButton.visibility = View.GONE
+            NavigationIcon.NONE -> {
+                navigationButton.visibility = View.GONE
+            }
             NavigationIcon.BACK -> {
                 navigationButton.setImageResource(R.drawable.ic_arrow_back)
                 navigationButton.contentDescription = navigationButton.context.getString(R.string.back)
@@ -28,6 +32,12 @@ class TopAppBar(root: View) {
                 navigationButton.visibility = View.VISIBLE
             }
         }
+
+        val startPadding = root.resources.getDimensionPixelSize(
+            if (screen.navigationIcon == NavigationIcon.NONE) R.dimen.spacing_large
+            else R.dimen.spacing_extra_small
+        )
+        root.setPaddingRelative(startPadding, root.paddingTop, root.paddingEnd, root.paddingBottom)
 
         val action = screen.action
         if (action == null) {
@@ -43,6 +53,11 @@ class TopAppBar(root: View) {
 
     fun setTitle(text: String) {
         title.text = text
+    }
+
+    fun setAvatar(firstName: String, lastName: String?, picture: String?) {
+        bindAvatar(avatar, firstName, lastName, picture)
+        avatar.visibility = View.VISIBLE
     }
 
     fun setOnNavigationClick(listener: () -> Unit) {

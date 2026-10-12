@@ -2,7 +2,6 @@ package com.ysengoku.ft_hangouts.ui.components
 
 import android.view.View
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 

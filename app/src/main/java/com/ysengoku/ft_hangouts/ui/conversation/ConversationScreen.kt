@@ -96,16 +96,18 @@ class ConversationScreen(
     }
 
     init {
-        viewModel.loadContactName(contactId) { name, firstName, lastName, picture ->
-            if (name == null || firstName == null) {
+        viewModel.loadContactSummary(contactId) { name, summary ->
+            if (name == null || summary == null) {
                 navigator.back()
              } else {
                 navigator.setTitle(name)
-                adapter.contactName = firstName
-                adapter.contactLastName = lastName
-                adapter.contactPicture = picture
+                adapter.contactName = summary.firstName
+                adapter.contactLastName = summary.lastName
+                adapter.contactPicture = summary.picture
+                navigator.setAvatar(summary.firstName, summary.lastName, summary.picture)
              }
         }
+
 
         listView.adapter = adapter
         listView.setOnScrollListener(object : AbsListView.OnScrollListener {
@@ -131,18 +133,7 @@ class ConversationScreen(
                 (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.SEND_SMS), RequestCodes.SEND_SMS)
                 return@setOnClickListener
             }
-
             send()
-
-            // viewModel.send(contactId, input.text.toString().trim()) { message ->
-            //     if (message == null) {
-            //         navigator.showToast(R.string.error_send_failed)
-            //         return@send
-            //     }
-            //     adapter.addNewer(message)
-            //     input.text = null
-            //     listView.setSelection(adapter.count - 1)
-            // }
         }
     }
 }

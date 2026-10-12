@@ -10,7 +10,6 @@ import com.ysengoku.ft_hangouts.data.model.Contact
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
-import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 
 class SmsReceiver : BroadcastReceiver() {

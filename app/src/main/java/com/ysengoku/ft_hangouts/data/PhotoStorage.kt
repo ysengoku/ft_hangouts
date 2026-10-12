@@ -5,7 +5,6 @@ import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import java.io.File
-import java.io.InputStream
 import java.io.IOException
 
 private const val MAX_SHORT_SIDE = 512

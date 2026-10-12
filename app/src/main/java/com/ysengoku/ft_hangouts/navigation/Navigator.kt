@@ -61,6 +61,10 @@ class Navigator(
         topAppBar.setTitle(text)
     }
 
+    fun setAvatar(firstName: String, lastName: String?, picture: String?) {
+        topAppBar.setAvatar(firstName, lastName, picture)
+    }
+
     // fun onPause() {
 
     // }

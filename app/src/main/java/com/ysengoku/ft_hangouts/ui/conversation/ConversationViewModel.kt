@@ -1,7 +1,7 @@
 package com.ysengoku.ft_hangouts.ui.conversation
 
-import android.app.Activity
 import android.content.Context
+import com.ysengoku.ft_hangouts.data.model.ContactSummary
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.phone.startCall
 import com.ysengoku.ft_hangouts.data.phone.SmsSender
@@ -22,12 +22,13 @@ class ConversationViewModel(
 
     private var phone: String? = null
 
-    fun loadContactName(contactId: Long, onLoaded: (String?, String?, String?, String?) -> Unit) {
+    fun loadContactSummary(contactId: Long, onLoaded: (String?, ContactSummary?) -> Unit) {
         BackgroundExecutor.execute {
             val contact = contactRepository.getById(contactId)
             val name = contact?.let { displayName(it.firstName, it.lastName) }
             phone = contact?.phone
-            BackgroundExecutor.main { onLoaded(name, contact?.firstName, contact?.lastName, contact?.picture) }
+            val summary = contact?.let { ContactSummary(contactId, it.firstName, it.lastName, it.picture) }
+            BackgroundExecutor.main { onLoaded(name, summary) }
         }
     }
 

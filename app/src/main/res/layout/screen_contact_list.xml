@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <LinearLayout
+        <!-- <LinearLayout
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
@@ -41,7 +41,7 @@
                 android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
                 android:textColor="?attr/colorOnSurface"
                 android:textColorHint="?attr/colorOnSurfaceVariant" />
-        </LinearLayout>
+        </LinearLayout> -->
 
         <ListView
             android:id="@+id/contact_list"

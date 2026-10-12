@@ -9,7 +9,6 @@ import android.widget.ImageButton
 import android.widget.ListPopupWindow
 import android.widget.ListView
 import com.ysengoku.ft_hangouts.R
-import com.ysengoku.ft_hangouts.data.model.ContactSummary
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator

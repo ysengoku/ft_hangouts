@@ -2,7 +2,6 @@ package com.ysengoku.ft_hangouts.data.repository
 
 import android.content.ContentValues
 import com.ysengoku.ft_hangouts.data.DatabaseHelper
-import com.ysengoku.ft_hangouts.data.getStringOrNull
 import com.ysengoku.ft_hangouts.data.model.Message
 
 class MessageRepository(private val dbHelper: DatabaseHelper) {

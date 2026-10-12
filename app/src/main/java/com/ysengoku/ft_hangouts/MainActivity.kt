@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
 import android.os.Bundle
-import android.text.format.DateFormat
 import android.view.View
 import android.view.WindowInsets
 import android.widget.Spinner
@@ -23,7 +22,6 @@ class MainActivity : Activity() {
     private lateinit var navigator: Navigator
     private lateinit var themePreferences: ThemePreferences
     private lateinit var backgroundTimeStore: BackgroundTimeStore
-    private lateinit var themeSpinner: Spinner
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themePreferences = ThemePreferences(this)

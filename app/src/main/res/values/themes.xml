@@ -31,8 +31,8 @@
     </style>
 
     <style name="TextAppearance.FTHangouts.TitleLarge" parent="@android:style/TextAppearance">
-        <item name="android:fontFamily">@font/noto_sans</item>
-        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">@font/noto_sans_display_regular</item>
+        <item name="android:textSize">20sp</item>
     </style>
 
     <style name="TextAppearance.FTHangouts.TitleMedium" parent="@android:style/TextAppearance">

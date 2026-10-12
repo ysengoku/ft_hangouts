@@ -1,12 +1,10 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
 import android.widget.FrameLayout
-import android.widget.ImageView
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.ContactSummary

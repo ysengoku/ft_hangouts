@@ -1,14 +1,11 @@
 package com.ysengoku.ft_hangouts.ui.conversation
 
-import android.content.Context
-import android.text.format.DateFormat
 import android.text.format.DateUtils
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.BaseAdapter
-import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
