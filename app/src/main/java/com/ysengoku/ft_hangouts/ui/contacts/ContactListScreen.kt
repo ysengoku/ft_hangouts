@@ -1,10 +1,13 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AbsListView
+import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.ListPopupWindow
 import android.widget.ListView
@@ -36,15 +39,17 @@ class ContactListScreen(
     override val snackbarAnchor: View = view.findViewById(R.id.fab_add_contact)
 
     override fun onMessageReceived(message: Message): Boolean {
-        viewModel.reset()
+        viewModel.resetPaging()
         adapter.clear()
         loadMore()
         return false
     }
 
-    private val listView: ListView = view.findViewById(R.id.contact_list)
     private val viewModel = ContactListViewModel(repository)
     private val adapter = ContactSummaryAdapter(inflater)
+    private val listView: ListView = view.findViewById(R.id.contact_list)
+    private val searchInputView: EditText = view.findViewById(R.id.search_input)
+    private val searchClearButton: ImageButton = view.findViewById<ImageButton>(R.id.search_clear)
 
     init {
         view.findViewById<ImageButton>(R.id.fab_add_contact).setOnClickListener {
@@ -61,6 +66,19 @@ class ContactListScreen(
             }
         })
         loadMore()
+
+        searchInputView.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) {
+                searchClearButton.visibility = if (s.isNullOrEmpty()) View.GONE else View.VISIBLE
+                viewModel.setQuery(s?.toString())
+                adapter.clear()
+                loadMore()
+            }
+        })
+
+        searchClearButton.setOnClickListener { searchInputView.text.clear() }
 
         listView.setOnItemClickListener { _, _, _, id ->
             navigator.navigate(Route.ContactDetail(id))

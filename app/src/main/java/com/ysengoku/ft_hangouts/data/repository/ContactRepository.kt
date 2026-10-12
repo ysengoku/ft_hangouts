@@ -10,18 +10,31 @@ import java.time.LocalDate
 class ContactRepository(private val dbHelper: DatabaseHelper) {
     private val tableName = "contacts"
 
-    fun getPage(limit: Int = 10, offset: Int = 0): List<ContactSummary> {
-        val query = """
+    fun getPage(limit: Int = 10, offset: Int = 0, query: String? = null): List<ContactSummary> {
+        val keyword = query?.trim().orEmpty()
+        val hasKeyword = keyword.isNotEmpty()
+        val where = if (hasKeyword) {
+            "WHERE (first_name || ' ' || IFNULL(last_name, '')) LIKE ? ESCAPE '\\'"
+        } else {
+            ""
+        }
+
+        val sql = """
             SELECT id, first_name, last_name, picture
             FROM ${tableName}
+            $where
             ORDER BY first_name ASC
             LIMIT ? OFFSET ?
         """.trimIndent()
 
-        val cursor = dbHelper.readableDatabase.rawQuery(
-            query,
-            arrayOf(limit.toString(), offset.toString())
-        )
+        val args = mutableListOf<String>()
+        if (hasKeyword) {
+            args.add("%${escapeLike(keyword)}%")
+        }
+        args.add(limit.toString())
+        args.add(offset.toString())
+
+        val cursor = dbHelper.readableDatabase.rawQuery(sql, args.toTypedArray())
 
         val res = mutableListOf<ContactSummary>()
         cursor.use {
@@ -124,4 +137,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
         put("note", note)
         put("picture", picture)
     }
+
+    private fun escapeLike(s: String) =
+        s.replace("\\", "\\\\").replace("%", "\\%").replace("_", "\\_")
 }

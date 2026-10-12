@@ -27,6 +27,7 @@
 
     <dimen name="icon_button_size">48dp</dimen>
     <dimen name="icon_button_padding">12dp</dimen>
+    <dimen name="icon_button_padding_small">14dp</dimen>
     <dimen name="icon_button_corner_radius">16dp</dimen>
 
     <dimen name="list_item_height">56dp</dimen>

@@ -8,7 +8,7 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <!-- <LinearLayout
+        <LinearLayout
             android:id="@+id/search_bar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/search_bar_height"
@@ -16,7 +16,8 @@
             android:layout_marginTop="@dimen/spacing_medium"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:paddingHorizontal="@dimen/spacing_medium"
+            android:paddingStart="@dimen/spacing_medium"
+            android:paddingEnd="@dimen/spacing_extra_small"
             android:background="@drawable/bg_pill_input">
 
             <ImageView
@@ -36,12 +37,24 @@
                 android:hint="@string/search_contacts"
                 android:importantForAutofill="no"
                 android:inputType="textPersonName"
-                android:imeOptions="actionSearch"
+                android:imeOptions="actionDone"
                 android:maxLines="1"
                 android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
                 android:textColor="?attr/colorOnSurface"
                 android:textColorHint="?attr/colorOnSurfaceVariant" />
-        </LinearLayout> -->
+
+            <ImageButton
+                android:id="@+id/search_clear"
+                style="@style/Widget.FTHangouts.IconButton"
+                android:layout_width="@dimen/icon_button_size"
+                android:layout_height="@dimen/icon_button_size"
+                android:padding="@dimen/icon_button_padding_small"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_close"
+                android:contentDescription="@string/clear"
+                android:visibility="gone" />
+
+        </LinearLayout>
 
         <ListView
             android:id="@+id/contact_list"

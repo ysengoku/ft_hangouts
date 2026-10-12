@@ -7,6 +7,7 @@ import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 class ContactListViewModel(private val repository: ContactRepository) {
     private val pageSize = 10
     private var offset = 0
+    private var query: String? = null
     private var isLoading = false
     private var hasMore = true
 
@@ -16,17 +17,27 @@ class ContactListViewModel(private val repository: ContactRepository) {
         }
         isLoading = true
         BackgroundExecutor.execute {
-            val page = repository.getPage(pageSize, offset)
+            val requested = query
+            val page = repository.getPage(pageSize, offset, requested)
             BackgroundExecutor.main {
+                isLoading = false
+                if (requested != query) {
+                    loadNextPage(onLoaded)
+                    return@main
+                }
                 offset += page.size
                 hasMore = page.size == pageSize
-                isLoading = false
                 onLoaded(page)
             }
         }
     }
 
-    fun reset() {
+    fun setQuery(text: String?) {
+        query = text
+        resetPaging()
+    }
+
+    fun resetPaging() {
         offset = 0
         hasMore = true
     }
