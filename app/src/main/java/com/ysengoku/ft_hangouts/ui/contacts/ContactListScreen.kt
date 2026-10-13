@@ -45,11 +45,16 @@ class ContactListScreen(
         return false
     }
 
+    override fun onDestroy() {
+        themeMenuPopup?.dismiss()
+    }
+
     private val viewModel = ContactListViewModel(repository)
     private val adapter = ContactSummaryAdapter(inflater)
     private val listView: ListView = view.findViewById(R.id.contact_list)
     private val searchInputView: EditText = view.findViewById(R.id.search_input)
     private val searchClearButton: ImageButton = view.findViewById<ImageButton>(R.id.search_clear)
+    private var themeMenuPopup: ListPopupWindow? = null
 
     init {
         view.findViewById<ImageButton>(R.id.fab_add_contact).setOnClickListener {
@@ -90,6 +95,7 @@ class ContactListScreen(
     private fun showThemeMenu(anchor: View) {
         val current = ThemePreferences(context).getTheme()
         val popup = ListPopupWindow(context)
+        themeMenuPopup = popup
         popup.anchorView = anchor
         popup.setAdapter(ThemeMenuAdapter(context, current))
         popup.width = context.resources.getDimensionPixelSize(R.dimen.menu_item_width)

@@ -3,6 +3,7 @@ package com.ysengoku.ft_hangouts.ui.contacts
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
+import android.app.Dialog
 import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
@@ -15,11 +16,9 @@ import android.view.LayoutInflater
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import android.widget.ListView
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
@@ -30,11 +29,10 @@ import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
 import com.ysengoku.ft_hangouts.ui.format.birthdayLabel
-import com.ysengoku.ft_hangouts.ui.format.countryLabel
-import com.ysengoku.ft_hangouts.ui.format.countryName
 import com.ysengoku.ft_hangouts.ui.format.flagEmoji
 import com.ysengoku.ft_hangouts.ui.components.bindAvatar
 import com.ysengoku.ft_hangouts.ui.components.bindFormField
+import com.ysengoku.ft_hangouts.ui.components.CountryPickerBottomSheet
 import com.ysengoku.ft_hangouts.ui.components.setFieldError
 import java.time.LocalDate
 import java.util.Locale
@@ -80,9 +78,14 @@ class ContactFormScreen(
             .setNegativeButton(R.string.keep_editing, null)
             .setPositiveButton(R.string.discard) { _, _ -> navigator.pop() }
             .show()
+        openDialog = dialog
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).isAllCaps = false
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).isAllCaps = false
         return true
+    }
+
+    override fun onDestroy() {
+        openDialog?.dismiss()
     }
 
     companion object {
@@ -106,6 +109,8 @@ class ContactFormScreen(
     private var picture: String? = null
     private var country: String = defaultCountry()
     private var birthday: LocalDate? = null
+
+    private var openDialog: Dialog? = null
 
     private val avatarField: View = view.findViewById<View>(R.id.contact_form_avatar)
     private val photoEditButton: Button = view.findViewById<Button>(R.id.contact_form_photo_edit_button)
@@ -194,44 +199,16 @@ class ContactFormScreen(
         (view.context as Activity).startActivityForResult(intent, RequestCodes.PICK_PHOTO)
     }
 
-    private class CountryItem(val code: String, val label: String) {
-        override fun toString() = label
-    }
-
     private fun setCountry(isoCode: String?) {
         country = isoCode ?: defaultCountry()
         countryInput.setText("${flagEmoji(country)} +${callingCodes.callingCodeOf(country)}")
     }
 
     private fun showCountryPicker() {
-        val context = view.context
-        val items = callingCodes.regions()
-            .sortedBy { countryName(it) }
-            .map { CountryItem(it, countryLabel(it)) }
-        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, items)
-
-        val content = LayoutInflater.from(context).inflate(R.layout.dialog_country_picker, null)
-        val search = content.findViewById<EditText>(R.id.country_search)
-        val list = content.findViewById<ListView>(R.id.country_list)
-        list.adapter = adapter
-
-        val dialog = AlertDialog.Builder(context)
-            .setTitle(R.string.country)
-            .setNegativeButton(android.R.string.cancel, null)
-            .setView(content)
-            .show()
-
-        search.addTextChangedListener(object : TextWatcher {
-            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) { adapter.filter.filter(s) }
-        })
-
-        list.setOnItemClickListener { _, _, position, _ ->
-            val code = adapter.getItem(position)!!.code
-            if (code != country) setCountry(code)
-            dialog.dismiss()
-        }
+        openDialog = CountryPickerBottomSheet(
+            view.context,
+            callingCodes.regions()
+        ) { setCountry(it) }.also { it.show() }
     }
 
     private fun setCountryLabelWidth() {
@@ -265,6 +242,7 @@ class ContactFormScreen(
             initial.monthValue - 1,
             initial.dayOfMonth,
         )
+        openDialog = dialog
         dialog.datePicker.maxDate = System.currentTimeMillis()
         dialog.setButton(DialogInterface.BUTTON_NEUTRAL, view.context.getString(R.string.clear)) { _, _ ->
             setBirthday(null)

@@ -1,18 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/bottom_sheet_country_picker"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:gravity="center_vertical"
     android:paddingTop="@dimen/spacing_small">
 
+    <View
+        android:id="@+id/drag_handle"
+        android:layout_width="32dp"
+        android:layout_height="4dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginVertical="@dimen/spacing_medium"
+        android:background="@drawable/bg_drag_handle" />
+
     <EditText
         android:id="@+id/country_search"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:layout_marginVertical="@dimen/spacing_small"
         android:paddingHorizontal="@dimen/spacing_medium"
-        android:paddingVertical="@dimen/spacing_extra_small"
+        android:paddingVertical="@dimen/spacing_small"
         android:hint="@string/search"
         android:inputType="text"
         android:importantForAutofill="no"

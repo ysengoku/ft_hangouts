@@ -65,14 +65,6 @@ class Navigator(
         topAppBar.setAvatar(firstName, lastName, picture)
     }
 
-    // fun onPause() {
-
-    // }
-
-    // fun onResume() {
-        
-    // }
-
     private fun render(route: Route, savedState: Bundle? = null) {
         val screen = createScreen(route, savedState)
         current = screen
@@ -136,5 +128,9 @@ class Navigator(
     }
 
     init { MessageEvent.register(onMessageReceived) }
-    fun onDestroy() = MessageEvent.unregister(onMessageReceived)
+
+    fun onDestroy() {
+        current?.onDestroy()
+        MessageEvent.unregister(onMessageReceived)
+    }
 }

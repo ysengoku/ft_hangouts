@@ -3,6 +3,7 @@ package com.ysengoku.ft_hangouts.ui.contacts
 import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
+import android.app.Dialog
 import android.content.pm.PackageManager
 import android.view.LayoutInflater
 import android.view.View
@@ -48,7 +49,12 @@ class ContactDetailScreen(
         }
     }
 
+    override fun onDestroy() {
+        openDialog?.dismiss()
+    }
+
     private val viewModel = ContactDetailViewModel(repository)
+    private var openDialog: Dialog? = null
 
     init {
         viewModel.load(contactId) { contact ->
@@ -139,6 +145,7 @@ class ContactDetailScreen(
             }
             .show()
 
+        openDialog = dialog
         dialog.getButton(AlertDialog.BUTTON_POSITIVE).isAllCaps = false
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).isAllCaps = false
         dialog.getButton(AlertDialog.BUTTON_POSITIVE)
