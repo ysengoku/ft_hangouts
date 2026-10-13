@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center_vertical"
+    android:paddingTop="@dimen/spacing_small">
+
+    <EditText
+        android:id="@+id/country_search"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/spacing_medium"
+        android:paddingHorizontal="@dimen/spacing_medium"
+        android:paddingVertical="@dimen/spacing_extra_small"
+        android:hint="@string/search"
+        android:inputType="text"
+        android:importantForAutofill="no"
+        android:imeOptions="actionDone"
+        android:maxLines="1"
+        android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
+        android:background="@drawable/bg_pill_input_dialog"
+        android:textColor="?attr/colorOnSurface"
+        android:textColorHint="?attr/colorOnSurfaceVariant" />
+
+    <ListView
+        android:id="@+id/country_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+</LinearLayout>

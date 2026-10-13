@@ -15,9 +15,11 @@ import android.view.LayoutInflater
 import android.view.Gravity
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.ListView
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
@@ -192,24 +194,58 @@ class ContactFormScreen(
         (view.context as Activity).startActivityForResult(intent, RequestCodes.PICK_PHOTO)
     }
 
+    private class CountryItem(val code: String, val label: String) {
+        override fun toString() = label
+    }
+
     private fun setCountry(isoCode: String?) {
         country = isoCode ?: defaultCountry()
         countryInput.setText("${flagEmoji(country)} +${callingCodes.callingCodeOf(country)}")
     }
 
     private fun showCountryPicker() {
-        val codes = callingCodes.regions()
+        val context = view.context
+        val items = callingCodes.regions()
             .sortedBy { countryName(it) }
-        val labels = codes.map { countryLabel(it) }
-            .toTypedArray()
+            .map { CountryItem(it, countryLabel(it)) }
+        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, items)
 
-        AlertDialog.Builder(view.context)
+        val content = LayoutInflater.from(context).inflate(R.layout.dialog_country_picker, null)
+        val search = content.findViewById<EditText>(R.id.country_search)
+        val list = content.findViewById<ListView>(R.id.country_list)
+        list.adapter = adapter
+
+        val dialog = AlertDialog.Builder(context)
             .setTitle(R.string.country)
-            .setItems(labels) { _, which ->
-                if (codes[which] != country) {
-                    setCountry(codes[which]) 
-                }}
+            .setNegativeButton(android.R.string.cancel, null)
+            .setView(content)
             .show()
+
+        search.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
+            override fun afterTextChanged(s: Editable?) { adapter.filter.filter(s) }
+        })
+
+        list.setOnItemClickListener { _, _, position, _ ->
+            val code = adapter.getItem(position)!!.code
+            if (code != country) setCountry(code)
+            dialog.dismiss()
+        }
+    }
+
+    private fun setCountryLabelWidth() {
+        val countryLabelView = countryField.findViewById<TextView>(R.id.form_field_label)
+        countryLabelView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
+
+        val labelStart = view.resources.getDimensionPixelSize(R.dimen.text_field_label_start)
+        val labelWidth = countryLabelView.measuredWidth + labelStart * 2
+
+        val sampleValue = "${flagEmoji("US")} +000"
+        val contentMaxWidth = countryInput.paint.measureText(sampleValue).toInt() +
+            countryInput.compoundPaddingStart + countryInput.compoundPaddingEnd
+
+        countryInput.minWidth = maxOf(labelWidth, contentMaxWidth)
     }
 
     private fun setBirthday(date: LocalDate?) {
@@ -299,10 +335,8 @@ class ContactFormScreen(
             override fun afterTextChanged(s: Editable?) { setFieldError(phoneField, phoneInput, null) }
         })
 
-        val countryLabelView = countryField.findViewById<TextView>(R.id.form_field_label)
-        countryLabelView.measure(View.MeasureSpec.UNSPECIFIED, View.MeasureSpec.UNSPECIFIED)
-        val labelStart = view.resources.getDimensionPixelSize(R.dimen.text_field_label_start)
-        countryInput.minWidth = countryLabelView.measuredWidth + labelStart * 2
+        setCountryLabelWidth()
+
         countryInput.gravity = Gravity.CENTER
         setCountry(country)
         countryInput.isFocusable = false

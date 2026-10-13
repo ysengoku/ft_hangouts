@@ -6,6 +6,7 @@
     <string name="back">Retour</string>
     <string name="close">Fermer</string>
     <string name="clear">Effacer</string>
+    <string name="search">Rechercher</string>
     <string name="change_color_theme">Changer le thème de couleur</string>
     <string name="add_contact">Ajouter un contact</string>
     <string name="search_contacts">Rechercher des contacts</string>

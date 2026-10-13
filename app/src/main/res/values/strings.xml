@@ -7,6 +7,7 @@
     <string name="back">Back</string>
     <string name="close">Close</string>
     <string name="clear">Clear</string>
+    <string name="search">Search</string>
     <string name="change_color_theme">Change color theme</string>
     <string name="add_contact">Add contact</string>
     <string name="search_contacts">Search contacts</string>

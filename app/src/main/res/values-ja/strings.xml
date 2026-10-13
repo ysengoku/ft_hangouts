@@ -6,6 +6,7 @@
     <string name="back">戻る</string>
     <string name="close">閉じる</string>
     <string name="clear">クリア</string>
+    <string name="search">検索</string>
     <string name="change_color_theme">カラーテーマを変更</string>
     <string name="add_contact">連絡先を追加</string>
     <string name="send_message">メッセージを送信</string>
