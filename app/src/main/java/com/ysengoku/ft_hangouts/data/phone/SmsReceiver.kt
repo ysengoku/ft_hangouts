@@ -14,6 +14,8 @@ import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 
 class SmsReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION) return
+
         val dbHelper = DatabaseHelper.getInstance(context)
         val contactRepository = ContactRepository(dbHelper)
         val messageRepository = MessageRepository(dbHelper)

@@ -76,7 +76,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/spacing_medium"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:baselineAligned="false">
             <include
                 android:id="@+id/contact_form_phone_country"
                 layout="@layout/view_form_field"

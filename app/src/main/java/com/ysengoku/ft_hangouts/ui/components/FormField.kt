@@ -17,9 +17,10 @@ fun bindFormField(
     required: Boolean = false
 ): EditText {
     val labelText = field.context.getString(label)
-    field.findViewById<TextView>(R.id.form_field_label).text =
-        if (required) "$labelText *" else labelText
+    val labelView = field.findViewById<TextView>(R.id.form_field_label)
     val input = field.findViewById<EditText>(R.id.form_field_input)
+    labelView.text = if (required) "$labelText *" else labelText
+    labelView.labelFor = inputId
     input.id = inputId
     input.inputType = inputType
     input.isFocusable = inputType != InputType.TYPE_NULL

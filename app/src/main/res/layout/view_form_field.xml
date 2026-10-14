@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical">
@@ -17,10 +18,12 @@
             android:textAppearance="@style/TextAppearance.FTHangouts.BodyLarge"
             android:textColor="?attr/colorOnSurface"
             android:maxLength="@integer/max_length_name"
-            android:importantForAutofill="no" />
+            android:importantForAutofill="no"
+            tools:ignore="TextFields" />
 
         <TextView
             android:id="@+id/form_field_label"
+            android:labelFor="@id/form_field_input"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxLines="1"
@@ -28,7 +31,8 @@
             android:paddingHorizontal="@dimen/spacing_extra_small"
             android:background="?android:attr/colorBackground"
             android:textAppearance="@style/TextAppearance.FTHangouts.BodySmall"
-            android:textColor="?attr/colorOnSurfaceVariant" />
+            android:textColor="?attr/colorOnSurfaceVariant"
+            tools:ignore="LabelFor" />
     </FrameLayout>
 
     <TextView

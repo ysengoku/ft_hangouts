@@ -1,5 +1,6 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.app.AlertDialog
 import android.app.DatePickerDialog
@@ -202,6 +203,7 @@ class ContactFormScreen(
 
     private fun setCountry(isoCode: String?) {
         country = isoCode ?: defaultCountry()
+        @SuppressLint("SetTextI18n")
         countryInput.setText("${flagEmoji(country)} +${callingCodes.callingCodeOf(country)}")
     }
 

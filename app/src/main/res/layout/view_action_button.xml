@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -9,7 +10,8 @@
         android:id="@+id/action_button_icon"
         style="@style/Widget.FTHangouts.TonalIconButton"
         android:layout_width="@dimen/tonal_icon_button_width"
-        android:layout_height="@dimen/tonal_icon_button_height" />
+        android:layout_height="@dimen/tonal_icon_button_height"
+        tools:ignore="ContentDescription" />
 
     <TextView
         android:id="@+id/action_button_label"

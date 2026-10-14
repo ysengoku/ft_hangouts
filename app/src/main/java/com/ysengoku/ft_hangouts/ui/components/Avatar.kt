@@ -1,5 +1,6 @@
 package com.ysengoku.ft_hangouts.ui.components
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.net.Uri
 import android.view.View
@@ -39,6 +40,7 @@ fun bindAvatar(avatar: View, firstName: String, lastName: String?, picture: Stri
     initialsView.setPadding(padding, padding, padding, padding)
     imageView.setImageDrawable(null)
     imageView.visibility = View.GONE
+    @SuppressLint("SetTextI18n")
     initialsView.text = (firstName.take(1) + lastName.orEmpty().take(1)).uppercase()
     initialsView.visibility = View.VISIBLE
 }
