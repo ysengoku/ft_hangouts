@@ -64,6 +64,14 @@ This sends "Hello" to `phone_1`, as if it came from `6521` (`phone_2`). The numb
 
 The SMS goes through the same path as a real one: emulated radio -> Android -> `SMS_RECEIVED` broadcast -> `SmsReceiver`, which saves it and creates the contact if the number is unknown. The app needs the `RECEIVE_SMS` permission.
 
+## Uninstall the application
+
+Removes the app, its data and granted permissions. Reinstall with `./gradlew installDebug`.
+
+```bash
+adb -s emulator-5554 uninstall com.ysengoku.ft_hangouts
+```
+
 ## Emulator limitation
 
 An SMS sent from one emulator never arrives on the other emulator. This is a limitation of the Android Emulator, not of the app: sending and receiving each work on their own (see above), and Google Messages fails the same way.

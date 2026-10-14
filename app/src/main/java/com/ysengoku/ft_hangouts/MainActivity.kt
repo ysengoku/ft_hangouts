@@ -15,7 +15,7 @@ import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.navigation.RequestCodes
 import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.components.Snackbar
-import com.ysengoku.ft_hangouts.ui.format.timeLabel
+import com.ysengoku.ft_hangouts.ui.format.dateTimeLabel
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
 
 class MainActivity : Activity() {
@@ -77,7 +77,7 @@ class MainActivity : Activity() {
         if (time == null) {
             return
         }
-        val formatted = timeLabel(this, time)
+        val formatted = dateTimeLabel(this, time)
         window.decorView.postDelayed({ navigator.showToast(getString(R.string.last_background_time, formatted), 2500) }, 400)
     }
 

@@ -21,6 +21,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
+import com.ysengoku.ft_hangouts.data.model.Contact
 import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
@@ -223,6 +224,7 @@ class ContactFormScreen(
             countryInput.compoundPaddingStart + countryInput.compoundPaddingEnd
 
         countryInput.minWidth = maxOf(labelWidth, contentMaxWidth)
+        countryInput.gravity = Gravity.CENTER
     }
 
     private fun setBirthday(date: LocalDate?) {
@@ -253,6 +255,30 @@ class ContactFormScreen(
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).isAllCaps = false
     }
 
+    private fun Contact.toFormInput() = ContactFormInput(
+        firstName = firstName,
+        lastName = lastName.orEmpty(),
+        company = company.orEmpty(),
+        phone = callingCodes.split(phone)?.second ?: phone,
+        phoneCountry = phoneCountry,
+        address = address.orEmpty(),
+        birthday = birthday,
+        note = note.orEmpty(),
+        picture = picture
+    )
+
+    private fun setInitialInput(contact: Contact) {
+        setPicture(contact.picture)
+        firstNameInput.setText(contact.firstName)
+        lastNameInput.setText(contact.lastName)
+        companyInput.setText(contact.company)
+        setCountry(contact.phoneCountry)
+        phoneInput.setText(callingCodes.split(contact.phone)?.second ?: contact.phone)
+        addressInput.setText(contact.address)
+        setBirthday(contact.birthday)
+        noteInput.setText(contact.note)
+    }
+
     private fun currentInput() = ContactFormInput(
         firstName = firstNameInput.text.toString(),
         lastName = lastNameInput.text.toString(),
@@ -281,9 +307,6 @@ class ContactFormScreen(
     }
 
     init {
-        view.findViewById<TextView>(R.id.contact_form_required).setText(
-            R.string.required)
-
         setPicture(null)
         photoEditButton.setOnClickListener { showPhotoPicker() }
         photoRemoveButton.setOnClickListener { setPicture(null) }
@@ -296,31 +319,25 @@ class ContactFormScreen(
                 updateAvatar()
             }
         })
-
         lastNameInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) { updateAvatar() }
         })
-
-        phoneInput.filters = arrayOf(
-            InputFilter.LengthFilter(view.context.resources.getInteger(R.integer.max_length_phone)),
-            phoneCharsFilter,
-        )
         phoneInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
             override fun afterTextChanged(s: Editable?) { setFieldError(phoneField, phoneInput, null) }
         })
 
+        phoneInput.filters = arrayOf(
+            InputFilter.LengthFilter(view.context.resources.getInteger(R.integer.max_length_phone)),
+            phoneCharsFilter,
+        )
         setCountryLabelWidth()
-
-        countryInput.gravity = Gravity.CENTER
         setCountry(country)
-        countryInput.isFocusable = false
         countryInput.setOnClickListener { showCountryPicker() }
 
-        birthdayInput.isFocusable = false
         birthdayInput.setOnClickListener { showBirthdayPicker() }
 
         if (contactId != null) {
@@ -329,17 +346,9 @@ class ContactFormScreen(
                     navigator.back()
                     return@load
                 }
+                initialInput = contact.toFormInput()
                 if (savedState != null) return@load
-                setPicture(contact.picture)
-                firstNameInput.setText(contact.firstName)
-                lastNameInput.setText(contact.lastName)
-                companyInput.setText(contact.company)
-                setCountry(contact.phoneCountry)
-                phoneInput.setText(callingCodes.split(contact.phone)?.second ?: contact.phone)
-                addressInput.setText(contact.address)
-                setBirthday(contact.birthday)
-                noteInput.setText(contact.note)
-                initialInput = currentInput()
+                setInitialInput(contact)
             }
         }
 

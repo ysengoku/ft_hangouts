@@ -1,6 +1,7 @@
 package com.ysengoku.ft_hangouts.ui.components
 
 import android.text.InputFilter
+import android.text.InputType
 import android.view.View
 import android.widget.EditText
 import android.widget.TextView
@@ -21,6 +22,7 @@ fun bindFormField(
     val input = field.findViewById<EditText>(R.id.form_field_input)
     input.id = inputId
     input.inputType = inputType
+    input.isFocusable = inputType != InputType.TYPE_NULL
     input.filters = arrayOf(InputFilter.LengthFilter(maxLength))
     return input
 }

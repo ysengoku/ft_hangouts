@@ -23,7 +23,7 @@ class SmsReceiver : BroadcastReceiver() {
 
         val from = parts[0].originatingAddress ?: return
         val content = parts.joinToString("") { it. messageBody }
-        val time = parts[0].timestampMillis
+        val time = System.currentTimeMillis()
 
         val pending = goAsync()
         BackgroundExecutor.execute {

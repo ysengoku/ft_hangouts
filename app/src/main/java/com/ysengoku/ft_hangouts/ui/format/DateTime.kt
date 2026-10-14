@@ -32,8 +32,8 @@ fun dateLabel(context: Context, millis: Long): String? {
     }
 }
 
-val birthdayFormatter = DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG)
+fun dateTimeLabel(context: Context, millis: Long, separator: String = " ") =
+    listOfNotNull(dateLabel(context, millis), timeLabel(context, millis)).joinToString(separator)
 
 fun birthdayLabel(date: LocalDate) =
     date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
-

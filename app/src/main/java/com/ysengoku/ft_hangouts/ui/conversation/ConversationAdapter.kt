@@ -11,8 +11,7 @@ import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.ui.components.bindAvatar
-import com.ysengoku.ft_hangouts.ui.format.dateLabel
-import com.ysengoku.ft_hangouts.ui.format.timeLabel
+import com.ysengoku.ft_hangouts.ui.format.dateTimeLabel
 import com.ysengoku.ft_hangouts.ui.themeColor
 
 class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() {
@@ -58,8 +57,6 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
         val message = items[position]
         val content = view.findViewById<TextView>(R.id.message_content)
         content.text = message.content
-        val date = dateLabel(parent.context, message.createdAt)
-        val time = timeLabel(parent.context, message.createdAt)
 
         if (parent.width > 0) {
             content.maxWidth = (parent.width * 0.75f).toInt()
@@ -79,8 +76,8 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
         }
 
         val timeView = view.findViewById<TextView>(R.id.message_time)
-        val name = if (message.isIncoming) contactName else "You"
-        timeView.text = listOfNotNull(name, listOfNotNull(date, time).joinToString(" ")).joinToString(" · ")
+        val name = if (message.isIncoming) contactName else parent.context.getString(R.string.you)
+        timeView.text = listOfNotNull(name, dateTimeLabel(parent.context, message.createdAt)).joinToString(" · ")
         timeView.visibility = if (message.id == shownTimeId) View.VISIBLE else View.GONE
         
         content.setOnClickListener {
@@ -91,7 +88,7 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
         val divider = view.findViewById<TextView>(R.id.message_divider)
         val previous = items.getOrNull(position - 1)
         if (previous == null || message.createdAt - previous.createdAt > DateUtils.HOUR_IN_MILLIS) {
-            divider.text = listOfNotNull(date, time).joinToString(" · ")
+            divider.text = dateTimeLabel(parent.context, message.createdAt, " · ")
             divider.visibility = View.VISIBLE
         } else {
             divider.visibility = View.GONE
