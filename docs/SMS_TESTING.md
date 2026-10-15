@@ -4,27 +4,15 @@ How to test sending and receiving SMS on emulators, and why an SMS cannot go fro
 
 ## Prerequistes
 
-Needs two AVDs named `phone_1` and `phone_2` (API 33+). Check: `emulator -list-avds`
-
-- To create with the command-line tools:
-  ```sh
-  sdkmanager "system-images;android-37;google_apis;x86_64"
-  avdmanager create avd -n phone_1 -k "system-images;android-37;google_apis;x86_64" -d medium_phone
-  avdmanager create avd -n phone_2 -k "system-images;android-37;google_apis;x86_64" -d medium_phone
-  ```
+Needs two AVDs named `phone_1` and `phone_2` (API 33+). Check: `emulator -list-avds`.  
+To create with the command-line tools, see [Prerequistes in README](../README.md###Prerequisites).
 
 ## Setup
 
-Start from the terminal with port: 6520–6527. (Device Manager can't add the option.)
+Start from the terminal with port: 6520–6527. Device Manager can't add the option.   
+(Use `./tools/emulators.sh` from the project root)
 
-Each emulator uses about 4.5 GB of RAM. Close Android Studio and stop Gradle (`./gradlew --stop`) before starting the second one, or the machine freezes.
-
-```sh
-emulator -avd phone_1 -modem-simulator-port 6520 &
- # after phone_1 has booted
-emulator -avd phone_2 -modem-simulator-port 6521 &  
-./gradlew installDebug
-```
+*Each emulator uses about 4.5 GB of RAM. Close Android Studio and stop Gradle (`./gradlew --stop`) before starting the second one, or the machine freezes.*
 
 | AVD | adb name | Number |
 |---|---|---|
@@ -41,7 +29,9 @@ The app hands the SMS to `SmsManager`. The message is added to the conversation 
 Run this command, then send an SMS from the app.
 
 ```sh
-adb -s emulator-5554 logcat -b radio | grep -E "sendTextForSubscriber|SEND_SMS"
+adb -s <adb name> logcat -b radio | grep -E "sendTextForSubscriber|SEND_SMS"
+
+# e.g. adb -s emulator-5554 logcat -b radio | grep -E "sendTextForSubscriber|SEND_SMS"
 ```
 
  When the SMS is accepted, these two lines appear in the log:
@@ -56,8 +46,10 @@ RILJ    : [0249]< SEND_SMS { mMessageRef = 2, mErrorCode = 0, ... }
 
 An incoming SMS can be simulated from the emulator console, with Extended controls > Phone > SMS, or from the terminal:
 
-```sh
-adb -s emulator-5554 emu sms send 6521 "Hello"
+```bash
+adb -s <adb name> emu sms send <sender number> "<message>"
+
+# e.g. adb -s emulator-5554 emu sms send 6521 "Hello"
 ```
 
 This sends "Hello" to `phone_1`, as if it came from `6521` (`phone_2`). The number after `send` is the sender, so use the number of a saved contact to test receiving from a contact.
@@ -69,7 +61,9 @@ The SMS goes through the same path as a real one: emulated radio -> Android -> `
 Removes the app, its data and granted permissions. Reinstall with `./gradlew installDebug`.
 
 ```bash
-adb -s emulator-5554 uninstall com.ysengoku.ft_hangouts
+adb -s <adb name> uninstall com.ysengoku.ft_hangouts
+
+# e.g. adb -s emulator-5554 uninstall com.ysengoku.ft_hangouts
 ```
 
 ## Emulator limitation
