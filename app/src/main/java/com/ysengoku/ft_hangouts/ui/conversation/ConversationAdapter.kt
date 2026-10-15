@@ -52,7 +52,13 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
     override fun getItemId(position: Int) = items[position].id
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val view = (convertView ?: inflater.inflate(R.layout.item_message, parent, false)) as LinearLayout
+        val view = (
+            convertView ?: inflater.inflate(
+                R.layout.item_message,
+                parent,
+                false
+            )
+            ) as LinearLayout
 
         val message = items[position]
         val content = view.findViewById<TextView>(R.id.message_content)
@@ -77,9 +83,13 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
 
         val timeView = view.findViewById<TextView>(R.id.message_time)
         val name = if (message.isIncoming) contactName else parent.context.getString(R.string.you)
-        timeView.text = listOfNotNull(name, dateTimeLabel(parent.context, message.createdAt)).joinToString(" · ")
+        timeView.text =
+            listOfNotNull(
+                name,
+                dateTimeLabel(parent.context, message.createdAt)
+            ).joinToString(" · ")
         timeView.visibility = if (message.id == shownTimeId) View.VISIBLE else View.GONE
-        
+
         content.setOnClickListener {
             shownTimeId = if (shownTimeId == message.id) null else message.id
             notifyDataSetChanged()
@@ -93,7 +103,7 @@ class ConversationAdapter(private val inflater: LayoutInflater) : BaseAdapter() 
         } else {
             divider.visibility = View.GONE
         }
-        
+
         return view
     }
 }

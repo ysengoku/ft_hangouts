@@ -4,9 +4,9 @@ import android.app.Dialog
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
-import android.view.MotionEvent
 import android.text.TextWatcher
 import android.view.Gravity
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ArrayAdapter
@@ -24,7 +24,7 @@ class CountryPickerBottomSheet(
     context: Context,
     codes: List<String>,
     private val onSelected: (String) -> Unit
-): Dialog(context) {
+) : Dialog(context) {
     private val items = codes.sortedBy { countryName(it) }
         .map { CountryItem(it, countryLabel(it)) }
 
@@ -52,7 +52,9 @@ class CountryPickerBottomSheet(
         handle.setOnTouchListener { v, event ->
             when (event.actionMasked) {
                 MotionEvent.ACTION_DOWN -> startY = event.rawY
+
                 MotionEvent.ACTION_MOVE -> sheet.translationY = maxOf(0f, event.rawY - startY)
+
                 MotionEvent.ACTION_UP, MotionEvent.ACTION_CANCEL -> {
                     if (sheet.translationY > sheet.height / 4) {
                         dismiss()
@@ -60,7 +62,7 @@ class CountryPickerBottomSheet(
                         sheet.animate().translationY(0f).setDuration(150)
                     }
                     v.performClick()
-                } 
+                }
             }
             true
         }
@@ -68,7 +70,9 @@ class CountryPickerBottomSheet(
         search.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) { adapter.filter.filter(s) }
+            override fun afterTextChanged(s: Editable?) {
+                adapter.filter.filter(s)
+            }
         })
 
         list.setOnItemClickListener { _, _, position, _ ->

@@ -3,17 +3,17 @@ package com.ysengoku.ft_hangouts.ui.conversation
 import android.content.Context
 import com.ysengoku.ft_hangouts.data.model.ContactSummary
 import com.ysengoku.ft_hangouts.data.model.Message
-import com.ysengoku.ft_hangouts.telephony.startCall
-import com.ysengoku.ft_hangouts.telephony.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
+import com.ysengoku.ft_hangouts.telephony.SmsSender
+import com.ysengoku.ft_hangouts.telephony.startCall
 import com.ysengoku.ft_hangouts.ui.format.displayName
 import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 
 class ConversationViewModel(
     private val contactRepository: ContactRepository,
     private val messageRepository: MessageRepository,
-    private val smsSender: SmsSender,
+    private val smsSender: SmsSender
 ) {
     private val pageSize = 10
     private var offset = 0
@@ -27,7 +27,9 @@ class ConversationViewModel(
             val contact = contactRepository.getById(contactId)
             val name = contact?.let { displayName(it.firstName, it.lastName) }
             phone = contact?.phone
-            val summary = contact?.let { ContactSummary(contactId, it.firstName, it.lastName, it.picture) }
+            val summary = contact?.let {
+                ContactSummary(contactId, it.firstName, it.lastName, it.picture)
+            }
             BackgroundExecutor.main { onLoaded(name, summary) }
         }
     }

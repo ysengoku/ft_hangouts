@@ -1,8 +1,8 @@
 package com.ysengoku.ft_hangouts.ui.components
 
-import android.view.animation.PathInterpolator
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.PathInterpolator
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 
@@ -17,7 +17,10 @@ class Snackbar(private val view: View) {
             .withEndAction { view.visibility = View.GONE }
     }
 
-    private fun offscreen() = (view.height + (view.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin).toFloat()
+    private fun offscreen() = (
+        view.height +
+            (view.layoutParams as ViewGroup.MarginLayoutParams).bottomMargin
+        ).toFloat()
 
     fun show(content: CharSequence, durationMs: Long = 3500, anchor: View?) {
         val params = view.layoutParams as ViewGroup.MarginLayoutParams

@@ -8,13 +8,12 @@ import android.graphics.Rect
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
-import android.widget.Spinner
 import android.window.OnBackInvokedDispatcher
 import com.ysengoku.ft_hangouts.data.BackgroundTimeStore
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.navigation.RequestCodes
-import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.components.Snackbar
+import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.format.dateTimeLabel
 import com.ysengoku.ft_hangouts.ui.theme.ThemePreferences
 
@@ -25,7 +24,7 @@ class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         themePreferences = ThemePreferences(this)
-        backgroundTimeStore = BackgroundTimeStore(this) 
+        backgroundTimeStore = BackgroundTimeStore(this)
         val savedTheme = themePreferences.getTheme()
         setTheme(getThemeStyleResId(savedTheme))
 
@@ -46,7 +45,7 @@ class MainActivity : Activity() {
             onThemeSelected = { theme ->
                 themePreferences.saveTheme(theme)
                 recreate()
-            },
+            }
         )
         onBackInvokedDispatcher.registerOnBackInvokedCallback(
             OnBackInvokedDispatcher.PRIORITY_DEFAULT
@@ -58,7 +57,10 @@ class MainActivity : Activity() {
             navigator.start()
         }
 
-        if (savedInstanceState == null && checkSelfPermission(Manifest.permission.RECEIVE_SMS) != PackageManager.PERMISSION_GRANTED) {
+        if (savedInstanceState == null &&
+            checkSelfPermission(Manifest.permission.RECEIVE_SMS) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
             requestPermissions(arrayOf(Manifest.permission.RECEIVE_SMS), RequestCodes.RECEIVE_SMS)
         }
     }
@@ -78,7 +80,9 @@ class MainActivity : Activity() {
             return
         }
         val formatted = dateTimeLabel(this, time)
-        window.decorView.postDelayed({ navigator.showToast(getString(R.string.last_background_time, formatted), 2500) }, 400)
+        window.decorView.postDelayed({
+            navigator.showToast(getString(R.string.last_background_time, formatted), 2500)
+        }, 400)
     }
 
     override fun onDestroy() {
@@ -89,7 +93,7 @@ class MainActivity : Activity() {
     /**
      * Called by Android before the Activity is recreated (rotation, theme change).
      * The saved history is restored in onCreate through navigator.restoreState.
-    */
+     */
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
         navigator.saveState(outState)
@@ -100,7 +104,11 @@ class MainActivity : Activity() {
         navigator.onActivityResult(requestCode, resultCode, data)
     }
 
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<String>, grantResults: IntArray) {
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == RequestCodes.RECEIVE_SMS) {
             return
@@ -115,14 +123,12 @@ class MainActivity : Activity() {
         window.setDecorFitsSystemWindows(false)
     }
 
-    private fun getThemeStyleResId(themeName: String): Int {
-        return when (themeName) {
-            ThemePreferences.THEME_AMBER -> R.style.Theme_FtHangouts_Amber
-            ThemePreferences.THEME_FOREST -> R.style.Theme_FtHangouts_Forest
-            ThemePreferences.THEME_ROSE -> R.style.Theme_FtHangouts_Rose
-            ThemePreferences.THEME_LAVENDER -> R.style.Theme_FtHangouts_Lavender
-            else -> R.style.Theme_FtHangouts_Ocean
-        }
+    private fun getThemeStyleResId(themeName: String): Int = when (themeName) {
+        ThemePreferences.THEME_AMBER -> R.style.Theme_FtHangouts_Amber
+        ThemePreferences.THEME_FOREST -> R.style.Theme_FtHangouts_Forest
+        ThemePreferences.THEME_ROSE -> R.style.Theme_FtHangouts_Rose
+        ThemePreferences.THEME_LAVENDER -> R.style.Theme_FtHangouts_Lavender
+        else -> R.style.Theme_FtHangouts_Ocean
     }
 
     private fun applySystemBarInsets() {
@@ -151,8 +157,7 @@ class MainActivity : Activity() {
     }
 
     // Returns the height of the keyboard, or 0 when it is closed.
-    private fun WindowInsets.imeBottom(): Int =
-        getInsets(WindowInsets.Type.ime()).bottom
+    private fun WindowInsets.imeBottom(): Int = getInsets(WindowInsets.Type.ime()).bottom
 
     private fun WindowInsets.systemBarsRect(): Rect {
         val i = getInsets(WindowInsets.Type.systemBars() or WindowInsets.Type.displayCutout())

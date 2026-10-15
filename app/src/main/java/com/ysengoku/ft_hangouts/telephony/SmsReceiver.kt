@@ -24,7 +24,7 @@ class SmsReceiver : BroadcastReceiver() {
         if (parts.isEmpty()) return
 
         val from = parts[0].originatingAddress ?: return
-        val content = parts.joinToString("") { it. messageBody }
+        val content = parts.joinToString("") { it.messageBody }
         val time = System.currentTimeMillis()
 
         val pending = goAsync()
@@ -45,7 +45,8 @@ class SmsReceiver : BroadcastReceiver() {
                         birthday = null,
                         note = null,
                         picture = null
-                    ))
+                    )
+                )
                 if (contactId == -1L) return@execute
                 val draft = Message(0, contactId, true, time, content)
                 val saved = draft.copy(id = messageRepository.create(draft))

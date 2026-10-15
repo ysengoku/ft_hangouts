@@ -13,7 +13,7 @@ class CountryCallingCodes(resources: Resources) {
 
     private val codeByRegion: Map<String, String> = entries.toMap()
     private val regionByCode: Map<String, List<String>> =
-        entries.groupBy({ it.second }, { it.first} )
+        entries.groupBy({ it.second }, { it.first })
 
     fun regions(): List<String> = entries.map { it.first }
 
@@ -33,10 +33,10 @@ class CountryCallingCodes(resources: Resources) {
     }
 }
 
-/** 
+/**
  * Emulator numbers:
  * the modem port (6520..6527, see docs/SMS_TESTING.md) or
- * the console port (5554..5584, even), 
+ * the console port (5554..5584, even),
  * as 4 digits, 1555521xxxx or +1555521xxxx.
  */
 private val EMULATOR_NUMBER =

@@ -15,11 +15,11 @@ import android.widget.ImageButton
 import android.widget.ListView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Message
-import com.ysengoku.ft_hangouts.telephony.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.navigation.RequestCodes
+import com.ysengoku.ft_hangouts.telephony.SmsSender
 import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
@@ -32,13 +32,18 @@ class ConversationScreen(
     messageRepository: MessageRepository,
     private val contactId: Long,
     savedState: Bundle?
-): Screen {
+) : Screen {
     override val view: View = inflater.inflate(R.layout.screen_conversation, container, false)
     override val title = container.context.getString(R.string.home_title)
     override val navigationIcon = NavigationIcon.BACK
     override val action = Action(icon = R.drawable.ic_call, label = R.string.call) {
-        if (view.context.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), RequestCodes.CALL_PHONE)
+        if (view.context.checkSelfPermission(Manifest.permission.CALL_PHONE) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            (view.context as Activity).requestPermissions(
+                arrayOf(Manifest.permission.CALL_PHONE),
+                RequestCodes.CALL_PHONE
+            )
             return@Action
         }
         viewModel.startCall(view.context)
@@ -99,15 +104,14 @@ class ConversationScreen(
         viewModel.loadContactSummary(contactId) { name, summary ->
             if (name == null || summary == null) {
                 navigator.back()
-             } else {
+            } else {
                 navigator.setTitle(name)
                 adapter.contactName = summary.firstName
                 adapter.contactLastName = summary.lastName
                 adapter.contactPicture = summary.picture
                 navigator.setAvatar(summary.firstName, summary.lastName, summary.picture)
-             }
+            }
         }
-
 
         listView.adapter = adapter
         listView.setOnScrollListener(object : AbsListView.OnScrollListener {
@@ -129,8 +133,13 @@ class ConversationScreen(
         })
 
         sendButton.setOnClickListener {
-            if (view.context.checkSelfPermission(Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED) {
-                (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.SEND_SMS), RequestCodes.SEND_SMS)
+            if (view.context.checkSelfPermission(Manifest.permission.SEND_SMS) !=
+                PackageManager.PERMISSION_GRANTED
+            ) {
+                (view.context as Activity).requestPermissions(
+                    arrayOf(Manifest.permission.SEND_SMS),
+                    RequestCodes.SEND_SMS
+                )
                 return@setOnClickListener
             }
             send()

@@ -13,8 +13,8 @@ import android.text.Editable
 import android.text.InputFilter
 import android.text.InputType
 import android.text.TextWatcher
-import android.view.LayoutInflater
 import android.view.Gravity
+import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -23,19 +23,19 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Contact
-import com.ysengoku.ft_hangouts.telephony.CountryCallingCodes
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.navigation.RequestCodes
+import com.ysengoku.ft_hangouts.telephony.CountryCallingCodes
 import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
-import com.ysengoku.ft_hangouts.ui.format.birthdayLabel
-import com.ysengoku.ft_hangouts.ui.format.flagEmoji
+import com.ysengoku.ft_hangouts.ui.components.CountryPickerBottomSheet
 import com.ysengoku.ft_hangouts.ui.components.bindAvatar
 import com.ysengoku.ft_hangouts.ui.components.bindFormField
-import com.ysengoku.ft_hangouts.ui.components.CountryPickerBottomSheet
 import com.ysengoku.ft_hangouts.ui.components.setFieldError
+import com.ysengoku.ft_hangouts.ui.format.birthdayLabel
+import com.ysengoku.ft_hangouts.ui.format.flagEmoji
 import java.time.LocalDate
 import java.util.Locale
 
@@ -46,11 +46,17 @@ class ContactFormScreen(
     repository: ContactRepository,
     private val contactId: Long?,
     savedState: Bundle?
-): Screen {
+) : Screen {
     private val viewModel = ContactFormViewModel(repository)
 
     override val view: View = inflater.inflate(R.layout.screen_contact_form, container, false)
-    override val title = if (contactId == null) container.context.getString(R.string.new_contact) else container.context.getString(R.string.edit_contact)
+    override val title = if (contactId ==
+        null
+    ) {
+        container.context.getString(R.string.new_contact)
+    } else {
+        container.context.getString(R.string.edit_contact)
+    }
     override val navigationIcon = NavigationIcon.CLOSE
     override val action = Action(
         icon = R.drawable.ic_check,
@@ -115,8 +121,12 @@ class ContactFormScreen(
     private var openDialog: Dialog? = null
 
     private val avatarField: View = view.findViewById<View>(R.id.contact_form_avatar)
-    private val photoEditButton: Button = view.findViewById<Button>(R.id.contact_form_photo_edit_button)
-    private val photoRemoveButton: ImageButton = view.findViewById<ImageButton>(R.id.contact_form_remove_photo)
+    private val photoEditButton: Button = view.findViewById<Button>(
+        R.id.contact_form_photo_edit_button
+    )
+    private val photoRemoveButton: ImageButton = view.findViewById<ImageButton>(
+        R.id.contact_form_remove_photo
+    )
 
     private val firstNameField: View = view.findViewById(R.id.contact_form_first_name)
     private val firstNameInput: EditText = bindFormField(
@@ -126,7 +136,7 @@ class ContactFormScreen(
         inputType = InputType.TYPE_CLASS_TEXT or
             InputType.TYPE_TEXT_VARIATION_PERSON_NAME or
             InputType.TYPE_TEXT_FLAG_CAP_WORDS,
-        required = true,
+        required = true
     )
 
     private val lastNameInput: EditText = bindFormField(
@@ -135,7 +145,7 @@ class ContactFormScreen(
         R.string.last_name,
         InputType.TYPE_CLASS_TEXT or
             InputType.TYPE_TEXT_VARIATION_PERSON_NAME or
-            InputType.TYPE_TEXT_FLAG_CAP_WORDS,
+            InputType.TYPE_TEXT_FLAG_CAP_WORDS
     )
 
     private val companyInput: EditText = bindFormField(
@@ -168,7 +178,7 @@ class ContactFormScreen(
         R.id.form_address,
         R.string.address,
         InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_POSTAL_ADDRESS,
-        view.context.resources.getInteger(R.integer.max_length_address),
+        view.context.resources.getInteger(R.integer.max_length_address)
     )
 
     private val birthdayInput: EditText = bindFormField(
@@ -182,7 +192,7 @@ class ContactFormScreen(
         R.id.form_note,
         R.string.note,
         InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_FLAG_MULTI_LINE,
-        view.context.resources.getInteger(R.integer.max_length_note),
+        view.context.resources.getInteger(R.integer.max_length_note)
     )
 
     private fun setPicture(path: String?) {
@@ -193,7 +203,12 @@ class ContactFormScreen(
     }
 
     private fun updateAvatar() {
-        bindAvatar(avatarField, firstNameInput.text.toString(), lastNameInput.text.toString(), picture)
+        bindAvatar(
+            avatarField,
+            firstNameInput.text.toString(),
+            lastNameInput.text.toString(),
+            picture
+        )
     }
 
     private fun showPhotoPicker() {
@@ -233,7 +248,7 @@ class ContactFormScreen(
         birthday = date
         birthdayInput.setText(date?.let { birthdayLabel(it) })
     }
-    
+
     private fun showBirthdayPicker() {
         val initial = birthday ?: LocalDate.now().minusYears(18)
         val dialog = DatePickerDialog(
@@ -244,11 +259,14 @@ class ContactFormScreen(
             },
             initial.year,
             initial.monthValue - 1,
-            initial.dayOfMonth,
+            initial.dayOfMonth
         )
         openDialog = dialog
         dialog.datePicker.maxDate = System.currentTimeMillis()
-        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, view.context.getString(R.string.clear)) { _, _ ->
+        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, view.context.getString(R.string.clear)) {
+                _,
+                _
+            ->
             setBirthday(null)
         }
         dialog.show()
@@ -290,17 +308,19 @@ class ContactFormScreen(
         address = addressInput.text.toString(),
         birthday = birthday,
         note = noteInput.text.toString(),
-        picture = picture,
+        picture = picture
     )
 
     private fun save() {
         viewModel.save(currentInput(), contactId, view.context.applicationContext) { result ->
             when (result) {
                 SaveResult.Saved -> navigator.pop()
+
                 is SaveResult.Invalid -> {
                     setFieldError(firstNameField, firstNameInput, result.firstNameError)
                     setFieldError(phoneField, phoneInput, result.phoneError)
                 }
+
                 SaveResult.Failed -> {
                     navigator.showToast(R.string.error_save_failed)
                 }
@@ -324,17 +344,21 @@ class ContactFormScreen(
         lastNameInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) { updateAvatar() }
+            override fun afterTextChanged(s: Editable?) {
+                updateAvatar()
+            }
         })
         phoneInput.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-            override fun afterTextChanged(s: Editable?) { setFieldError(phoneField, phoneInput, null) }
+            override fun afterTextChanged(s: Editable?) {
+                setFieldError(phoneField, phoneInput, null)
+            }
         })
 
         phoneInput.filters = arrayOf(
             InputFilter.LengthFilter(view.context.resources.getInteger(R.integer.max_length_phone)),
-            phoneCharsFilter,
+            phoneCharsFilter
         )
         setCountryLabelWidth()
         setCountry(country)

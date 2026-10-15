@@ -19,12 +19,12 @@ import com.ysengoku.ft_hangouts.navigation.Route
 import com.ysengoku.ft_hangouts.ui.Action
 import com.ysengoku.ft_hangouts.ui.NavigationIcon
 import com.ysengoku.ft_hangouts.ui.Screen
-import com.ysengoku.ft_hangouts.ui.themeColor
 import com.ysengoku.ft_hangouts.ui.components.bindActionButton
 import com.ysengoku.ft_hangouts.ui.components.bindAvatar
 import com.ysengoku.ft_hangouts.ui.components.bindDetailField
 import com.ysengoku.ft_hangouts.ui.format.birthdayLabel
 import com.ysengoku.ft_hangouts.ui.format.displayName
+import com.ysengoku.ft_hangouts.ui.themeColor
 
 class ContactDetailScreen(
     inflater: LayoutInflater,
@@ -32,14 +32,14 @@ class ContactDetailScreen(
     private val navigator: Navigator,
     repository: ContactRepository,
     private val contactId: Long
-): Screen {
+) : Screen {
     override val view: View = inflater.inflate(R.layout.screen_contact_detail, container, false)
     override val title = ""
     override val navigationIcon = NavigationIcon.BACK
     override val action = Action(
         icon = R.drawable.ic_edit,
-        label = R.string.edit_contact,
-    ) { 
+        label = R.string.edit_contact
+    ) {
         navigator.navigate(Route.ContactForm(contactId))
     }
 
@@ -65,8 +65,9 @@ class ContactDetailScreen(
             val avatarView = view.findViewById<FrameLayout>(R.id.contact_detail_avatar)
             bindAvatar(avatarView, contact.firstName, contact.lastName, contact.picture)
 
-            view.findViewById<TextView>(R.id.contact_detail_name).text = displayName(contact.firstName, contact.lastName)
-            
+            view.findViewById<TextView>(R.id.contact_detail_name).text =
+                displayName(contact.firstName, contact.lastName)
+
             val companyView = view.findViewById<TextView>(R.id.contact_detail_company)
             if ((contact.company).isNullOrBlank()) {
                 companyView.visibility = View.GONE
@@ -116,7 +117,9 @@ class ContactDetailScreen(
                 contact.note
             )
 
-            view.findViewById<Button>(R.id.contact_delete_button).setOnClickListener { confirmDelete() }
+            view.findViewById<Button>(R.id.contact_delete_button).setOnClickListener {
+                confirmDelete()
+            }
         }
     }
 
@@ -125,8 +128,13 @@ class ContactDetailScreen(
     }
 
     private fun startCall() {
-        if (view.context.checkSelfPermission(Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-            (view.context as Activity).requestPermissions(arrayOf(Manifest.permission.CALL_PHONE), RequestCodes.CALL_PHONE)
+        if (view.context.checkSelfPermission(Manifest.permission.CALL_PHONE) !=
+            PackageManager.PERMISSION_GRANTED
+        ) {
+            (view.context as Activity).requestPermissions(
+                arrayOf(Manifest.permission.CALL_PHONE),
+                RequestCodes.CALL_PHONE
+            )
             return
         }
         viewModel.startCall(view.context)

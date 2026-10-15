@@ -21,21 +21,28 @@ class TopAppBar(private val root: View) {
             NavigationIcon.NONE -> {
                 navigationButton.visibility = View.GONE
             }
+
             NavigationIcon.BACK -> {
                 navigationButton.setImageResource(R.drawable.ic_arrow_back)
-                navigationButton.contentDescription = navigationButton.context.getString(R.string.back)
+                navigationButton.contentDescription =
+                    navigationButton.context.getString(R.string.back)
                 navigationButton.visibility = View.VISIBLE
             }
+
             NavigationIcon.CLOSE -> {
                 navigationButton.setImageResource(R.drawable.ic_close)
-                navigationButton.contentDescription = navigationButton.context.getString(R.string.close)
+                navigationButton.contentDescription =
+                    navigationButton.context.getString(R.string.close)
                 navigationButton.visibility = View.VISIBLE
             }
         }
 
         val startPadding = root.resources.getDimensionPixelSize(
-            if (screen.navigationIcon == NavigationIcon.NONE) R.dimen.spacing_large
-            else R.dimen.spacing_extra_small
+            if (screen.navigationIcon == NavigationIcon.NONE) {
+                R.dimen.spacing_large
+            } else {
+                R.dimen.spacing_extra_small
+            }
         )
         root.setPaddingRelative(startPadding, root.paddingTop, root.paddingEnd, root.paddingBottom)
 

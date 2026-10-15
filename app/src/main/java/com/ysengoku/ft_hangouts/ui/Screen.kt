@@ -15,21 +15,17 @@ interface Screen {
     fun onShow() {}
     fun onHide() {}
     fun onDestroy() {}
-    fun saveState(outState: Bundle) {} 
+    fun saveState(outState: Bundle) {}
     fun onBack(): Boolean = false
     fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {}
     fun onPermissionResult(requestCode: Int, granted: Boolean) {}
     fun onMessageReceived(message: Message): Boolean = false
 }
 
-data class Action(
-    val icon: Int,
-    val label: Int,
-    val onClick: (View) -> Unit
-)
+data class Action(val icon: Int, val label: Int, val onClick: (View) -> Unit)
 
 enum class NavigationIcon {
     NONE,
     BACK,
-    CLOSE,
+    CLOSE
 }

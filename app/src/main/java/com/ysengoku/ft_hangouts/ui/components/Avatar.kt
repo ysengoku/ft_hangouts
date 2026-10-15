@@ -15,7 +15,7 @@ fun bindAvatar(avatar: View, firstName: String, lastName: String?, picture: Stri
     avatar.clipToOutline = true
     val initialsView = avatar.findViewById<TextView>(R.id.avatar_initials)
     val imageView = avatar.findViewById<ImageView>(R.id.avatar_picture)
-    
+
     if (picture != null) {
         imageView.setImageURI(Uri.parse(picture))
         imageView.imageTintList = null

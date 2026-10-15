@@ -19,5 +19,5 @@ data class ContactSummary(
     val id: Long,
     val firstName: String,
     val lastName: String?,
-    val picture: String?,
+    val picture: String?
 )

@@ -9,10 +9,7 @@ import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.ui.themeColor
 
-class ThemeMenuAdapter(
-    private val context: Context,
-    private val current: String
-): BaseAdapter() {
+class ThemeMenuAdapter(private val context: Context, private val current: String) : BaseAdapter() {
     private val themes = ThemePreferences.THEME_LIST
     private val inflater = LayoutInflater.from(context)
     private val horizontalPadding = context.resources.getDimensionPixelSize(R.dimen.spacing_medium)
@@ -22,7 +19,13 @@ class ThemeMenuAdapter(
     override fun getItemId(position: Int) = position.toLong()
 
     override fun getView(position: Int, convertView: View?, parent: ViewGroup): View {
-        val label = (convertView ?: inflater.inflate(R.layout.item_theme_menu, parent, false)) as TextView
+        val label = (
+            convertView ?: inflater.inflate(
+                R.layout.item_theme_menu,
+                parent,
+                false
+            )
+            ) as TextView
         val theme = themes[position]
         label.setText(ThemePreferences.labelResId(theme))
 

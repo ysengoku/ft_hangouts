@@ -4,15 +4,15 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.DatabaseHelper
-import com.ysengoku.ft_hangouts.telephony.MessageEvent
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
-import com.ysengoku.ft_hangouts.R
+import com.ysengoku.ft_hangouts.telephony.MessageEvent
 import com.ysengoku.ft_hangouts.ui.Screen
-import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.components.Snackbar
+import com.ysengoku.ft_hangouts.ui.components.TopAppBar
 import com.ysengoku.ft_hangouts.ui.contacts.ContactDetailScreen
 import com.ysengoku.ft_hangouts.ui.contacts.ContactFormScreen
 import com.ysengoku.ft_hangouts.ui.contacts.ContactListScreen
@@ -82,13 +82,42 @@ class Navigator(
         }
     }
 
-    private fun createScreen(route: Route, savedState: Bundle? = null): Screen =
-        when (route) {
-            Route.ContactList -> ContactListScreen(inflater, container, this, contactRepository, onThemeSelected)
-            is Route.ContactDetail -> ContactDetailScreen(inflater, container, this, contactRepository, route.contactId)
-            is Route.Conversation -> ConversationScreen(inflater, container, this, contactRepository, messageRepository, route.contactId, savedState)
-            is Route.ContactForm -> ContactFormScreen(inflater, container, this, contactRepository, route.contactId, savedState)
-        }
+    private fun createScreen(route: Route, savedState: Bundle? = null): Screen = when (route) {
+        Route.ContactList -> ContactListScreen(
+            inflater,
+            container,
+            this,
+            contactRepository,
+            onThemeSelected
+        )
+
+        is Route.ContactDetail -> ContactDetailScreen(
+            inflater,
+            container,
+            this,
+            contactRepository,
+            route.contactId
+        )
+
+        is Route.Conversation -> ConversationScreen(
+            inflater,
+            container,
+            this,
+            contactRepository,
+            messageRepository,
+            route.contactId,
+            savedState
+        )
+
+        is Route.ContactForm -> ContactFormScreen(
+            inflater,
+            container,
+            this,
+            contactRepository,
+            route.contactId,
+            savedState
+        )
+    }
 
     fun saveState(outState: Bundle) {
         val pairs = history.map { it.toPair() }
@@ -127,7 +156,9 @@ class Navigator(
         snackbar.show(container.context.getText(content), durationMs, current?.snackbarAnchor)
     }
 
-    init { MessageEvent.register(onMessageReceived) }
+    init {
+        MessageEvent.register(onMessageReceived)
+    }
 
     fun onDestroy() {
         current?.onDestroy()

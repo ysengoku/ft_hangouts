@@ -4,12 +4,12 @@ import android.content.Context
 import android.net.Uri
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.copyImageToAppCache
-import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 import com.ysengoku.ft_hangouts.data.deleteOldImage
 import com.ysengoku.ft_hangouts.data.model.Contact
 import com.ysengoku.ft_hangouts.data.moveImageToStorage
-import com.ysengoku.ft_hangouts.telephony.toE164
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
+import com.ysengoku.ft_hangouts.telephony.toE164
+import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 import java.time.LocalDate
 
 data class ContactFormInput(
@@ -21,7 +21,7 @@ data class ContactFormInput(
     val address: String,
     val birthday: LocalDate?,
     val note: String,
-    val picture: String?,
+    val picture: String?
 )
 
 sealed class SaveResult {
@@ -45,7 +45,12 @@ class ContactFormViewModel(private val repository: ContactRepository) {
         }
     }
 
-    fun save(input: ContactFormInput, contactId: Long?, context: Context, onResult: (SaveResult) -> Unit) {
+    fun save(
+        input: ContactFormInput,
+        contactId: Long?,
+        context: Context,
+        onResult: (SaveResult) -> Unit
+    ) {
         BackgroundExecutor.execute {
             val result = validate(input, contactId) ?: persist(input, contactId, context)
             BackgroundExecutor.main { onResult(result) }
@@ -55,7 +60,8 @@ class ContactFormViewModel(private val repository: ContactRepository) {
     private fun validate(input: ContactFormInput, contactId: Long?): SaveResult.Invalid? {
         val phone = toE164(input.phone, input.phoneCountry)
 
-        val firstNameError = if (input.firstName.isBlank()) R.string.error_empty_first_name else null
+        val firstNameError =
+            if (input.firstName.isBlank()) R.string.error_empty_first_name else null
 
         val phoneError = when {
             input.phone.isBlank() -> R.string.error_empty_phone
@@ -63,7 +69,13 @@ class ContactFormViewModel(private val repository: ContactRepository) {
             isDuplicate(phone, contactId) -> R.string.error_duplicate_phone
             else -> null
         }
-        return if (firstNameError == null && phoneError == null ) null else SaveResult.Invalid(firstNameError, phoneError)
+        return if (firstNameError == null &&
+            phoneError == null
+        ) {
+            null
+        } else {
+            SaveResult.Invalid(firstNameError, phoneError)
+        }
     }
 
     private fun persist(input: ContactFormInput, contactId: Long?, context: Context): SaveResult {

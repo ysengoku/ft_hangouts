@@ -10,7 +10,7 @@ class MessageRepository(private val dbHelper: DatabaseHelper) {
     fun getPageByContactId(contactId: Long, limit: Int = 10, offset: Int = 0): List<Message> {
         val query = """
             SELECT *
-            FROM ${tableName}
+            FROM $tableName
             WHERE contact_id = ?
             ORDER BY created_at DESC
             LIMIT ? OFFSET ?

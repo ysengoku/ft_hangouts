@@ -21,7 +21,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
 
         val sql = """
             SELECT id, first_name, last_name, picture
-            FROM ${tableName}
+            FROM $tableName
             $where
             ORDER BY first_name ASC
             LIMIT ? OFFSET ?
@@ -42,8 +42,8 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
                 res.add(
                     ContactSummary(
                         id = it.getLong(it.getColumnIndexOrThrow("id")),
-                        firstName = it.getString(it.getColumnIndexOrThrow   ("first_name")),
-                        lastName = it.getString(it.getColumnIndexOrThrow    ("last_name")),
+                        firstName = it.getString(it.getColumnIndexOrThrow("first_name")),
+                        lastName = it.getString(it.getColumnIndexOrThrow("last_name")),
                         picture = it.getStringOrNull(it.getColumnIndexOrThrow("picture"))
                     )
                 )
@@ -55,7 +55,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
     fun getById(id: Long): Contact? {
         val query = """
             SELECT *
-            FROM ${tableName}
+            FROM $tableName
             WHERE id = ?
         """.trimIndent()
 
@@ -66,7 +66,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
 
         cursor.use {
             if (!it.moveToFirst()) {
-              return null
+                return null
             }
             return Contact(
                 id = it.getLong(it.getColumnIndexOrThrow("id")),
@@ -76,9 +76,11 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
                 phone = it.getString(it.getColumnIndexOrThrow("phone")),
                 phoneCountry = it.getString(it.getColumnIndexOrThrow("phone_country")),
                 address = it.getStringOrNull(it.getColumnIndexOrThrow("address")),
-                birthday = it.getStringOrNull(it.getColumnIndexOrThrow("birthday"))?.let { s -> LocalDate.parse(s) },
+                birthday = it.getStringOrNull(it.getColumnIndexOrThrow("birthday"))?.let { s ->
+                    LocalDate.parse(s)
+                },
                 note = it.getStringOrNull(it.getColumnIndexOrThrow("note")),
-                picture = it.getStringOrNull(it.getColumnIndexOrThrow("picture")),
+                picture = it.getStringOrNull(it.getColumnIndexOrThrow("picture"))
             )
         }
     }
@@ -86,7 +88,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
     fun findIdByPhone(numberInE164: String): Long? {
         val query = """
             SELECT id
-            FROM ${tableName}
+            FROM $tableName
             WHERE phone = ?
             LIMIT 1
         """.trimIndent()
@@ -98,7 +100,7 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
 
         cursor.use {
             if (!it.moveToFirst()) {
-              return null
+                return null
             }
             return it.getLong(it.getColumnIndexOrThrow("id"))
         }
@@ -109,26 +111,22 @@ class ContactRepository(private val dbHelper: DatabaseHelper) {
         return id
     }
 
-    fun update(contact: Contact): Int {
-        return dbHelper.writableDatabase.update(
-            tableName,
-            contact.toContentValues(),
-            "id = ?",
-            arrayOf(contact.id.toString())
-        )
-    }
+    fun update(contact: Contact): Int = dbHelper.writableDatabase.update(
+        tableName,
+        contact.toContentValues(),
+        "id = ?",
+        arrayOf(contact.id.toString())
+    )
 
-    fun delete(id: Long): Boolean {
-        return dbHelper.writableDatabase.delete(
-            tableName,
-            "id = ?",
-            arrayOf(id.toString())
-        ) > 0
-    }
+    fun delete(id: Long): Boolean = dbHelper.writableDatabase.delete(
+        tableName,
+        "id = ?",
+        arrayOf(id.toString())
+    ) > 0
 
     private fun Contact.toContentValues() = ContentValues().apply {
         put("first_name", firstName)
-        put("last_name" , lastName)
+        put("last_name", lastName)
         put("company", company)
         put("phone", phone)
         put("phone_country", phoneCountry)

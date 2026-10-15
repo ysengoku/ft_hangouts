@@ -1,8 +1,8 @@
 package com.ysengoku.ft_hangouts.ui.contacts
 
-import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 import com.ysengoku.ft_hangouts.data.model.ContactSummary
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
+import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 
 class ContactListViewModel(private val repository: ContactRepository) {
     private val pageSize = 10

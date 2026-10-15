@@ -1,0 +1,53 @@
+name: CI tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref}}
+  cancel-in-progress: true
+
+jobs:
+  ktlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - name: Install ktlint
+        run: |
+          curl -sSL -o ktlint https://github.com/pinterest/ktlint/releases/download/1.8.0/ktlint
+          chmod +x ktlint
+      - name: Run ktlint
+        run: ./ktlint "app/src/**/*.kt"
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-java@v5
+        with:
+          distribution: temurin
+          java-version: 17
+      - uses: gradle/actions/setup-gradle@v4
+
+      - name: Build
+        run: ./gradlew assembleDebug
+
+      - name: Android Lint
+        run: ./gradlew lint
+      - name: Upload lint report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lint-report
+          path: app/build/reports/lint-results-debug.*

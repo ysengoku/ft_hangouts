@@ -28,12 +28,12 @@ class ContactListScreen(
     private val navigator: Navigator,
     repository: ContactRepository,
     private val onThemeSelected: (String) -> Unit
-): Screen {
+) : Screen {
     private val context = container.context
     override val view: View = inflater.inflate(R.layout.screen_contact_list, container, false)
     override val title = container.context.getString(R.string.home_title)
     override val navigationIcon = NavigationIcon.NONE
-    override val action = Action(R.drawable.ic_palette, R.string.change_color_theme) { anchor -> 
+    override val action = Action(R.drawable.ic_palette, R.string.change_color_theme) { anchor ->
         showThemeMenu(anchor)
     }
     override val snackbarAnchor: View = view.findViewById(R.id.fab_add_contact)
@@ -62,7 +62,7 @@ class ContactListScreen(
         }
 
         listView.adapter = adapter
-        listView.setOnScrollListener(object: AbsListView.OnScrollListener {
+        listView.setOnScrollListener(object : AbsListView.OnScrollListener {
             override fun onScrollStateChanged(view: AbsListView, scrollState: Int) {}
             override fun onScroll(view: AbsListView, first: Int, visible: Int, total: Int) {
                 if (total > 0 && first + visible >= total - 3) {
@@ -100,11 +100,12 @@ class ContactListScreen(
         popup.setAdapter(ThemeMenuAdapter(context, current))
         popup.width = context.resources.getDimensionPixelSize(R.dimen.menu_item_width)
         popup.setDropDownGravity(Gravity.END)
-        popup.horizontalOffset = -context.resources.getDimensionPixelSize(R.dimen.spacing_extra_small)
+        popup.horizontalOffset =
+            -context.resources.getDimensionPixelSize(R.dimen.spacing_extra_small)
         popup.setBackgroundDrawable(context.getDrawable(R.drawable.bg_menu))
         popup.isModal = true
 
-        popup.setOnItemClickListener {_, _, position, _ ->
+        popup.setOnItemClickListener { _, _, position, _ ->
             popup.dismiss()
             val selected = ThemePreferences.THEME_LIST[position]
             if (selected != current) {
