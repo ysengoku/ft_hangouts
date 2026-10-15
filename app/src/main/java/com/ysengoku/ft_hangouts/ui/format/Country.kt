@@ -2,7 +2,7 @@ package com.ysengoku.ft_hangouts.ui.format
 
 import java.util.Locale
 
-fun countryName(code: String): String = Locale("", code).displayCountry
+fun countryName(code: String): String = Locale.Builder().setRegion(code).build().displayCountry
 
 fun countryLabel(code: String) = "${flagEmoji(code)}  ${countryName(code)}"
 

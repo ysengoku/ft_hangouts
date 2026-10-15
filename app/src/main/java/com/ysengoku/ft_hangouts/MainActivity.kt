@@ -5,6 +5,7 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Rect
+import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
@@ -120,7 +121,12 @@ class MainActivity : Activity() {
     }
 
     private fun enableEdgeToEdge() {
-        window.setDecorFitsSystemWindows(false)
+        // Edge-to-edge is enforced from API 35 (targetSdk 35+)
+        // Only older versions need this.
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.VANILLA_ICE_CREAM) {
+            @Suppress("DEPRECATION")
+            window.setDecorFitsSystemWindows(false)
+        }
     }
 
     private fun getThemeStyleResId(themeName: String): Int = when (themeName) {
