@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import com.ysengoku.ft_hangouts.data.DatabaseHelper
-import com.ysengoku.ft_hangouts.data.phone.MessageEvent
+import com.ysengoku.ft_hangouts.telephony.MessageEvent
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository

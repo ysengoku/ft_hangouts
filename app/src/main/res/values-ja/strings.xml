@@ -44,8 +44,6 @@
     <string name="keep_editing">編集を続ける</string>
     <string name="discard">破棄</string>
     <string name="message_hint">メッセージを入力</string>
-    <string name="insert_emoji">絵文字を挿入</string>
-    <string name="today">今日</string>
     <string name="yesterday">昨日</string>
     <string name="you">あなた</string>
     <string name="new_message">%1$s から新しいメッセージが届きました。</string>

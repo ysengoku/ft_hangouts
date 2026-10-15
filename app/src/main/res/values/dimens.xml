@@ -28,7 +28,6 @@
     <dimen name="icon_button_size">48dp</dimen>
     <dimen name="icon_button_padding">12dp</dimen>
     <dimen name="icon_button_padding_small">14dp</dimen>
-    <dimen name="icon_button_corner_radius">16dp</dimen>
 
     <dimen name="list_item_height">56dp</dimen>
 
@@ -47,7 +46,6 @@
     <dimen name="snackbar_corner_radius">4dp</dimen>
     <dimen name="snackbar_elevation">6dp</dimen>
 
-    <dimen name="tonal_button_width">96dp</dimen>
     <dimen name="tonal_button_height">48dp</dimen>
     <dimen name="tonal_button_padding">16dp</dimen>
     <dimen name="tonal_button_corner_radius">28dp</dimen>

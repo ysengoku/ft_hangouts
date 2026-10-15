@@ -1,4 +1,4 @@
-package com.ysengoku.ft_hangouts.data.phone
+package com.ysengoku.ft_hangouts.telephony
 
 import com.ysengoku.ft_hangouts.data.model.Message
 import com.ysengoku.ft_hangouts.util.BackgroundExecutor

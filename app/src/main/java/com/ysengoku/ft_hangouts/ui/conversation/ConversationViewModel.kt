@@ -3,8 +3,8 @@ package com.ysengoku.ft_hangouts.ui.conversation
 import android.content.Context
 import com.ysengoku.ft_hangouts.data.model.ContactSummary
 import com.ysengoku.ft_hangouts.data.model.Message
-import com.ysengoku.ft_hangouts.data.phone.startCall
-import com.ysengoku.ft_hangouts.data.phone.SmsSender
+import com.ysengoku.ft_hangouts.telephony.startCall
+import com.ysengoku.ft_hangouts.telephony.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.ui.format.displayName

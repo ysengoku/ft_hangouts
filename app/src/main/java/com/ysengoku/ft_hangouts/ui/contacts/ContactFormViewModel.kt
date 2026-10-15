@@ -8,7 +8,7 @@ import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 import com.ysengoku.ft_hangouts.data.deleteOldImage
 import com.ysengoku.ft_hangouts.data.model.Contact
 import com.ysengoku.ft_hangouts.data.moveImageToStorage
-import com.ysengoku.ft_hangouts.data.phone.toE164
+import com.ysengoku.ft_hangouts.telephony.toE164
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import java.time.LocalDate
 

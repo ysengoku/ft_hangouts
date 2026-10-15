@@ -15,7 +15,7 @@ import android.widget.ImageButton
 import android.widget.ListView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Message
-import com.ysengoku.ft_hangouts.data.phone.SmsSender
+import com.ysengoku.ft_hangouts.telephony.SmsSender
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator

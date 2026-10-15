@@ -23,7 +23,7 @@ import android.widget.ImageButton
 import android.widget.TextView
 import com.ysengoku.ft_hangouts.R
 import com.ysengoku.ft_hangouts.data.model.Contact
-import com.ysengoku.ft_hangouts.data.phone.CountryCallingCodes
+import com.ysengoku.ft_hangouts.telephony.CountryCallingCodes
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.navigation.Navigator
 import com.ysengoku.ft_hangouts.navigation.RequestCodes

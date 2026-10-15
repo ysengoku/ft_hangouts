@@ -1,4 +1,4 @@
-package com.ysengoku.ft_hangouts.data.phone
+package com.ysengoku.ft_hangouts.telephony
 
 import android.content.BroadcastReceiver
 import android.content.Context

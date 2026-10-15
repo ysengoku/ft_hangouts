@@ -44,8 +44,6 @@
     <string name="keep_editing">Continuer</string>
     <string name="discard">Supprimer</string>
     <string name="message_hint">Message</string>
-    <string name="insert_emoji">Insérer un emoji</string>
-    <string name="today">Aujourd\'hui</string>
     <string name="yesterday">Hier</string>
     <string name="you">Vous</string>
     <string name="new_message">Vous avez un nouveau message de %1$s.</string>

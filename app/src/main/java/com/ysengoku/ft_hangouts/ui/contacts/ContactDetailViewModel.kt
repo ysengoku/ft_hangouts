@@ -4,7 +4,7 @@ import android.content.Context
 import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 import com.ysengoku.ft_hangouts.data.deleteOldImage
 import com.ysengoku.ft_hangouts.data.model.Contact
-import com.ysengoku.ft_hangouts.data.phone.startCall
+import com.ysengoku.ft_hangouts.telephony.startCall
 import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 
 class ContactDetailViewModel(private val repository: ContactRepository) {

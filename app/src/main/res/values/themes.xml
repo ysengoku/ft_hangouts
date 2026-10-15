@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="UnusedResources">
 
     <!-- Base Parent Theme using Android Framework Theme -->
     <style name="Base.Theme.FtHangouts" parent="@android:style/Theme.Material.Light.NoActionBar">
@@ -15,11 +16,6 @@
     <style name="Theme.FtHangouts" parent="Theme.FtHangouts.Ocean" />
 
     <!-- ==================== Text styles ==================== -->
-    <style name="TextAppearance.FTHangouts.DisplayMedium" parent="@android:style/TextAppearance">
-        <item name="android:fontFamily">@font/noto_sans</item>
-        <item name="android:textSize">45sp</item>
-    </style>
-
     <style name="TextAppearance.FTHangouts.HeadlineMedium" parent="@android:style/TextAppearance">
         <item name="android:fontFamily">@font/noto_sans</item>
         <item name="android:textSize">28sp</item>
