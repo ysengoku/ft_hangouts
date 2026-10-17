@@ -122,7 +122,8 @@ Fill the database with demo data (12 contacts, 25 messages with the first contac
 
 ```bash
 # From the project root
-./tools/seed.sh
+./tools/seed.sh                  # on emulator-5554
+./tools/seed.sh emulator-5556    # on another emulator
 ```
 
 Requirements:

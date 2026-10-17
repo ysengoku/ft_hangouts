@@ -6,6 +6,8 @@
     android:paddingHorizontal="@dimen/spacing_medium"
     android:paddingVertical="@dimen/spacing_small"
     android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:minHeight="@dimen/snackbar_min_height"
     android:background="@drawable/bg_snackbar"
     android:layout_gravity="bottom"
     android:elevation="@dimen/snackbar_elevation"
@@ -17,6 +19,6 @@
         android:layout_height="wrap_content"
         android:gravity="bottom|center_horizontal"
         android:textAppearance="@style/TextAppearance.FTHangouts.BodyMedium"
-        android:textColor="?attr/colorSurface" />
+        android:textColor="?attr/colorInverseOnSurface" />
 
 </LinearLayout>

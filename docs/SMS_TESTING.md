@@ -2,10 +2,10 @@
 
 How to test sending and receiving SMS on emulators, and why an SMS cannot go from one emulator to another.
 
-## Prerequistes
+## Prerequisites
 
 Needs two AVDs named `phone_1` and `phone_2` (API 33+). Check: `emulator -list-avds`.  
-To create with the command-line tools, see [Prerequistes in README](../README.md###Prerequisites).
+To create with the command-line tools, see [Prerequisites in README](../README.md#prerequisites).
 
 ## Setup
 

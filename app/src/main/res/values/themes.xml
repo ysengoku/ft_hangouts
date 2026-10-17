@@ -86,6 +86,8 @@
         <item name="colorOnTertiaryContainer">@color/ocean_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/ocean_surface_container_high</item>
         <item name="colorOutline">@color/ocean_outline</item>
+        <item name="colorInverseSurface">@color/ocean_inverse_surface</item>
+        <item name="colorInverseOnSurface">@color/ocean_inverse_on_surface</item>
     </style>
 
     <!-- ==================== AMBER THEME ==================== -->
@@ -108,6 +110,8 @@
         <item name="colorOnTertiaryContainer">@color/amber_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/amber_surface_container_high</item>
         <item name="colorOutline">@color/amber_outline</item>
+        <item name="colorInverseSurface">@color/amber_inverse_surface</item>
+        <item name="colorInverseOnSurface">@color/amber_inverse_on_surface</item>
     </style>
 
     <!-- ==================== FOREST THEME ==================== -->
@@ -130,6 +134,8 @@
         <item name="colorOnTertiaryContainer">@color/forest_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/forest_surface_container_high</item>
         <item name="colorOutline">@color/forest_outline</item>
+        <item name="colorInverseSurface">@color/forest_inverse_surface</item>
+        <item name="colorInverseOnSurface">@color/forest_inverse_on_surface</item>
     </style>
 
     <!-- ==================== ROSE THEME ==================== -->
@@ -152,6 +158,8 @@
         <item name="colorOnTertiaryContainer">@color/rose_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/rose_surface_container_high</item>
         <item name="colorOutline">@color/rose_outline</item>
+        <item name="colorInverseSurface">@color/rose_inverse_surface</item>
+        <item name="colorInverseOnSurface">@color/rose_inverse_on_surface</item>
     </style>
 
     <!-- ==================== LAVENDER THEME ==================== -->
@@ -174,6 +182,8 @@
         <item name="colorOnTertiaryContainer">@color/lavender_on_tertiary_container</item>
         <item name="colorSurfaceContainerHigh">@color/lavender_surface_container_high</item>
         <item name="colorOutline">@color/lavender_outline</item>
+        <item name="colorInverseSurface">@color/lavender_inverse_surface</item>
+        <item name="colorInverseOnSurface">@color/lavender_inverse_on_surface</item>
     </style>
 
     <!-- ==================== Widget ==================== -->

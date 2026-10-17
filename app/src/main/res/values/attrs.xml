@@ -12,4 +12,6 @@
     <attr name="colorSurfaceContainerHigh" format="color" />
     <attr name="colorOnSurfaceVariant" format="color" />
     <attr name="colorOutline" format="color" />
+    <attr name="colorInverseSurface" format="color" />
+    <attr name="colorInverseOnSurface" format="color" />
 </resources>

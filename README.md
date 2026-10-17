@@ -30,15 +30,13 @@
 - [Technical Restrictions](#technical-restrictions)
 - [Getting Started](#getting-started)
   - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
   - [Usage](#usage)
 - [Development](#development)
-  - [Workflow](#workflow)
-  - [Linting & Formatting](#linting--formatting)
+  - [Useful commands](#useful-commands)
+  - [Tools](#tools)
   - [Testing](#testing)
-- [Notes](#notes)
+- [Documentation](#documentation)
 - [Resources](#resources)
-- [AI Usage](#ai-usage)
 - [Authors](#authors)
 - [License](#license)
 
@@ -47,6 +45,8 @@
 ## About
 
 `ft_hangouts` is an Android app for managing contacts and exchanging SMS with them, written in Kotlin. Contacts and conversations are stored in a local SQLite database, and the app is built with the Android framework only, without external libraries.
+
+The app runs on Android 13 (API 33) or later.
 
 ## Objectives
 
@@ -66,6 +66,8 @@ Contacts are stored in a local SQLite database and can be managed entirely withi
 - Users can add a profile picture from the photo picker, and contacts without one show their initials instead.
 - When a message arrives from an unknown number, a new contact is created for it automatically.
 
+See [docs/CONTACT_FORM.md](docs/CONTACT_FORM.md) for how the contact form works and checks its input.
+
 <p align="center">
   <img src="./docs/assets/ui/contact-list.png" alt="Contact List" width="180px" />
   <img src="./docs/assets/ui/contact-detail.png" alt="Contact Detail" width="180px" />
@@ -81,7 +83,7 @@ Each contact has its own conversation, sent and received through the device's SM
 - Users can tap a message to show its sender and the time it was sent.
 
 <p align="center">
-  <img src="./docs/assets/ui/conversation.png" alt="Forgot password" width="180px" />
+  <img src="./docs/assets/ui/conversation.png" alt="Conversation screen" width="180px" />
 </p>
 
 ### Calls
@@ -121,9 +123,9 @@ English, French and Japanese, following the system language. Other languages fal
 Change the header color from the palette menu: Ocean, Amber, Forest, Rose or Lavender. The choice is kept after the app restarts. Each theme also has a dark version.
 
 <p align="center">
-  <img src="./docs/assets/ui/theme-selector.png" alt="UI in French" width="180px" />
-  <img src="./docs/assets/ui/contact-detail-forest.png" alt="UI in Japanese" width="180px" />
-  <img src="./docs/assets/ui/contact-detail-lavender.png" alt="UI in English" width="180px" />
+  <img src="./docs/assets/ui/theme-selector.png" alt="Theme selector" width="180px" />
+  <img src="./docs/assets/ui/contact-detail-forest.png" alt="Theme forest" width="180px" />
+  <img src="./docs/assets/ui/contact-detail-lavender.png" alt="Theme lavender" width="180px" />
 </p>
 
 #### Dark mode
@@ -141,46 +143,22 @@ Both orientations are supported. The current screen and unsaved form input are k
 
 #### Material Design 3
 
-Built with Android framework views only. Colors, typography, shapes and components follow Material Design 3.
+Built with Android framework views only. Colors, typography, shapes and components follow Material Design 3.   
+See [docs/MATERIAL_DESIGN_3.md](docs/MATERIAL_DESIGN_3.md) for the rules applied in the app.
 
 ## Architecture
 
-```mermaid
-flowchart TD
-    subgraph UI["UI layer"]
-        MainActivity --> Navigator
-        Navigator --> TopAppBar & Snackbar
-        Navigator --> Screens["Screens<br/>ContactList · ContactDetail<br/>ContactForm · Conversation"]
-        Screens --> ViewModels
-    end
+`MainActivity` is the entry point of the app: Android launches it when users open the app. The rest of the code is split into three layers.
 
-    subgraph Telephony["Telephony layer"]
-        SmsSender
-        Call
-        SmsReceiver
-        MessageEvent
-    end
+- **UI layer**: `MainActivity` starts the `Navigator`, which shows the screens (contact list, contact detail, contact form, conversation) under the top app bar and shows snackbars when needed. Each screen gets its data through a ViewModel.
+- **Data layer**: Repositories read and write contacts and messages in SQLite through `DatabaseHelper`, on a background thread so the UI never waits for the database. Profile pictures are stored as files by `PhotoStorage`.
+- **Telephony layer**: `SmsSender` sends messages and `Call` starts calls in the system Phone app. `SmsReceiver` picks up incoming SMS from the system and saves them through the repositories, even when the app is not open.
 
-    subgraph Data["Data layer"]
-        Repositories["Repositories<br/>Contact · Message"] --> DB[(SQLite<br/>DatabaseHelper)]
-        PhotoStorage
-    end
+<p align="center">
+  <img src="./docs/assets/architecture.png" alt="Architecture diagram" width="80%" />
+</p>
 
-    subgraph System["Android system"]
-        SMS([SMS service])
-        Dialer([Phone app])
-    end
-
-    ViewModels --> Repositories & PhotoStorage
-    ViewModels --> SmsSender & Call
-
-    SmsSender --> SMS
-    Call --> Dialer
-    SMS -- incoming SMS --> SmsReceiver
-    SmsReceiver --> Repositories
-    SmsReceiver --> MessageEvent
-    MessageEvent --> Navigator
-```
+For more details, see [docs/NAVIGATION.md](docs/NAVIGATION.md) for how screens are switched, and [docs/DATABASE.md](docs/DATABASE.md) for the database.
 
 ## Project Structure
 
@@ -303,7 +281,7 @@ The app uses only the Android SDK and the Kotlin standard library. No external l
    ```bash
    avdmanager create avd -n <avd_name> -k "$IMAGE" -d medium_phone
    ```
-   Then set `hw.keyboard=yes` in `~/.android/avd/phone_1.avd/config.ini` to type with your computer's keyboard.
+   Then set `hw.keyboard=yes` in `~/.android/avd/<avd_name>.avd/config.ini` to type with your computer's keyboard.
 
 <br/> 
    
@@ -326,9 +304,17 @@ adb wait-for-device
 # Or [Run ▶] in Android Studio
 ```
 
+*To test sending and receiving SMS, the emulators need a modem port. See [docs/SMS_TESTING.md](docs/SMS_TESTING.md).*
+
 ## Development
 
 ### Useful commands
+
+**Lauch an emulator with specific modem port**
+```bash
+emulator -avd <avd_name> -port <emulator_port> -modem-simulator-port <modem_port> &
+# e.g. emulator -avd phone_1 -port 5554 -modem-simulator-port 6520 &
+```
 
 **Launch the app**
 ```bash
@@ -350,12 +336,46 @@ adb logcat --pid=$(adb shell pidof com.ysengoku.ft_hangouts)
 # report in app/build/reports/
 ```
 
+**Check Kotlin style with [ktlint](https://pinterest.github.io/ktlint/)**   
+CI runs ktlint 1.8.0 on every push and pull request to `main`.
+```bash
+# macOS
+brew install ktlint
+# Linux
+curl -sSL -o ktlint https://github.com/pinterest/ktlint/releases/download/1.8.0/ktlint && chmod +x ktlint
+
+ktlint "app/src/**/*.kt"
+```
+
 **Free Gradle's memory**
 ```bash
 ./gradlew --stop
 ```
 
+### Tools
+
+Helper scripts in `tools/`, run from the project root:
+
+| Script | Description |
+|---|---|
+| `tools/emulators.sh` | Starts `phone_1` (`emulator-5554`, number `6520`) and `phone_2` (`emulator-5556`, number `6521`) with a modem port, then installs the app. |
+| `tools/sms-relay.sh` | Relays SMS between the running emulators, since the emulator does not do it. Stop with Ctrl-C. |
+| `tools/seed.sh` | Fills the database with demo contacts and messages from `tools/seed.sql`. Runs on `emulator-5554` by default, or on the emulator given as argument (`./tools/seed.sh emulator-5556`). Launch the app once before so the database exists. |
+| `tools/extract_country_codes.py` | Generates `res/values/country_codes.xml` from libphonenumber's `PhoneNumberMetadata.xml`. Usage is in the script header. |
+
+See [docs/SMS_TESTING.md](docs/SMS_TESTING.md) for testing SMS with these scripts.
+
 ### Testing
+
+## Documentation
+
+| Document | Content |
+|---|---|
+| [NAVIGATION.md](docs/NAVIGATION.md) | How `Navigator` switches screens inside `MainActivity` |
+| [DATABASE.md](docs/DATABASE.md) | Schema, data flow, versioning, seeding and inspecting the database |
+| [CONTACT_FORM.md](docs/CONTACT_FORM.md) | Contact form modes and input checks |
+| [MATERIAL_DESIGN_3.md](docs/MATERIAL_DESIGN_3.md) | Material Design 3 rules applied in the app |
+| [SMS_TESTING.md](docs/SMS_TESTING.md) | Testing SMS on emulators, and why the emulator does not relay SMS |
 
 ## Resources
 
@@ -373,7 +393,7 @@ adb logcat --pid=$(adb shell pidof com.ysengoku.ft_hangouts)
 ## Authors
 
 <div valign="top">
-  <img src="https://contrib.rocks/image?repo=ysengoku/swifty-companion" height="30px" valign="middle" />
+  <img src="https://contrib.rocks/image?repo=ysengoku/ft_hangouts" height="30px" valign="middle" />
   &nbsp Yuko SENGOKU &nbsp&nbsp (<a href="https://github.com/ysengoku">GitHub @ysengoku</a>)
 </div>
 

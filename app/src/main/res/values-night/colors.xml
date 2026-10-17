@@ -23,6 +23,8 @@
     <color name="ocean_on_surface_variant">#C0C8CC</color>
     <color name="ocean_surface_container_high">#262B2D</color>
     <color name="ocean_outline">#8a9296</color>
+    <color name="ocean_inverse_surface">#DEE3E6</color>
+    <color name="ocean_inverse_on_surface">#2C3134</color>
 
     <!-- ==================== AMBER THEME ==================== -->
     <color name="amber_primary">#DBC66E</color>
@@ -46,6 +48,8 @@
     <color name="amber_on_surface_variant">#CDC6B4</color>
     <color name="amber_surface_container_high">#2C2A24</color>
     <color name="amber_outline">#969080</color>
+    <color name="amber_inverse_surface">#E8E2D4</color>
+    <color name="amber_inverse_on_surface">#333027</color>
 
     <!-- ==================== FOREST THEME ==================== -->
     <color name="forest_primary">#B1D18A</color>
@@ -69,6 +73,8 @@
     <color name="forest_on_surface_variant">#C5C8BA</color>
     <color name="forest_surface_container_high">#292B26</color>
     <color name="forest_outline">#8F9285</color>
+    <color name="forest_inverse_surface">#E2E3D8</color>
+    <color name="forest_inverse_on_surface">#2F312A</color>
 
     <!-- ==================== ROSE THEME ==================== -->
     <color name="rose_primary">#FFB1C8</color>
@@ -92,6 +98,8 @@
     <color name="rose_on_surface_variant">#D5C2C6</color>
     <color name="rose_surface_container_high">#30282A</color>
     <color name="rose_outline">#9E8C90</color>
+    <color name="rose_inverse_surface">#EFDFE1</color>
+    <color name="rose_inverse_on_surface">#372E30</color>
 
     <!-- ==================== LAVENDER THEME ==================== -->
     <color name="lavender_primary">#E0B8F6</color>
@@ -115,4 +123,6 @@
     <color name="lavender_on_surface_variant">#CEC3CE</color>
     <color name="lavender_surface_container_high">#2C292E</color>
     <color name="lavender_outline">#978E98</color>
+    <color name="lavender_inverse_surface">#E9E0E7</color>
+    <color name="lavender_inverse_on_surface">#332F35</color>
 </resources>
