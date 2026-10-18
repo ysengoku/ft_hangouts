@@ -48,6 +48,8 @@
 
 The app runs on Android 13 (API 33) or later.
 
+https://github.com/user-attachments/assets/374a9c9c-cc9e-483a-9bfe-76c892c54ca2
+
 ## Objectives
 
 This project explores how an Android app works with the operating system: the activity lifecycle, system broadcasts, runtime permissions and intents. Everything is built directly on the Android SDK, without libraries that would hide these mechanisms.
@@ -359,7 +361,6 @@ Helper scripts in `tools/`, run from the project root:
 | Script | Description |
 |---|---|
 | `tools/emulators.sh` | Starts `phone_1` (`emulator-5554`, number `6520`) and `phone_2` (`emulator-5556`, number `6521`) with a modem port, then installs the app. |
-| `tools/sms-relay.sh` | Relays SMS between the running emulators, since the emulator does not do it. Stop with Ctrl-C. |
 | `tools/seed.sh` | Fills the database with demo contacts and messages from `tools/seed.sql`. Runs on `emulator-5554` by default, or on the emulator given as argument (`./tools/seed.sh emulator-5556`). Launch the app once before so the database exists. |
 | `tools/extract_country_codes.py` | Generates `res/values/country_codes.xml` from libphonenumber's `PhoneNumberMetadata.xml`. Usage is in the script header. |
 
