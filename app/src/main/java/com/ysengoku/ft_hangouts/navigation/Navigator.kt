@@ -24,7 +24,10 @@ class Navigator(
     private val snackbar: Snackbar,
     val onThemeSelected: (String) -> Unit
 ) {
+    // Builds each screen's View objects from its XML layout file
     private val inflater = LayoutInflater.from(container.context)
+
+    // Routes that the user has visited, oldest first. The last one is on screen.
     private val history = ArrayDeque<Route>()
     private var current: Screen? = null
 

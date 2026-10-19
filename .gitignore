@@ -42,6 +42,7 @@ replay_pid*
 /captures
 .externalNativeBuild
 .cxx
+ktlint
 
 .env
 *~

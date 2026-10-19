@@ -14,12 +14,12 @@ Start from the terminal with port: 6520–6527. Device Manager can't add the opt
 
 *Each emulator uses about 4.5 GB of RAM. Close Android Studio and stop Gradle (`./gradlew --stop`) before starting the second one, or the machine freezes.*
 
-| AVD | adb name | Number |
+| AVD | serial | Number |
 |---|---|---|
 | `phone_1` | `emulator-5554` | `6520` / `15555216520` |
 | `phone_2` | `emulator-5556` | `6521` / `15555216521` |
 
-- adb name = start order, not the modem port.
+- serial = start order, not the modem port.
 - No `+`: `+15555216521` -> `DIAL error 44`.
 
 ## Sending
@@ -29,7 +29,7 @@ The app hands the SMS to `SmsManager`. The message is added to the conversation 
 Run this command, then send an SMS from the app.
 
 ```sh
-adb -s <adb name> logcat -b radio | grep -E "sendTextForSubscriber|SEND_SMS"
+adb -s <serial> logcat -b radio | grep -E "sendTextForSubscriber|SEND_SMS"
 
 # e.g. adb -s emulator-5554 logcat -b radio | grep -E "sendTextForSubscriber|SEND_SMS"
 ```
@@ -47,7 +47,7 @@ RILJ    : [0249]< SEND_SMS { mMessageRef = 2, mErrorCode = 0, ... }
 An incoming SMS can be simulated from the emulator console, with Extended controls > Phone > SMS, or from the terminal:
 
 ```bash
-adb -s <adb name> emu sms send <sender number> "<message>"
+adb -s <serial> emu sms send <sender number> "<message>"
 
 # e.g. adb -s emulator-5554 emu sms send 6521 "Hello"
 ```
@@ -61,7 +61,7 @@ The SMS goes through the same path as a real one: emulated radio -> Android -> `
 Removes the app, its data and granted permissions. Reinstall with `./gradlew installDebug`.
 
 ```bash
-adb -s <adb name> uninstall com.ysengoku.ft_hangouts
+adb -s <serial> uninstall com.ysengoku.ft_hangouts
 
 # e.g. adb -s emulator-5554 uninstall com.ysengoku.ft_hangouts
 ```

@@ -199,9 +199,10 @@ For more details, see [docs/NAVIGATION.md](docs/NAVIGATION.md) for how screens a
 │               ├── values-ja/
 │               └── values-night/
 ├── gradle/
+├── gradlew
+├── tools/
 ├── docs/
-├── README.md
-└── tools/
+└── README.md
 ```
 
 ## Tech Stack
@@ -231,8 +232,9 @@ For more details, see [docs/NAVIGATION.md](docs/NAVIGATION.md) for how screens a
 **Tools:**   
 <div>
   <img src="https://img.shields.io/badge/Android_Studio-333333?style=for-the-badge&logo=androidstudio&logoColor=3DDC84" />
-  <img src="https://img.shields.io/badge/Gradle-333333?style=for-the-badge&logo=gradle&logoColor=02303A" />
   <img src="https://img.shields.io/badge/Android_Emulator_API_37-333333?style=for-the-badge&logo=android&logoColor=3DDC84" />
+  <img src="https://img.shields.io/badge/Gradle-333333?style=for-the-badge&logo=gradle&logoColor=06A0CE" />
+  <img src="https://img.shields.io/badge/Ktlint-333333?style=for-the-badge" />
 </div>
 
 ## Technical Restrictions
@@ -306,6 +308,9 @@ adb wait-for-device
 # Or [Run ▶] in Android Studio
 ```
 
+> [!NOTE]
+> `./gradlew` is the Gradle Wrapper, included in the repo. It runs the Gradle version set in `gradle/wrapper/gradle-wrapper.properties`, so every machine and the CI build with the same version, and Gradle doesn't need to be installed.
+
 *To test sending and receiving SMS, the emulators need a modem port. See [docs/SMS_TESTING.md](docs/SMS_TESTING.md).*
 
 ## Development
@@ -328,7 +333,7 @@ adb -s emulator-<emulator_port> shell am start -n com.ysengoku.ft_hangouts/.Main
 
 **Show logs**
 ```bash
-adb logcat --pid=$(adb shell pidof com.ysengoku.ft_hangouts)
+adb -s emulator-<emulator_port> logcat --pid=$(adb -s -s emulator-<emulator_port> shell pidof com.ysengoku.ft_hangouts)
 ```
 
 **Lint**

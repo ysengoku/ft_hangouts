@@ -1,5 +1,10 @@
 package com.ysengoku.ft_hangouts.navigation
 
+/**
+ * All the screens the app can navigate to.
+ * Route class is sealed. Its subclasses can only be declared here,
+ * so the compiler knows the complete list.
+ */
 sealed class Route {
     object ContactList : Route()
     data class ContactDetail(val contactId: Long) : Route()

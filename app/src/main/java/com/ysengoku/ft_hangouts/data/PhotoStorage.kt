@@ -22,7 +22,10 @@ fun copyImageToAppCache(uri: Uri, context: Context): String? {
     }
 }
 
-/** Decodes the image at [uri], scaled down so that its shorter side is at most MAX_SHORT_SIDE. */
+/**
+ * Decodes the image at [uri], scaled down so that its shorter side is
+ * at most MAX_SHORT_SIDE.
+ */
 private fun decodeResized(uri: Uri, context: Context): Bitmap {
     val source = ImageDecoder.createSource(context.contentResolver, uri)
     return ImageDecoder.decodeBitmap(source) { decoder, info, _ ->

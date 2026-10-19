@@ -13,6 +13,14 @@ class DatabaseHelper(context: Context) :
         @Volatile // ensures writes to `instance` are visible to all threads immediately
         private var instance: DatabaseHelper? = null
 
+        /**
+         * Returns the app's singleton DatabaseHelper, creating it on the first call.
+         * Can be called as DatabaseHelper.getInstance(context) from anywhere in the app.
+         *
+         * The second null check inside synchronized stops two threads from creating
+         * an instance. applicationContext is used so that the helper which lives
+         * as long as the app, never keeps a destroyed Activityin memory.
+         */
         fun getInstance(context: Context): DatabaseHelper = instance ?: synchronized(this) {
             instance ?: DatabaseHelper(context.applicationContext).also { instance = it }
         }
