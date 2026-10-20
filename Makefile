@@ -53,16 +53,27 @@ stop:
 # Removes the app, its data and granted permissions.
 uninstall-1:
 	@if adb -s $(PHONE_1_SERIAL) shell pm list packages $(PKG) | grep -q $(PKG); then \
+		echo "Uninstalling $(PKG) from $(PHONE_1_SERIAL)"; \
 		adb -s $(PHONE_1_SERIAL) uninstall $(PKG); \
 	else \
 		echo "$(PKG) is not installed on $(PHONE_1_SERIAL)"; \
 	fi
 
 uninstall-2:
-	@if adb -s $(PHONE_1_SERIAL) shell pm list packages $(PKG) | grep -q $(PKG); then \
-		adb -s $(PHONE_1_SERIAL) uninstall $(PKG); \
+	@if adb -s $(PHONE_2_SERIAL) shell pm list packages $(PKG) | grep -q $(PKG); then \
+		echo "Uninstalling $(PKG) from $(PHONE_2_SERIAL)"; \
+		adb -s $(PHONE_2_SERIAL) uninstall $(PKG); \
 	else \
-		echo "$(PKG) is not installed on $(PHONE_1_SERIAL)"; \
+		echo "$(PKG) is not installed on $(PHONE_2_SERIAL)"; \
 	fi
 
 clean: uninstall-1 uninstall-2
+
+stop-emulators:
+	@for serial in $(PHONE_1_SERIAL) $(PHONE_2_SERIAL); do \
+		if adb devices | grep -q "^$$serial[[:space:]]"; then \
+			adb -s $$serial emu kill; \
+		else \
+			echo "$$serial is not running"; \
+		fi; \
+	done

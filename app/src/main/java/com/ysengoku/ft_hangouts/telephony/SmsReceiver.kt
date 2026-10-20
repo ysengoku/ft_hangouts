@@ -12,6 +12,10 @@ import com.ysengoku.ft_hangouts.data.repository.ContactRepository
 import com.ysengoku.ft_hangouts.data.repository.MessageRepository
 import com.ysengoku.ft_hangouts.util.BackgroundExecutor
 
+/**
+* Receives the system's SMS_RECEIVED broadcast.
+* Declared in the manifest so it receives SMS even when the app is closed.
+*/
 class SmsReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != Telephony.Sms.Intents.SMS_RECEIVED_ACTION) return
