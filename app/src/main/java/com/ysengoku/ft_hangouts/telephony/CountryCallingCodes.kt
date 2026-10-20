@@ -36,17 +36,19 @@ class CountryCallingCodes(resources: Resources) {
 /**
  * Emulator numbers:
  * the modem port (6520..6527, see docs/SMS_TESTING.md) or
- * the console port (5554..5584, even),
- * as 4 digits, 1555521xxxx or +1555521xxxx.
+ * the console port (5554..5584, even) as 4 digits,
+ * or any 1555xxxxxxx / +1555xxxxxxx number.
  */
-private val EMULATOR_NUMBER =
-    Regex("^\\+?(?:1?555521)?(555[468]|55[67][02468]|558[024]|652[0-7])$")
+private val EMULATOR_PORT = Regex("^(555[468]|55[67][02468]|558[024]|652[0-7])$")
+private val EMULATOR_NUMBER = Regex("^\\+?(?:1?555)\\d{7}$")
 
 fun toE164(number: String, country: String): String? {
     val trimmed = number.trim()
+    val compact = trimmed.replace(Regex("[\\s()-]"), "")
 
     // Allow emulator port numbers or emulator test numbers for local dev/testing
-    EMULATOR_NUMBER.find(trimmed)?.let { return "+1555521${it.groupValues[1]}" }
+    EMULATOR_PORT.find(compact)?.let { return "+1555521${it.value}" }
+    if (EMULATOR_NUMBER.matches(compact)) return "+1${compact.removePrefix("+1")}"
 
     return PhoneNumberUtils.formatNumberToE164(number, country)
 }
