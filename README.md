@@ -348,10 +348,11 @@ CI runs ktlint 1.8.0 on every push and pull request to `main`.
 ```bash
 # macOS
 brew install ktlint
+ktlint "app/src/**/*.kt"
+
 # Linux
 curl -sSL -o ktlint https://github.com/pinterest/ktlint/releases/download/1.8.0/ktlint && chmod +x ktlint
-
-ktlint "app/src/**/*.kt"
+./ktlint "app/src/**/*.kt"
 ```
 
 **Free Gradle's memory**

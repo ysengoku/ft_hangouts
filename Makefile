@@ -5,7 +5,7 @@ PHONE_1_SERIAL=emulator-5554
 PHONE_2_AVD=phone_2
 PHONE_2_SERIAL=emulator-5556
 
-.PHONY: all emulator-1 emulator-2 run seed-1 seed-2 logs-1 logs-2 logs-1-sms logs-2-sms clean-db-1 clean-db-2 stop uninstall-1 uninstall-2 clean
+.PHONY: all emulator-1 emulator-2 run seed-1 seed-2 logs-1 logs-2 logs-1-sms logs-2-sms clean-db-1 clean-db-2 stop uninstall-1 uninstall-2 clean stop-emulators
 
 all:
 	./tools/emulators.sh
