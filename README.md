@@ -331,6 +331,16 @@ adb -s emulator-<emulator_port> shell am start -n com.ysengoku.ft_hangouts/.Main
 # adb -s emulator-5554 shell am start -n com.ysengoku.ft_hangouts/.MainActivity
 ```
 
+**Inspect Database**
+```bash
+adb -s emulator-<emulator_port> shell
+run-as com.ysengoku.ft_hangouts
+sqlite3 databases/ft_hangouts.db
+
+# Or
+adb -s emulator-<emulator_port> shell "run-as com.ysengoku.ft_hangouts sqlite3 -header -column databases/ft_hangouts.db 'SELECT * FROM contacts;'"
+```
+
 **Show logs**
 ```bash
 adb -s emulator-<emulator_port> logcat --pid=$(adb -s -s emulator-<emulator_port> shell pidof com.ysengoku.ft_hangouts)
