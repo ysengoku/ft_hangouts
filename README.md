@@ -1,11 +1,11 @@
 # ft_hangouts
 
 <!-- Add image or use below -->
-<!-- <img src="https://capsule-render.vercel.app/api?type=venom&height=300&color=0:61baf8,100:256082&text={{PROJECT_NAME}}&fontColor=ae3855&animation=fadeIn&textBg=false&stroke=e995a4&strokeWidth=1&desc=Short%20description&descSize=18&descAlignY=66" width="100%" /> -->
-<img src="" width="100%" />
+<img src="https://capsule-render.vercel.app/api?type=venom&height=300&color=0:61baf8,100:256082&text=ft_hangouts&fontColor=ae3855&animation=fadeIn&textBg=false&stroke=e995a4&strokeWidth=1&desc=Contact%20manager%20App%20for%20Android&descSize=18&descAlignY=66" width="100%" />
+<!-- <img src="" width="100%" /> -->
 
 <div align="center">
-  <!-- <img src="https://img.shields.io/badge/validated-125/100-brightgreen?style=for-the-badge&logo=cachet" /> -->
+  <img src="https://img.shields.io/badge/validated-125/100-brightgreen?style=for-the-badge&logo=cachet" />
   <br />
   <em>  
     This project was created as part of the 42 curriculum by <a href="https://github.com/ysengoku">yusengok</a>.
